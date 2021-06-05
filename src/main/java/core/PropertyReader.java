@@ -20,4 +20,7 @@ public class PropertyReader {
         return properties.getProperty("baseurl");
     }
 
+    public static String getBrowserName() {
+        return properties.getProperty("browser").toLowerCase();
+    }
 }
