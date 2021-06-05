@@ -23,5 +23,4 @@ public class PropertyReader {
     public static String getBrowserName() {
         return properties.getProperty("browser").toLowerCase();
     }
-
 }
