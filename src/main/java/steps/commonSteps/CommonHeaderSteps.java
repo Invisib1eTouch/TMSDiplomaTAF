@@ -8,8 +8,10 @@ public abstract class CommonHeaderSteps<Page extends CommonHeader> extends BaseS
     /**
      * @param openPageByUrl - if true page will be opened by url
      */
-    public CommonHeaderSteps(boolean openPageByUrl) {
+    protected CommonHeaderSteps(boolean openPageByUrl) {
         super(openPageByUrl);
     }
+
+    
 
 }

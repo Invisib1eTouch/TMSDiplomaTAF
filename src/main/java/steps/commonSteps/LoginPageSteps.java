@@ -5,7 +5,7 @@ import pages.LoginPage;
 
 public class LoginPageSteps extends BaseStep<LoginPage> {
 
-    public LoginPageSteps() {
+    private LoginPageSteps() {
         super(false);
     }
 
