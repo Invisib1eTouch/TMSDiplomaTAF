@@ -51,6 +51,9 @@ public abstract class BaseStep<Page extends BasePage> {
      * public BaseStep<Page> openPage();
      * to:
      * public LoginPageSteps openPage();
+     * each overridden method body should contain:
+     * this.page.openAndVerifyCorrectPageOpened();
+     * return this;
      */
     public abstract BaseStep<Page> openPage();
 }
