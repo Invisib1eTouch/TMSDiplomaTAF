@@ -10,13 +10,13 @@ import static com.codeborne.selenide.Condition.*;
 public class LoginTests extends BaseTestAfterMethodDriverDisposing {
 
     @Test
-    @Parameters({"validLogin", "validPassword"})
-    public void positiveLoginTest(String login, String password){
+    @Parameters({"validLogin", "validPassword", "validUserId"})
+    public void positiveLoginTest(String login, String password, String userId){
         new MainPageSteps(true)
                 .loginWithCorrectCredentials(login, password)
                 .openProfileMenu()
                 .getPageInstance()
                 .getUserId()
-                .should(be(visible), have(exactOwnText("3308965")));
+                .should(be(visible), have(exactOwnText(userId)));
     }
 }
