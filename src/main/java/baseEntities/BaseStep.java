@@ -5,7 +5,7 @@ import java.lang.reflect.ParameterizedType;
 
 /**
  * @param <Page> - generics used to connect step with corresponding page and get access to page methods
- *            so that incorrect methods of other pages con not be used in steps
+ *               so that incorrect methods of other pages con not be used in steps
  */
 public abstract class BaseStep<Page extends BasePage> {
     //    Instance of the page
@@ -13,6 +13,11 @@ public abstract class BaseStep<Page extends BasePage> {
 
     /**
      * @param openPageByUrl - if true page will be opened by url
+     * @implNote - if page can not be opened by url, false value hardcoded to super constructor
+     * e.g.
+     * public ProfileMenuSteps() {
+     * super(false);
+     * }
      */
     public BaseStep(boolean openPageByUrl) {
 //        Set page instance

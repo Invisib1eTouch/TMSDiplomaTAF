@@ -50,4 +50,9 @@ public abstract class CommonHeaderSteps<Page extends CommonHeader> extends BaseS
         this.page.getLoginBtn().click();
         return new LoginPageSteps();
     }
+
+    public ProfileMenuSteps openProfileMenu(){
+        this.page.getProfileIcon().click();
+        return new ProfileMenuSteps();
+    }
 }
