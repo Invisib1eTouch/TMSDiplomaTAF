@@ -52,7 +52,7 @@ public abstract class BaseStep<Page extends BasePage> {
      * @return - steps class object that invokes the method
      */
     public <T extends BaseStep<Page>> T openPage(Class<T> callerStepsClass){
-        this.page.openAndVerifyCorrectPageOpened();
+        this.page.open();
         return this.getStepsObjectInstance(callerStepsClass);
     }
 
