@@ -1,4 +1,4 @@
-package steps;
+package steps.commonSteps;
 
 import baseEntities.BaseStep;
 import pages.CommonHeader;
@@ -11,7 +11,5 @@ public abstract class CommonHeaderSteps<Page extends CommonHeader> extends BaseS
     protected CommonHeaderSteps(boolean openPageByUrl) {
         super(openPageByUrl);
     }
-
-    
 
 }

@@ -1,8 +1,7 @@
 package steps;
 
-import baseEntities.BaseStep;
-import pages.CommonHeader;
 import pages.MainPage;
+import steps.commonSteps.CommonHeaderSteps;
 
 public class MainPageSteps extends CommonHeaderSteps<MainPage> {
 
