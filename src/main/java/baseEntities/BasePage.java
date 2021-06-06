@@ -35,4 +35,9 @@ public abstract class BasePage {
         if (this.path != null)
             com.codeborne.selenide.Selenide.open(this.path);
     }
+
+    public void openAndVerifyCorrectPageOpened(){
+        this.open();
+        this.verifyCorrectPageOpened();
+    }
 }

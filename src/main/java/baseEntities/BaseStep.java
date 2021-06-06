@@ -4,15 +4,20 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.ParameterizedType;
 
 /**
- * @param <T> - generics used to connect step with corresponding page and get access to page methods
- *            so that incorrect methods of other pages con not be used in steps
+ * @param <Page> - generics used to connect step with corresponding page and get access to page methods
+ *               so that incorrect methods of other pages con not be used in steps
  */
-public abstract class BaseStep<T extends BasePage> {
+public abstract class BaseStep<Page extends BasePage> {
     //    Instance of the page
-    protected T page;
+    protected Page page;
 
     /**
      * @param openPageByUrl - if true page will be opened by url
+     * @implNote - if page can not be opened by url, false value hardcoded to super constructor
+     * e.g.
+     * public ProfileMenuSteps() {
+     * super(false);
+     * }
      */
     public BaseStep(boolean openPageByUrl) {
 //        Set page instance
@@ -29,11 +34,11 @@ public abstract class BaseStep<T extends BasePage> {
      * @return page instance
      */
     @SuppressWarnings("unchecked")
-    public T getPageInstance() {
+    public Page getPageInstance() {
         if (this.page == null) {
 //            Defining page class
-            Class<T> pageClass =
-                    (Class<T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
+            Class<Page> pageClass =
+                    (Class<Page>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
             try {
 //                Create page instance based on defined class
                 this.page = pageClass.getConstructor().newInstance();
@@ -45,12 +50,15 @@ public abstract class BaseStep<T extends BasePage> {
     }
 
     /**
-     * @return - step where method is implemented
+     * @return - steps type where method is implemented
      * return type has to be changed during implementation to corresponding step class to save chain of invocation
      * e.g. from:
-     * public BaseStep<T> openPage();
+     * public BaseStep<Page> openPage();
      * to:
      * public LoginPageSteps openPage();
+     * each overridden method body should contain:
+     * this.page.openAndVerifyCorrectPageOpened();
+     * return this;
      */
-    public abstract BaseStep<T> openPage();
+    public abstract BaseStep<Page> openPage();
 }
