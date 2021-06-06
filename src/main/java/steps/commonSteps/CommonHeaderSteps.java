@@ -15,19 +15,6 @@ public abstract class CommonHeaderSteps<Page extends CommonHeader> extends BaseS
     }
 
     /**
-     * @param login
-     * @param password
-     * @implNote - due to the fact that header is presented on all pages this method is necessary
-     */
-    protected void login(String login, String password) {
-//    since Login page has not opened yet, it is opening and Login page instance is obtained
-        var page = this.openLoginPage().getPageInstance();
-        page.getEmailInput().sendKeys(login);
-        page.getPasswordInput().sendKeys(password);
-        page.getLoginBtn().click();
-    }
-
-    /**
      *
      * @param callerStepsClass - steps class, that invokes method; necessary to know to maintain invocation chain
      * @param login
@@ -36,12 +23,7 @@ public abstract class CommonHeaderSteps<Page extends CommonHeader> extends BaseS
      * @return - any steps class, that extends CommonHeaderSteps class
      */
     public <T extends CommonHeaderSteps<Page>> T loginWithCorrectCredentials(Class<T> callerStepsClass, String login, String password) {
-        //    since Login page has not opened yet, it is opening and Login page instance is obtained
-        var page = this.openLoginPage().getPageInstance();
-        page.getEmailInput().sendKeys(login);
-        page.getPasswordInput().sendKeys(password);
-        page.getLoginBtn().click();
-
+        this.login(login, password);
         return this.getStepsObjectInstance(callerStepsClass, false);
     }
 
@@ -58,5 +40,18 @@ public abstract class CommonHeaderSteps<Page extends CommonHeader> extends BaseS
     public ProfileMenuSteps openProfileMenu() {
         this.page.getProfileIcon().click();
         return new ProfileMenuSteps();
+    }
+
+    /**
+     * @param login
+     * @param password
+     * @implNote - due to the fact that header is presented on all pages this method is necessary
+     */
+    private void login(String login, String password) {
+//    since Login page has not opened yet, it is opening and Login page instance is obtained
+        var page = this.openLoginPage().getPageInstance();
+        page.getEmailInput().sendKeys(login);
+        page.getPasswordInput().sendKeys(password);
+        page.getLoginBtn().click();
     }
 }
