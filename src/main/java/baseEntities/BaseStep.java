@@ -45,7 +45,7 @@ public abstract class BaseStep<Page extends BasePage> {
     }
 
     /**
-     * @return - step where method is implemented
+     * @return - steps type where method is implemented
      * return type has to be changed during implementation to corresponding step class to save chain of invocation
      * e.g. from:
      * public BaseStep<Page> openPage();

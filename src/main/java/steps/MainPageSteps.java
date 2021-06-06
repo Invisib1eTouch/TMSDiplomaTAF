@@ -13,6 +13,12 @@ public class MainPageSteps extends CommonHeaderSteps<MainPage> {
     }
 
     @Override
+    public MainPageSteps loginWithCorrectCredentials(String login, String password) {
+        this.login(login, password);
+        return this;
+    }
+
+    @Override
     public MainPageSteps openPage() {
         this.page.openAndVerifyCorrectPageOpened();
         return this;

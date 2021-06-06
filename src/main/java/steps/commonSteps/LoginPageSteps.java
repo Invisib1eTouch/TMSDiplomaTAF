@@ -1,11 +1,11 @@
-package steps;
+package steps.commonSteps;
 
 import baseEntities.BaseStep;
 import pages.LoginPage;
 
 public class LoginPageSteps extends BaseStep<LoginPage> {
 
-    private LoginPageSteps() {
+    protected LoginPageSteps() {
         super(false);
     }
 
@@ -13,11 +13,5 @@ public class LoginPageSteps extends BaseStep<LoginPage> {
     public LoginPageSteps openPage() {
         this.page.openAndVerifyCorrectPageOpened();
         return this;
-    }
-
-    public void loginWithCorrectCredentials(String email, String password) {
-        this.page.getEmailInput().sendKeys(email);
-        this.page.getPasswordInput().sendKeys(password);
-        this.page.getLoginBtn().click();
     }
 }
