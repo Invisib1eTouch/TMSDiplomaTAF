@@ -19,7 +19,7 @@ public abstract class BaseStep<Page extends BasePage> {
      * super(false);
      * }
      */
-    public BaseStep(boolean openPageByUrl) {
+    public BaseStep(Boolean openPageByUrl) {
 //        Set page instance
         this.getPageInstance();
 
@@ -43,22 +43,24 @@ public abstract class BaseStep<Page extends BasePage> {
 //                Create page instance based on defined class
                 this.page = pageClass.getConstructor().newInstance();
             } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
-                throw new RuntimeException("Page instance was not initialised" + e.getMessage());
+                throw new RuntimeException("Page instance was not initialised:" + e.getMessage());
             }
         }
         return this.page;
     }
 
     /**
-     * @return - steps type where method is implemented
-     * return type has to be changed during implementation to corresponding step class to save chain of invocation
-     * e.g. from:
-     * public BaseStep<Page> openPage();
-     * to:
-     * public LoginPageSteps openPage();
-     * each overridden method body should contain:
-     * this.page.openAndVerifyCorrectPageOpened();
-     * return this;
+     * @return - steps class object that invokes the method
      */
-    public abstract BaseStep<Page> openPage();
+    public <T extends BaseStep<Page>> T openPage(Class<T> callerStepsClass){
+        return this.getStepsObjectInstance(callerStepsClass, true);
+    }
+
+    protected <T extends BaseStep<Page>> T getStepsObjectInstance(Class<T> classType, Boolean openPageByUrl){
+        try {
+            return classType.getConstructor(Boolean.class).newInstance(openPageByUrl);
+        } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
+            throw new RuntimeException("Cannot initialize steps class object:" + e.getMessage());
+        }
+    }
 }

@@ -13,7 +13,7 @@ public class LoginTests extends BaseTestAfterMethodDriverDisposing {
     @Parameters({"validLogin", "validPassword", "validUserId"})
     public void positiveLoginTest(String login, String password, String userId){
         new MainPageSteps(true)
-                .loginWithCorrectCredentials(login, password)
+                .loginWithCorrectCredentials(MainPageSteps.class, login, password)
                 .openProfileMenu()
                 .getPageInstance()
                 .getUserId()
