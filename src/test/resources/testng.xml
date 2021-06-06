@@ -3,6 +3,7 @@
 <suite name="Main Test Suite">
     <parameter name="validLogin" value="test.ondrey.ondreev@gmail.com"/>
     <parameter name="validPassword" value="weflknel12123knwkljef"/>
+    <parameter name="validUserId" value="3308965"/>
     <test name="LoginTests">
         <classes>
             <class name="tests.LoginTests"/>
