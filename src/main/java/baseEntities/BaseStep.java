@@ -26,7 +26,6 @@ public abstract class BaseStep<Page extends BasePage> {
         if (openPageByUrl) {
             this.page.open();
         }
-
         this.page.verifyCorrectPageOpened();
     }
 
@@ -53,12 +52,13 @@ public abstract class BaseStep<Page extends BasePage> {
      * @return - steps class object that invokes the method
      */
     public <T extends BaseStep<Page>> T openPage(Class<T> callerStepsClass){
-        return this.getStepsObjectInstance(callerStepsClass, true);
+        this.page.openAndVerifyCorrectPageOpened();
+        return this.getStepsObjectInstance(callerStepsClass);
     }
 
-    protected <T extends BaseStep<Page>> T getStepsObjectInstance(Class<T> classType, Boolean openPageByUrl){
+    protected <T extends BaseStep<Page>> T getStepsObjectInstance(Class<T> classType){
         try {
-            return classType.getConstructor(Boolean.class).newInstance(openPageByUrl);
+            return classType.getConstructor(Boolean.class).newInstance(false);
         } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
             throw new RuntimeException("Cannot initialize steps class object:" + e.getMessage());
         }

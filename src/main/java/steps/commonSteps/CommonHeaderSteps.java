@@ -24,7 +24,7 @@ public abstract class CommonHeaderSteps<Page extends CommonHeader> extends BaseS
      */
     public <T extends CommonHeaderSteps<Page>> T loginWithCorrectCredentials(Class<T> callerStepsClass, String login, String password) {
         this.login(login, password);
-        return this.getStepsObjectInstance(callerStepsClass, false);
+        return this.getStepsObjectInstance(callerStepsClass);
     }
 
     public LoginPageSteps loginWithIncorrectCredentials(String login, String password) {
