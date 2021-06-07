@@ -17,7 +17,6 @@ public abstract class ProfileHeader extends CommonHeader {
         super(path);
     }
 
-
     public SelenideElement getEditHeaderBackgroundBtn() {
         return $(editHeaderBackgroundBtnBy);
     }
