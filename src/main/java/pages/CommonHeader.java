@@ -1,7 +1,9 @@
 package pages;
 
 import baseEntities.BasePage;
+import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.SelenideElement;
+import core.PropertyReader;
 import org.openqa.selenium.By;
 
 import static com.codeborne.selenide.Selenide.*;
@@ -16,6 +18,7 @@ public abstract class CommonHeader extends BasePage {
      */
     public CommonHeader(String path) {
         super(path);
+        Configuration.baseUrl = PropertyReader.getCatalogBaseUrl();
     }
 
 
