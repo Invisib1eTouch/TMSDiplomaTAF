@@ -49,16 +49,25 @@ public abstract class BaseStep<Page extends BasePage> {
     }
 
     /**
-     * @return - steps class object that invokes the method
+     *
+     * @param callerStepsClass - steps class, that calls method; necessary to know to maintain invocation chain
+     * @param <StepsType> - method caller steps class type
+     * @return - instance of StepsType class from which method was invoked
      */
-    public <T extends BaseStep<Page>> T openPage(Class<T> callerStepsClass){
+    public <StepsType extends BaseStep<Page>> StepsType openPage(Class<StepsType> callerStepsClass){
         this.page.open();
         return this.getStepsObjectInstance(callerStepsClass);
     }
 
-    protected <T extends BaseStep<Page>> T getStepsObjectInstance(Class<T> classType){
+    /**
+     *
+     * @param stepsClassType steps class
+     * @param <StepsType> - steps class type
+     * @return - instance of StepsType class
+     */
+    protected <StepsType extends BaseStep<Page>> StepsType getStepsObjectInstance(Class<StepsType> stepsClassType){
         try {
-            return classType.getConstructor(Boolean.class).newInstance(false);
+            return stepsClassType.getConstructor(Boolean.class).newInstance(false);
         } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
             throw new RuntimeException("Cannot initialize steps class object:" + e.getMessage());
         }

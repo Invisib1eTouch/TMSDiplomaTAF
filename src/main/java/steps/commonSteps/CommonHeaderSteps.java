@@ -16,15 +16,15 @@ public abstract class CommonHeaderSteps<Page extends CommonHeader> extends BaseS
 
     /**
      *
-     * @param callerStepsClass - steps class, that invokes method; necessary to know to maintain invocation chain
+     * @param methodCallerStepsClass - steps class, that invokes method; necessary to know to maintain invocation chain
      * @param login
      * @param password
-     * @param <T> - caller steps class instance
-     * @return - any steps class, that extends CommonHeaderSteps class
+     * @param <StepsType> - method caller steps class type
+     * @return - instance of StepsType class that extends CommonHeaderSteps class from which method was invoked
      */
-    public <T extends CommonHeaderSteps<Page>> T loginWithCorrectCredentials(Class<T> callerStepsClass, String login, String password) {
+    public <StepsType extends CommonHeaderSteps<Page>> StepsType loginWithCorrectCredentials(Class<StepsType> methodCallerStepsClass, String login, String password) {
         this.login(login, password);
-        return this.getStepsObjectInstance(callerStepsClass);
+        return this.getStepsObjectInstance(methodCallerStepsClass);
     }
 
     public LoginPageSteps loginWithIncorrectCredentials(String login, String password) {
