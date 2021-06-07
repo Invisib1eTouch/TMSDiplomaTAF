@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Main Test Suite">
-    <parameter name="validLogin" value="test.ondrey.ondreev@gmail.com"/>
-    <parameter name="validPassword" value="weflknel12123knwkljef"/>
-    <parameter name="validUserId" value="3308965"/>
+    <parameter name="validLogin_1" value="test.ondrey.ondreev@gmail.com"/>
+    <parameter name="validPassword_1" value="weflknel12123knwkljef"/>
+    <parameter name="validUserId_1" value="3308965"/>
+    <parameter name="validLogin_2" value="test.ondrey.ondreev@gmail.com"/>
+    <parameter name="validPassword_2" value="weflknel12123knwkljef"/>
+    <parameter name="validUserId_2" value="3308965"/>
+    <parameter name="validLogin_3" value="test.acc.kids1@gmail.com"/>
+    <parameter name="validPassword_3" value="Lbgkjv_22062021"/>
+    <parameter name="validUserId_3" value="2804288"/>
     <test name="LoginTests">
         <classes>
             <class name="tests.LoginTests"/>

@@ -10,7 +10,7 @@ import static com.codeborne.selenide.Condition.*;
 public class LoginTests extends BaseTestAfterMethodDriverDisposing {
 
     @Test
-    @Parameters({"validLogin", "validPassword", "validUserId"})
+    @Parameters({"validLogin_1", "validPassword_1", "validUserId_1"})
     public void positiveLoginTest(String login, String password, String userId){
         new MainPageSteps(true)
                 .loginWithCorrectCredentials(login, password)
