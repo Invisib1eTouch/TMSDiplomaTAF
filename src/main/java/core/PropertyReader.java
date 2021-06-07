@@ -16,8 +16,12 @@ public class PropertyReader {
         }
     }
 
-    public static String getBaseUrl() {
-        return properties.getProperty("baseurl");
+    public static String getCatalogBaseUrl() {
+        return properties.getProperty("catalog.base.url");
+    }
+
+    public static String getProfileBaseUrl() {
+        return properties.getProperty("profile.base.url");
     }
 
     public static String getBrowserName() {
