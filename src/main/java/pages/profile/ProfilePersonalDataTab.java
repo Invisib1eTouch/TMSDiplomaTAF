@@ -1,6 +1,9 @@
 package pages.profile;
 
+import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
+
+import static com.codeborne.selenide.Selenide.$;
 
 public class ProfilePersonalDataTab extends ProfileHeader {
 
@@ -8,11 +11,15 @@ public class ProfilePersonalDataTab extends ProfileHeader {
     private static final By editPersonalDataBtnBy = By.cssSelector(".profile-form__set-item_person .profile-form__link_base-alter");
 
     public ProfilePersonalDataTab() {
-        super("");
+        super("/personal");
     }
 
     @Override
     protected By getCorrectPageOpenedIndicatorElLocator() {
         return emailLabelBy;
+    }
+
+    public SelenideElement getEditPersonalDataBtn(){
+        return $(editPersonalDataBtnBy);
     }
 }
