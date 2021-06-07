@@ -7,7 +7,7 @@ public abstract class ProfileHeaderSteps<Page extends ProfileHeader> extends Com
     /**
      * @param openPageByUrl - if true page will be opened by url
      */
-    protected ProfileHeaderSteps(boolean openPageByUrl) {
+    public ProfileHeaderSteps(boolean openPageByUrl) {
         super(openPageByUrl);
     }
 }
