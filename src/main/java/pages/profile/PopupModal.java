@@ -7,7 +7,7 @@ import static com.codeborne.selenide.Selenide.*;
 
 public class PopupModal extends ProfileHeader {
 
-    public static final String popupContainerCssLocator = ".popup-style__container_visible .profile-popup";
+    private static final String popupContainerCssLocator = ".popup-style__container_visible .profile-popup";
 
     public PopupModal() {
         super(null);
@@ -18,7 +18,19 @@ public class PopupModal extends ProfileHeader {
         return By.cssSelector(popupContainerCssLocator);
     }
 
-    public SelenideElement getFileUploadInput(){
-        return $(popupContainerCssLocator + " input");
+    public SelenideElement getFileUploadInput() {
+        return $(makePopupElLocator("input"));
+    }
+
+    public SelenideElement getSaveBtn() {
+        return $(makePopupElLocator(".button-style_primary"));
+    }
+
+    public SelenideElement getAnimatedSaveBtn() {
+        return $(makePopupElLocator(".button-style_animated"));
+    }
+
+    private String makePopupElLocator(String locatorEnding) {
+        return String.format("%s %s", popupContainerCssLocator, locatorEnding);
     }
 }
