@@ -3,8 +3,6 @@ package steps.commonSteps;
 import baseEntities.BaseStep;
 import pages.CommonHeader;
 
-import java.lang.reflect.InvocationTargetException;
-
 public abstract class CommonHeaderSteps<Page extends CommonHeader> extends BaseStep<Page> {
 
     /**
@@ -19,10 +17,10 @@ public abstract class CommonHeaderSteps<Page extends CommonHeader> extends BaseS
      * @param methodCallerStepsClass - steps class, that invokes method; necessary to know to maintain invocation chain
      * @param login
      * @param password
-     * @param <StepsType> - method caller steps class type
-     * @return - instance of StepsType class that extends CommonHeaderSteps class from which method was invoked
+     * @param <Steps> - method caller steps class type
+     * @return - instance of Steps class that extends CommonHeaderSteps class from which method was invoked
      */
-    public <StepsType extends CommonHeaderSteps<Page>> StepsType loginWithCorrectCredentials(Class<StepsType> methodCallerStepsClass, String login, String password) {
+    public <Steps extends CommonHeaderSteps<Page>> Steps loginWithCorrectCredentials(Class<Steps> methodCallerStepsClass, String login, String password) {
         this.login(login, password);
         return this.getStepsObjectInstance(methodCallerStepsClass);
     }
