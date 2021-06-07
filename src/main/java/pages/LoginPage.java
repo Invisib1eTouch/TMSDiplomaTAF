@@ -13,7 +13,7 @@ public class LoginPage extends BasePage {
     private static final By loginBtnBy = By.className("auth-button_primary");
 
     public LoginPage() {
-        super(null);
+        super(UrlPrefix.CATALOG_PREFIX, null);
     }
 
     @Override
