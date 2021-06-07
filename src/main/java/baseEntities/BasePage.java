@@ -1,5 +1,9 @@
 package baseEntities;
 
+import com.codeborne.selenide.Configuration;
+import core.PropertyReader;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 import org.openqa.selenium.By;
 
 import static com.codeborne.selenide.Selenide.*;
@@ -11,10 +15,11 @@ public abstract class BasePage {
 
     /**
      *
-     * @param path - if page has no constant path then path = null
-     *             (e.g. dialogue or dynamic path)
+     * @param urlPrefix - prefix for the page e.g. catalog, profile, etc.
+     * @param path - if page has no constant path then path = null (e.g. dialogue or dynamic path)
      */
-    public BasePage(String path) {
+    public BasePage(UrlPrefix urlPrefix, String path) {
+        Configuration.baseUrl = String.format("https://%s.%s", urlPrefix.getValue(), PropertyReader.getBaseUrl());
         this.path = path;
     }
 
@@ -36,8 +41,18 @@ public abstract class BasePage {
             com.codeborne.selenide.Selenide.open(this.path);
     }
 
-    public void openAndVerifyCorrectPageOpened(){
+    public void openAndVerifyCorrectPageOpened() {
         this.open();
         this.verifyCorrectPageOpened();
+    }
+
+    @AllArgsConstructor
+    protected enum UrlPrefix {
+        CATALOG_PREFIX(PropertyReader.getUrlPrefix("catalog.url.prefix")),
+        PROFILE_PREFIX(PropertyReader.getUrlPrefix("profile.url.prefix")),
+        CART_PREFIX(PropertyReader.getUrlPrefix("cart.url.prefix"));
+
+        @Getter
+        private final String value;
     }
 }

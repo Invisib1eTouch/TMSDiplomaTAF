@@ -10,16 +10,4 @@ public class ProfilePersonalDataTabSteps extends ProfileHeaderSteps<ProfileMainT
     protected ProfilePersonalDataTabSteps(boolean openPageByUrl) {
         super(openPageByUrl);
     }
-
-    @Override
-    public ProfilePersonalDataTabSteps openPage() {
-        this.page.openAndVerifyCorrectPageOpened();
-        return this;
-    }
-
-    @Override
-// Not implemented since will be changed to another architecture type
-    public CommonHeaderSteps<ProfileMainTab> loginWithCorrectCredentials(String login, String password) {
-        return null;
-    }
 }

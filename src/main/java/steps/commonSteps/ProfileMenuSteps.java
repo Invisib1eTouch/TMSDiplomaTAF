@@ -2,6 +2,7 @@ package steps.commonSteps;
 
 import baseEntities.BaseStep;
 import pages.ProfileMenu;
+import steps.profileSteps.ProfileMainTabSteps;
 
 public class ProfileMenuSteps extends BaseStep<ProfileMenu> {
 
@@ -9,9 +10,8 @@ public class ProfileMenuSteps extends BaseStep<ProfileMenu> {
         super(false);
     }
 
-    @Override
-    public ProfileMenuSteps openPage() {
-        this.page.verifyCorrectPageOpened();
-        return this;
+    public ProfileMainTabSteps openProfilePageOnMainTab(){
+        this.page.getUserId().click();
+        return new ProfileMainTabSteps(false);
     }
 }

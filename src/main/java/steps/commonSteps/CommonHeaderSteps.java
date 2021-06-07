@@ -8,38 +8,22 @@ public abstract class CommonHeaderSteps<Page extends CommonHeader> extends BaseS
     /**
      * @param openPageByUrl - if true page will be opened by url
      */
-    protected CommonHeaderSteps(boolean openPageByUrl) {
+    protected CommonHeaderSteps(Boolean openPageByUrl) {
         super(openPageByUrl);
     }
 
     /**
+     *
+     * @param methodCallerStepsClass - steps class, that invokes method; necessary to know to maintain invocation chain
      * @param login
      * @param password
-     * @implNote - due to the fact that header is presented on all pages this method is necessary
+     * @param <Steps> - method caller steps class type
+     * @return - instance of Steps class that extends CommonHeaderSteps class from which method was invoked
      */
-    protected void login(String login, String password) {
-//    since Login page has not opened yet, it is opening and Login page instance is obtained
-        var page = this.openLoginPage().getPageInstance();
-        page.getEmailInput().sendKeys(login);
-        page.getPasswordInput().sendKeys(password);
-        page.getLoginBtn().click();
+    public <Steps extends CommonHeaderSteps<Page>> Steps loginWithCorrectCredentials(Class<Steps> methodCallerStepsClass, String login, String password) {
+        this.login(login, password);
+        return this.getStepsObjectInstance(methodCallerStepsClass);
     }
-
-    /**
-     * @param login
-     * @param password
-     * @return - steps type where method is implemented
-     * @implNote return type has to be changed during implementation to corresponding steps class to save chain of
-     * invocation
-     * e.g. from:
-     * public CommonHeaderSteps<Page> loginWithCorrectCredentials(String login, String password);
-     * to:
-     * public MainPageSteps loginWithCorrectCredentials(String login, String password);
-     * each overridden method body should contain:
-     * this.login(login, password);
-     * return this;
-     */
-    public abstract CommonHeaderSteps<Page> loginWithCorrectCredentials(String login, String password);
 
     public LoginPageSteps loginWithIncorrectCredentials(String login, String password) {
         this.login(login, password);
@@ -51,8 +35,21 @@ public abstract class CommonHeaderSteps<Page extends CommonHeader> extends BaseS
         return new LoginPageSteps();
     }
 
-    public ProfileMenuSteps openProfileMenu(){
+    public ProfileMenuSteps openProfileMenu() {
         this.page.getProfileIcon().click();
         return new ProfileMenuSteps();
+    }
+
+    /**
+     * @param login
+     * @param password
+     * @implNote - due to the fact that header is presented on all pages this method is necessary
+     */
+    private void login(String login, String password) {
+//    since Login page has not opened yet, it is opening and Login page instance is obtained
+        var page = this.openLoginPage().getPageInstance();
+        page.getEmailInput().sendKeys(login);
+        page.getPasswordInput().sendKeys(password);
+        page.getLoginBtn().click();
     }
 }

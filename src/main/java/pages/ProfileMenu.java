@@ -1,6 +1,5 @@
 package pages;
 
-import baseEntities.BasePage;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
 

@@ -10,9 +10,14 @@
     <parameter name="validLogin_3" value="test.acc.kids1@gmail.com"/>
     <parameter name="validPassword_3" value="Lbgkjv_22062021"/>
     <parameter name="validUserId_3" value="3311180"/>
-    <test name="LoginTests">
+<!--    <test name="LoginTests">-->
+<!--        <classes>-->
+<!--            <class name="tests.LoginTests"/>-->
+<!--        </classes>-->
+<!--    </test>-->
+    <test name="ProfileTests">
         <classes>
-            <class name="tests.LoginTests"/>
+            <class name="tests.ProfileTests"/>
         </classes>
     </test>
 </suite>
