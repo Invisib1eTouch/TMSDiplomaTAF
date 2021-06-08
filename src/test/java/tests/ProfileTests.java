@@ -15,4 +15,18 @@ public class ProfileTests extends BaseTestAfterClassDriverDisposing {
                 .openProfileMenu()
                 .openProfilePageOnMainTab();
     }
+
+    @Test
+    @Parameters({"validLogin_3", "validPassword_3"})
+    public void personalDataEditWithExceedingValuesTest(String login, String password){
+        new MainPageSteps(true)
+                .loginWithCorrectCredentials(MainPageSteps.class, login, password)
+                .openProfileMenu()
+                .openProfilePageOnMainTab()
+                .openPersonalDataTab()
+                .openEditProfileContainer()
+                .fillLastNameField();
+
+
+    }
 }

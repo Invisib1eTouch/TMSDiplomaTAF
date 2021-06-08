@@ -10,4 +10,9 @@ public abstract class ProfileHeaderSteps<Page extends ProfileHeader> extends Com
     public ProfileHeaderSteps(boolean openPageByUrl) {
         super(openPageByUrl);
     }
+
+    public ProfilePersonalDataTabSteps openPersonalDataTab(){
+        this.page.getPersonalDataBtn().click();
+        return new ProfilePersonalDataTabSteps(false);
+    }
 }

@@ -14,4 +14,5 @@ public class ProfileMenuSteps extends BaseStep<ProfileMenu> {
         this.page.getUserId().click();
         return new ProfileMainTabSteps(false);
     }
+
 }
