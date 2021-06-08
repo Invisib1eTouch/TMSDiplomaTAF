@@ -19,18 +19,22 @@ public class PopupModal extends ProfileHeader {
     }
 
     public SelenideElement getFileUploadInput() {
-        return $(makePopupElLocator("input"));
+        return $(getPopupElLocator("input"));
     }
 
     public SelenideElement getSaveBtn() {
-        return $(makePopupElLocator(".button-style_primary"));
+        return $(getPopupElLocator(".button-style_primary"));
     }
 
     public SelenideElement getAnimatedSaveBtn() {
-        return $(makePopupElLocator(".button-style_animated"));
+        return $(getPopupElLocator(".button-style_animated"));
     }
 
-    private String makePopupElLocator(String locatorEnding) {
+    /**
+     * @param locatorEnding - popup element locator inside popup container
+     * @return - string popup full locator
+     */
+    private String getPopupElLocator(String locatorEnding) {
         return String.format("%s %s", popupContainerCssLocator, locatorEnding);
     }
 }
