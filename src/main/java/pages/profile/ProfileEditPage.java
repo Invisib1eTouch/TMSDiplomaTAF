@@ -4,31 +4,20 @@ import baseEntities.BasePage;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
 
+import java.util.Objects;
+
 import static com.codeborne.selenide.Selenide.$;
 
 public class ProfileEditPage extends BasePage {
 
     private static final By saveBtnBy = By.className("auth-button_primary");
-    private static final By nickInputBy = By.xpath("//div[normalize-space()='Ник']" +
-            "/ancestor::div[contains(@class, 'auth-form__row')]//input");
     private static final By lastNameInputBy = By.cssSelector("input[placeholder='Фамилия']");
-    private static final By firstNameInputBy = By.cssSelector("input[placeholder='Имя']");
-    private static final By patronymicInputBy = By.cssSelector("input[placeholder='Отчество']");
-    private static final By dateOfBirthInputBy = By.xpath("//div[normalize-space()='Дата рождения']" +
-            "/ancestor::div[contains(@class, 'auth-form__row')]//input[1]");
+    private static final By dayOfBirthInputBy = By.xpath("//div[normalize-space()='Дата рождения']" +
+            "/ancestor::div[contains(@class, 'auth-form__row')]//input[@maxlength=2]");
+    private static final By monthSelectorBy = By.className("auth-input__real");
     private static final By yearOfBirthInputBy = By.xpath("//div[normalize-space()='Дата рождения']" +
-            "/ancestor::div[contains(@class, 'auth-form__row')]//input[2]");
-    private static final By cityInputBy = By.xpath("//div[normalize-space()='Из города']" +
-            "/ancestor::div[contains(@class, 'auth-form__row')]//input");
-    private static final By myTechInputBy = By.xpath("//div[normalize-space()='Моя техника']" +
-            "/ancestor::div[contains(@class, 'auth-form__row')]/descendant::textarea");
-    private static final By occupationInputBy = By.xpath("//div[normalize-space()='Род занятий']" +
-            "/ancestor::div[contains(@class, 'auth-form__row')]/descendant::textarea");
-    private static final By interestsInputBy = By.xpath("//div[normalize-space()='Интересы']" +
-            "/ancestor::div[contains(@class, 'auth-form__row')]/descendant::textarea");
-    private static final By forumCaptionInputBy = By.xpath("//div[normalize-space()='Подпись на Форуме']" +
-            "/ancestor::div[contains(@class, 'auth-form__row')]/descendant::textarea");
-
+            "/ancestor::div[contains(@class, 'auth-form__row')]//input[@maxlength=4]");
+    private static final By errorLabelBy = By.cssSelector(".auth-form__description_error ");
 
     public ProfileEditPage() {
         super(UrlPrefix.CATALOG_PREFIX, null);
@@ -43,48 +32,31 @@ public class ProfileEditPage extends BasePage {
         return $(saveBtnBy);
     }
 
-    public SelenideElement getNickInput() {
-        return $(nickInputBy);
-    }
-
     public SelenideElement getLastNameInput() {
         return $(lastNameInputBy);
     }
 
-    public SelenideElement getFirstNameInput() {
-        return $(firstNameInputBy);
+    public SelenideElement getDayOfBirthInput() {
+        return $(dayOfBirthInputBy);
     }
 
-    public SelenideElement getPatronymicInput() {
-        return $(patronymicInputBy);
-    }
-
-    public SelenideElement getDateOfBirthInput() {
-        return $(dateOfBirthInputBy);
+    public SelenideElement getMonthSelector() {
+        return $(monthSelectorBy);
     }
 
     public SelenideElement getYearOfBirthInput() {
         return $(yearOfBirthInputBy);
     }
 
-    public SelenideElement getCityInput() {
-        return $(cityInputBy);
+    public SelenideElement getErrorLabel(){
+        return $(errorLabelBy);
     }
 
-    public SelenideElement getMyTechInput() {
-        return $(myTechInputBy);
+    public int getEltMaxLength(SelenideElement selenideElement){
+        return Integer.parseInt(Objects.requireNonNull(selenideElement.getAttribute("maxlength")));
     }
 
-    public SelenideElement getOccupationInput() {
-        return $(occupationInputBy);
+    public int getLastNameValueLength(){
+        return this.getLastNameInput().text().length();
     }
-
-    public SelenideElement getInterestsInput() {
-        return $(interestsInputBy);
-    }
-
-    public SelenideElement getForumCaptionInput() {
-        return $(forumCaptionInputBy);
-    }
-
 }
