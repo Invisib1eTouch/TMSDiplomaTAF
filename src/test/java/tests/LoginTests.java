@@ -6,7 +6,7 @@ import org.testng.annotations.Test;
 import pages.LoginPage;
 import steps.MainPageSteps;
 import templates.BaseTestAfterMethodDriverDisposing;
-import testData.StaticProviderFromCsvFile;
+import testData.StaticProvider;
 
 import static com.codeborne.selenide.Condition.*;
 
@@ -19,7 +19,7 @@ public class LoginTests extends BaseTestAfterMethodDriverDisposing {
                 .openProfileMenu().getPageInstance().getUserId().should(be(visible), have(exactOwnText(userId)));
     }
 
-    @Test(dataProvider = "readFromCsvFile", dataProviderClass = StaticProviderFromCsvFile.class, groups = {"users.csv"})
+    @Test(dataProvider = "loginWithIncorrectData", dataProviderClass = StaticProvider.class, groups = {"users.csv"})
     public void negativeLoginTest(LoginTestDataContainer loginTestDataContainer) {
         LoginPage loginPage = new MainPageSteps(true).loginWithIncorrectCredentials(loginTestDataContainer.getLogin(),
                 loginTestDataContainer.getPassword()).getPageInstance();

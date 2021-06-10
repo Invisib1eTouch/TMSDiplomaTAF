@@ -5,6 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * Class is used for assign fields from csv file
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
