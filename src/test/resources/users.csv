@@ -1,3 +1,5 @@
-login|password
-user1|password1
-user2|password2
+login,password,login field error,password field error
+login_invalid,,,"Укажите пароль"
+,password_invalid,"Укажите ник или e-mail",
+,,"Укажите ник или e-mail","Укажите пароль"
+login_invalid,password_invalid,,"Неверный логин или пароль"
