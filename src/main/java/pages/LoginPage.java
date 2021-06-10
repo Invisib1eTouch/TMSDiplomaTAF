@@ -4,15 +4,15 @@ import baseEntities.BasePage;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
 
-import static com.codeborne.selenide.Selenide.*;
+import static com.codeborne.selenide.Selectors.*;
+import static com.codeborne.selenide.Selenide.$;
 
 public class LoginPage extends BasePage {
 
-    private static final By emailInputBy = By.cssSelector("[type=text].auth-input");
-    private static final By passwordInputBy = By.cssSelector("[type=password]");
+    private static final String emailInputLocator = "//*[@type='text' and contains(@class,'auth-input')]";
+    private static final String passwordInputLocator = "//*[@type='password']";
+    private static final String authFieldErrorMesLocator = "following::div[contains(@class, 'auth-form__description_error')]";
     private static final By loginBtnBy = By.className("auth-button_primary");
-    private static final By loginInputErrorBy = By.xpath("//input[@type='text']/ancestor::div[contains(@class, 'auth-form__group')]/descendant::div[contains(@class, 'auth-form__description_error')]");
-    private static final By passwordInputErrorBy = By.xpath("//input[@type='password']/following::div[contains(@class, 'auth-form__description_error')]");
 
     public LoginPage() {
         super(UrlPrefix.CATALOG_PREFIX, null);
@@ -24,11 +24,11 @@ public class LoginPage extends BasePage {
     }
 
     public SelenideElement getEmailInput() {
-        return $(emailInputBy);
+        return $(byXpath(emailInputLocator));
     }
 
     public SelenideElement getPasswordInput() {
-        return $(passwordInputBy);
+        return $(byXpath(passwordInputLocator));
     }
 
     public SelenideElement getLoginBtn() {
@@ -36,10 +36,10 @@ public class LoginPage extends BasePage {
     }
 
     public SelenideElement getLoginInputError(){
-        return $(loginInputErrorBy);
+        return $(byXpath(emailInputLocator + "/" + authFieldErrorMesLocator));
     }
 
     public SelenideElement getPasswordInputError(){
-        return $(passwordInputErrorBy);
+        return $(byXpath(passwordInputLocator + "/" + authFieldErrorMesLocator));
     }
 }
