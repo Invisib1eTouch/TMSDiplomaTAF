@@ -1,21 +1,27 @@
 package apiSteps;
 
 import io.restassured.RestAssured;
-import io.restassured.http.ContentType;
+import io.restassured.http.Header;
 import io.restassured.response.Response;
 
-import static io.restassured.RestAssured.given;
+import static io.restassured.RestAssured.*;
 
-public class UserApiSteps extends ApiSteps{
+public class UserApiSteps extends ApiSteps {
 
-    public UserApiSteps() {
-        super("user.api");
+    static {
+       RestAssured.basePath = "user.api";
     }
 
-    public Response login(String login, String password){
-        given()
-                .contentType(ContentType.JSON)
-                .body()
-    }
+    public static Response getMe(){
+        Response response = given()
+                .header(new Header("Authorization", "Bearer " + authToken))
+                .log().all()
+                .get("/me");
 
+        if (response.getStatusCode() != 200){
+            response.prettyPrint();
+        }
+
+        return response;
+    }
 }
