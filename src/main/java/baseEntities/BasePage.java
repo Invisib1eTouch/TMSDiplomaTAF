@@ -30,7 +30,8 @@ public abstract class BasePage {
 
     public void verifyCorrectPageOpened() {
         try {
-            $(this.getCorrectPageOpenedIndicatorElLocator()).shouldNotBe(visible);
+            // Check that element that indicates particular page can be found and visible
+            $(this.getCorrectPageOpenedIndicatorElLocator()).should(exist, be(visible));
         } catch (Error e) {
             throw new AssertionError(String.format("%s was not opened\n Detailed Message:\n%s",
                             this.getClass().getSimpleName(), e.getMessage()));
