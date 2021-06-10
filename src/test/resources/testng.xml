@@ -10,6 +10,9 @@
     <parameter name="validLogin_3" value="test.acc.kids1@gmail.com"/>
     <parameter name="validPassword_3" value="Lbgkjv_22062021"/>
     <parameter name="validUserId_3" value="3311180"/>
+    <parameter name="validLogin_4" value="ktafaniuk@yandex.by"/>
+    <parameter name="validPassword_4" value="Qwerty_2206"/>
+    <parameter name="validUserId_4" value="3313009"/>
 <!--    <test name="LoginTests">-->
 <!--        <classes>-->
 <!--            <class name="tests.LoginTests"/>-->

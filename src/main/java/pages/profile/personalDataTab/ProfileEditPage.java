@@ -1,4 +1,4 @@
-package pages.profile;
+package pages.profile.personalDataTab;
 
 import baseEntities.BasePage;
 import com.codeborne.selenide.SelenideElement;
@@ -12,6 +12,8 @@ public class ProfileEditPage extends BasePage {
 
     private static final By saveBtnBy = By.className("auth-button_primary");
     private static final By lastNameInputBy = By.cssSelector("input[placeholder='Фамилия']");
+    private static final By firstNameInputBy = By.cssSelector("input[placeholder='Имя']");
+    private static final By patronymicInputBy = By.cssSelector("input[placeholder='Отчество']");
     private static final By dayOfBirthInputBy = By.xpath("//div[normalize-space()='Дата рождения']" +
             "/ancestor::div[contains(@class, 'auth-form__row')]//input[@maxlength=2]");
     private static final By monthSelectorBy = By.className("auth-input__real");
@@ -20,7 +22,7 @@ public class ProfileEditPage extends BasePage {
     private static final By errorLabelBy = By.cssSelector(".auth-form__description_error ");
 
     public ProfileEditPage() {
-        super(UrlPrefix.CATALOG_PREFIX, null);
+        super(UrlPrefix.PROFILE_PREFIX, null);
     }
 
     @Override
@@ -34,6 +36,14 @@ public class ProfileEditPage extends BasePage {
 
     public SelenideElement getLastNameInput() {
         return $(lastNameInputBy);
+    }
+
+    public SelenideElement getFirstNameInput() {
+        return $(firstNameInputBy);
+    }
+
+    public SelenideElement getPatronymicInput() {
+        return $(patronymicInputBy);
     }
 
     public SelenideElement getDayOfBirthInput() {
@@ -52,11 +62,4 @@ public class ProfileEditPage extends BasePage {
         return $(errorLabelBy);
     }
 
-    public int getEltMaxLength(SelenideElement selenideElement){
-        return Integer.parseInt(Objects.requireNonNull(selenideElement.getAttribute("maxlength")));
-    }
-
-    public int getLastNameValueLength(){
-        return this.getLastNameInput().text().length();
-    }
 }

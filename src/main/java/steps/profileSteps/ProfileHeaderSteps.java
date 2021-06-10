@@ -2,6 +2,7 @@ package steps.profileSteps;
 
 import pages.profile.ProfileHeader;
 import steps.commonSteps.CommonHeaderSteps;
+import steps.profileSteps.personalDataTab.ProfilePersonalDataTabSteps;
 
 public abstract class ProfileHeaderSteps<Page extends ProfileHeader> extends CommonHeaderSteps<Page> {
     /**

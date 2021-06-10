@@ -1,6 +1,7 @@
 package pages;
 
 import baseEntities.BasePage;
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
 
@@ -20,7 +21,7 @@ public abstract class CommonHeader extends BasePage {
 
 
     public SelenideElement getLoginBtn() {
-        return $(loginBtnBy);
+        return $(loginBtnBy).shouldBe(Condition.visible);
     }
 
     public SelenideElement getProfileIcon() {
