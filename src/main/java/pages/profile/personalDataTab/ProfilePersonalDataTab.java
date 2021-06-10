@@ -17,9 +17,6 @@ public class ProfilePersonalDataTab extends ProfileHeader {
             "/ancestor::div[contains(@class,'profile-form__group')]//";
     private static final String fullNameNotEmptyLocator = "span";
     private static final String fullNameEmptyLocator = "div[contains(@class, 'profile-form__hint')]";
-   //private static final By fullNameBy = By.xpath("//div[contains(@class,'profile-form__label-title') and normalize-space()='ФИО']" +
-   //         "/ancestor::div[contains(@class,'profile-form__group')]//span");
-   // private static final By fullNameEmptyBy = By.xpath("//div[contains(@class,'profile-form__label-title') and normalize-space()='ФИО']/ancestor::div[contains(@class,'profile-form__group')]//div[contains(@class, 'profile-form__hint')]")
 
     public ProfilePersonalDataTab() {
         super("/personal");
@@ -30,20 +27,15 @@ public class ProfilePersonalDataTab extends ProfileHeader {
         return emailLabelBy;
     }
 
-    public SelenideElement getEditPersonalDataBtn(){
+    public SelenideElement getEditPersonalDataBtn() {
         return $(editPersonalDataBtnBy);
     }
 
-    public SelenideElement getFullName(){
-        System.out.println(getCombinedFullNameLocator(fullNameNotEmptyLocator));
-        return $(By.xpath(getCombinedFullNameLocator(fullNameNotEmptyLocator)));
+    public SelenideElement getFullName() {
+        return $(By.xpath(fullNameCommonLocator + fullNameNotEmptyLocator));
     }
 
-    public SelenideElement getEmptyFullName(){
-        return $(By.xpath(getCombinedFullNameLocator(fullNameEmptyLocator)));
-    }
-
-    public String getCombinedFullNameLocator(String locatorSecondPart){
-        return String.format("%s%s", fullNameCommonLocator, locatorSecondPart);
+    public SelenideElement getEmptyFullName() {
+        return $(By.xpath(fullNameCommonLocator + fullNameEmptyLocator));
     }
 }
