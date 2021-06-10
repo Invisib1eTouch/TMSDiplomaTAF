@@ -6,6 +6,7 @@ import org.testng.annotations.Test;
 import pages.profile.personalDataTab.ProfileEditPage;
 import pages.profile.personalDataTab.ProfilePersonalDataTab;
 import steps.MainPageSteps;
+import steps.profileSteps.ProfileMainTabSteps;
 import steps.profileSteps.personalDataTab.ProfileEditPageSteps;
 import steps.profileSteps.personalDataTab.ProfilePersonalDataTabSteps;
 import templates.BaseTestAfterMethodDriverDisposing;
@@ -14,18 +15,25 @@ import utils.Utils;
 import java.util.Calendar;
 import java.util.Objects;
 
-import static com.codeborne.selenide.Condition.*;
+import static com.codeborne.selenide.Condition.attributeMatching;
+import static com.codeborne.selenide.Condition.text;
+import static utils.FileHelper.getFileToUpload;
 
 
 public class ProfileTests extends BaseTestAfterMethodDriverDisposing {
 
     @Test
     @Parameters({"validLogin_1", "validPassword_1"})
-    public void changeProfileHeaderBackgroundTest(String login, String password){
+    public void changeProfileHeaderBackgroundImageTest(String login, String password) {
         new MainPageSteps(true)
                 .loginWithCorrectCredentials(MainPageSteps.class, login, password)
                 .openProfileMenu()
-                .openProfilePageOnMainTab();
+                .openProfilePageOnMainTab()
+                .uploadNewProfileHeaderBackground
+                        (ProfileMainTabSteps.class, getFileToUpload("this_is_fine_background.png"))
+                .getPageInstance()
+                .getProfileHeaderBackgroundEl()
+                .shouldHave(attributeMatching("style", "background-image: url\\(\".+\"\\);"));
     }
 
     @Test
@@ -135,5 +143,6 @@ public class ProfileTests extends BaseTestAfterMethodDriverDisposing {
                 "—");
 
     }
-
 }
+
+
