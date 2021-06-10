@@ -23,7 +23,7 @@ public class StaticProvider {
 
 //   Set the data from .csv file to List
         List<LoginTestDataContainer> beans =
-                (List<LoginTestDataContainer>) readFromCsv(m.getAnnotation(Test.class).groups()[0],
+                readFromCsv(m.getAnnotation(Test.class).groups()[0],
                         LoginTestDataContainer.class);
 
 
@@ -38,15 +38,15 @@ public class StaticProvider {
     /**
      *
      * @param filename - name of .csv file with data
-     * @param ClassToDeserializeTo - model class contains fields for csv. file
-     * @return - list of data read from .csv file
+     * @param classToDeserializeTo - model class contains fields for csv. file
+     * @return - list of objects data to deserialize to from .csv file
      */
     @SuppressWarnings("unchecked")
     @SneakyThrows
-    public static List<?> readFromCsv(String filename, Class<?> ClassToDeserializeTo) {
-        return (List<?>) new CsvToBeanBuilder(Files
+    public static <T> List<T> readFromCsv(String filename, Class<T> classToDeserializeTo) {
+        return new CsvToBeanBuilder(Files
                 .newBufferedReader(Paths.get(ClassLoader.getSystemResource(filename).toURI())))
-                .withType(ClassToDeserializeTo)
+                .withType(classToDeserializeTo)
                 .build()
                 .parse();
     }
