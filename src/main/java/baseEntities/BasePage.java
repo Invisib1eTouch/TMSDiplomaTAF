@@ -2,7 +2,8 @@ package baseEntities;
 
 import com.codeborne.selenide.Configuration;
 import core.PropertyReader;
-import enums.UrlPrefix;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 import org.openqa.selenium.By;
 
 import static com.codeborne.selenide.Condition.*;
@@ -45,5 +46,15 @@ public abstract class BasePage {
     public void openAndVerifyCorrectPageOpened() {
         this.open();
         this.verifyCorrectPageOpened();
+    }
+
+    @AllArgsConstructor
+    protected enum UrlPrefix {
+        CATALOG_PREFIX(PropertyReader.getUrlPrefix("catalog.url.prefix")),
+        PROFILE_PREFIX(PropertyReader.getUrlPrefix("profile.url.prefix")),
+        CART_PREFIX(PropertyReader.getUrlPrefix("cart.url.prefix"));
+
+        @Getter
+        private final String value;
     }
 }

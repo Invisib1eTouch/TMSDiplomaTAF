@@ -2,7 +2,6 @@ package pages;
 
 import baseEntities.BasePage;
 import com.codeborne.selenide.SelenideElement;
-import enums.UrlPrefix;
 import org.openqa.selenium.By;
 
 import static com.codeborne.selenide.Selenide.$;
