@@ -37,8 +37,9 @@ public class ProfileTests extends BaseTestAfterMethodDriverDisposing {
     }
 
     @Test
-    @Parameters({"validLogin_4", "validPassword_4"})
-    public void dateAndYearEditWithExceedingValuesTest(String login, String password) {
+    @Parameters({"validLogin_3", "validPassword_3"})
+    public void editDateAndYearWithExceedingValuesTest(String login, String password) {
+        // Case: both day and year have exceeding values
         String enteredDay = "54";
         String enteredYear = "5678";
         String expectedErrorText = "Значение поля не является датой. Значение поля не соответствует формату Y-m-d";
@@ -48,20 +49,21 @@ public class ProfileTests extends BaseTestAfterMethodDriverDisposing {
                 .openProfileMenu()
                 .openProfilePageOnMainTab()
                 .openPersonalDataTab()
-                .openEditProfilePage()
-                .fillDayAndYearOfBirthFields(enteredDay, enteredYear)
-                .saveWithIncorrectDataBtnClick()
+                .openProfileEditPage()
+                .fillDateOfBirthFields(enteredDay, null, enteredYear)
+                .saveIncorrectData()
                 .getPageInstance()
                 .getErrorLabel()
                 .shouldHave(text(expectedErrorText));
 
+        // Case: year is in the future
         enteredDay = "21";
         enteredYear = String.valueOf(Calendar.getInstance().get(Calendar.YEAR) + 1);
         expectedErrorText = "Недопустимая дата";
 
         new ProfileEditPageSteps()
-                .fillDayMonthYearOfBirthFields(enteredDay, ProfileEditPageSteps.Month.JAN, enteredYear)
-                .saveWithIncorrectDataBtnClick()
+                .fillDateOfBirthFields(enteredDay, ProfileEditPageSteps.Month.JAN, enteredYear)
+                .saveIncorrectData()
                 .getPageInstance()
                 .getErrorLabel()
                 .shouldHave(text(expectedErrorText));
@@ -69,75 +71,90 @@ public class ProfileTests extends BaseTestAfterMethodDriverDisposing {
     }
 
     @Test
-    @Parameters({"validLogin_4", "validPassword_4"})
-    public void profileEditPageBoundaryValuesTest(String login, String password) {
+    @Parameters({"validLogin_3", "validPassword_3"})
+    public void lastNameFieldBoundaryValuesTest(String login, String password) {
         final int lastNameMaxLength = 255;
+
+        // CASE: Entering to the field a string with length that exceeds the max length
         int enteredLastNameLength = lastNameMaxLength + 1;
+        String generatedBySizeString = Utils.getRandomAlphaNumericString(enteredLastNameLength);
 
         ProfileEditPage profileEditPage = new MainPageSteps(true)
                 .loginWithCorrectCredentials(MainPageSteps.class, login, password)
                 .openProfileMenu()
                 .openProfilePageOnMainTab()
                 .openPersonalDataTab()
-                .openEditProfilePage()
-                .fillLastNameField(Utils.getRandomAlphaNumericString(enteredLastNameLength))
+                .openProfileEditPage()
+                .fillLastNameField(generatedBySizeString)
                 .getPageInstance();
 
         String lastNameEditProfileText = profileEditPage.getLastNameInput().getValue();
 
+        // Verification that entered string was cut by max  field's length
         Assert.assertEquals(profileEditPage.getElementTextLength(profileEditPage.getLastNameInput()),
                 lastNameMaxLength);
 
         ProfilePersonalDataTab profilePersonalDataTab = new ProfileEditPageSteps()
-                .saveWithCorrectDataBtnClick()
+                .saveCorrectData()
                 .getPageInstance();
 
-        String lastNameTextInProfile = Utils.getPartOfSplitedBySpacesText(Objects.requireNonNull(profilePersonalDataTab.getFullName().getOwnText()), 0);
+        String lastNameTextInProfile = Utils.getPartOfSplitBySpacesText(Objects.requireNonNull(profilePersonalDataTab.getFullName().getOwnText()), 0);
+
+        // Verification that after saving last name has correct text after cutting by max length on the editing page
         Assert.assertEquals(lastNameTextInProfile, lastNameEditProfileText);
 
+        // CASE: Entering to the field a value with length that is equals to the max length
+        generatedBySizeString = Utils.getRandomAlphaNumericString(lastNameMaxLength);
         profileEditPage = new ProfilePersonalDataTabSteps(false)
-                .openEditProfilePage()
-                .fillLastNameField(Utils.getRandomAlphaNumericString(lastNameMaxLength))
+                .openProfileEditPage()
+                .fillLastNameField(generatedBySizeString)
                 .getPageInstance();
 
         lastNameEditProfileText = profileEditPage.getLastNameInput().getValue();
 
+        // Verification that entered string was cut by max  field's length
         Assert.assertEquals(profileEditPage.getElementTextLength(profileEditPage.getLastNameInput()),
                 lastNameMaxLength);
 
-        new ProfileEditPageSteps().saveWithCorrectDataBtnClick();
+        new ProfileEditPageSteps().saveCorrectData();
 
+        lastNameTextInProfile = Utils.getPartOfSplitBySpacesText(Objects.requireNonNull(profilePersonalDataTab.getFullName().getOwnText()), 0);
+
+        // Verification that after saving last name has correct text after cutting by max length on the editing page
+        Assert.assertEquals(lastNameTextInProfile, lastNameEditProfileText);
+
+        // CASE: Entering to the field a value with length that is less than the max length
         enteredLastNameLength = lastNameMaxLength - 1;
+        generatedBySizeString = Utils.getRandomAlphaNumericString(enteredLastNameLength);
         profileEditPage = new ProfilePersonalDataTabSteps(false)
-                .openEditProfilePage()
-                .fillLastNameField(Utils.getRandomAlphaNumericString(enteredLastNameLength))
+                .openProfileEditPage()
+                .fillLastNameField(generatedBySizeString)
                 .getPageInstance();
 
         lastNameEditProfileText = profileEditPage.getLastNameInput().getValue();
 
+        // Verification that entered string was cut by max  field's length
         Assert.assertEquals(profileEditPage.getElementTextLength(profileEditPage.getLastNameInput()),
                 enteredLastNameLength);
 
-        new ProfileEditPageSteps().saveWithCorrectDataBtnClick();
+        new ProfileEditPageSteps().saveCorrectData();
 
-        lastNameTextInProfile = Utils.getPartOfSplitedBySpacesText(Objects.requireNonNull(profilePersonalDataTab.getFullName().getOwnText()), 0);
+        lastNameTextInProfile = Utils.getPartOfSplitBySpacesText(Objects.requireNonNull(profilePersonalDataTab.getFullName().getOwnText()), 0);
+
+        // Verification that after saving last name has correct text after cutting by max length on the editing page
         Assert.assertEquals(lastNameTextInProfile, lastNameEditProfileText);
 
-        lastNameTextInProfile = Utils.getPartOfSplitedBySpacesText(Objects.requireNonNull(profilePersonalDataTab.getFullName().getOwnText()), 0);
-        Assert.assertEquals(lastNameTextInProfile, lastNameEditProfileText);
-
+        // CASE: Entering to the field an empty value
         profileEditPage = new ProfilePersonalDataTabSteps(false)
-                .openEditProfilePage()
+                .openProfileEditPage()
                 .clearFirstNameAndPatronymicFields()
                 .fillLastNameField("")
                 .getPageInstance();
 
-        lastNameEditProfileText = profileEditPage.getLastNameInput().getValue();
-
         Assert.assertEquals(profileEditPage.getElementTextLength(profileEditPage.getLastNameInput()),
                 0);
 
-        new ProfileEditPageSteps().saveWithCorrectDataBtnClick();
+        new ProfileEditPageSteps().saveCorrectData();
 
         Assert.assertEquals(profilePersonalDataTab.getEmptyFullName().getOwnText().replaceAll("\\s+", ""),
                 "—");

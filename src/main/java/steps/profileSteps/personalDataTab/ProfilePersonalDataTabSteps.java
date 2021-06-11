@@ -2,7 +2,6 @@ package steps.profileSteps.personalDataTab;
 
 import pages.profile.personalDataTab.ProfilePersonalDataTab;
 import steps.profileSteps.ProfileHeaderSteps;
-import steps.profileSteps.personalDataTab.ProfileEditPageSteps;
 
 public class ProfilePersonalDataTabSteps extends ProfileHeaderSteps<ProfilePersonalDataTab> {
     /**
@@ -12,7 +11,7 @@ public class ProfilePersonalDataTabSteps extends ProfileHeaderSteps<ProfilePerso
         super(openPageByUrl);
     }
 
-    public ProfileEditPageSteps openEditProfilePage(){
+    public ProfileEditPageSteps openProfileEditPage() {
         this.page.getEditPersonalDataBtn().hover().click();
         return new ProfileEditPageSteps();
     }

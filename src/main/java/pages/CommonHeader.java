@@ -1,11 +1,10 @@
 package pages;
 
 import baseEntities.BasePage;
-import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
 
-import static com.codeborne.selenide.Selenide.*;
+import static com.codeborne.selenide.Selenide.$;
 
 public abstract class CommonHeader extends BasePage {
 
@@ -19,9 +18,8 @@ public abstract class CommonHeader extends BasePage {
         super(UrlPrefix.CATALOG_PREFIX, path);
     }
 
-
     public SelenideElement getLoginBtn() {
-        return $(loginBtnBy).shouldBe(Condition.visible);
+        return $(loginBtnBy);
     }
 
     public SelenideElement getProfileIcon() {

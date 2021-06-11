@@ -4,22 +4,16 @@ import baseEntities.BasePage;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
 
-import java.util.Objects;
-
 import static com.codeborne.selenide.Selenide.$;
 
 public class ProfileEditPage extends BasePage {
 
     private static final By saveBtnBy = By.className("auth-button_primary");
-    private static final By lastNameInputBy = By.cssSelector("input[placeholder='Фамилия']");
-    private static final By firstNameInputBy = By.cssSelector("input[placeholder='Имя']");
-    private static final By patronymicInputBy = By.cssSelector("input[placeholder='Отчество']");
-    private static final By dayOfBirthInputBy = By.xpath("//div[normalize-space()='Дата рождения']" +
-            "/ancestor::div[contains(@class, 'auth-form__row')]//input[@maxlength=2]");
+    private final String fullNameCommonLocator = "input[placeholder='%s']";
+    private final String dateOfBirthContainer = "//div[normalize-space()='Дата рождения']" +
+            "/ancestor::div[@class='auth-form__row']//input[@maxlength=%s]";
     private static final By monthSelectorBy = By.className("auth-input__real");
-    private static final By yearOfBirthInputBy = By.xpath("//div[normalize-space()='Дата рождения']" +
-            "/ancestor::div[contains(@class, 'auth-form__row')]//input[@maxlength=4]");
-    private static final By errorLabelBy = By.cssSelector(".auth-form__description_error ");
+    private static final By errorLabelBy = By.cssSelector(".auth-form__description_error");
 
     public ProfileEditPage() {
         super(UrlPrefix.PROFILE_PREFIX, null);
@@ -35,19 +29,19 @@ public class ProfileEditPage extends BasePage {
     }
 
     public SelenideElement getLastNameInput() {
-        return $(lastNameInputBy);
+        return $(String.format(fullNameCommonLocator, "Фамилия"));
     }
 
     public SelenideElement getFirstNameInput() {
-        return $(firstNameInputBy);
+        return $(String.format(fullNameCommonLocator, "Имя"));
     }
 
     public SelenideElement getPatronymicInput() {
-        return $(patronymicInputBy);
+        return $(String.format(fullNameCommonLocator, "Отчество"));
     }
 
     public SelenideElement getDayOfBirthInput() {
-        return $(dayOfBirthInputBy);
+        return $(By.xpath(String.format(dateOfBirthContainer, '2')));
     }
 
     public SelenideElement getMonthSelector() {
@@ -55,10 +49,10 @@ public class ProfileEditPage extends BasePage {
     }
 
     public SelenideElement getYearOfBirthInput() {
-        return $(yearOfBirthInputBy);
+        return $(By.xpath(String.format(dateOfBirthContainer, '4')));
     }
 
-    public SelenideElement getErrorLabel(){
+    public SelenideElement getErrorLabel() {
         return $(errorLabelBy);
     }
 

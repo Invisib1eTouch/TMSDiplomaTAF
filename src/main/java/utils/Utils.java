@@ -18,17 +18,16 @@ public class Utils {
     }
 
     /**
-     *
-     * @param text - text that is needed to be split by spaces
+     * @param text      - text that is needed to be split by spaces
      * @param wordIndex - number of the word in the splitted array to return
      * @return - the word in the splitted array with selected index
      */
-    public static String getPartOfSplitedBySpacesText(String text, int wordIndex){
-        String[] splitedText = text.split("\\s+");
-        if (wordIndex <=splitedText.length){
-            return splitedText[wordIndex];
+    public static String getPartOfSplitBySpacesText(String text, int wordIndex) {
+        String[] textWords = text.split(" ");
+        if (wordIndex <= textWords.length) {
+            return textWords[wordIndex];
         }
-        throw new ArrayIndexOutOfBoundsException("Entered words number: " + wordIndex + ", number of the words in text: " + splitedText.length );
+        throw new ArrayIndexOutOfBoundsException("Entered word index: " + wordIndex + ", number of the words in text: " + textWords.length);
     }
 
 }

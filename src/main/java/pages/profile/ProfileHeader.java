@@ -8,7 +8,7 @@ import static com.codeborne.selenide.Selenide.$;
 
 public abstract class ProfileHeader extends CommonHeader {
 
-    private static final By personalDataBtnBy = By.cssSelector("[href='/personal']");
+    private static final By personalDataBtnBy = By.cssSelector("[href='/personal'] div");
     private static final By profileHeaderBackgroundBy = By.className("profile-header__background");
     private static final By editHeaderBackgroundBtnBy = By.className("profile-header__button");
 
@@ -27,7 +27,7 @@ public abstract class ProfileHeader extends CommonHeader {
         return $(editHeaderBackgroundBtnBy);
     }
 
-    public SelenideElement getProfileHeaderBackgroundEl(){
+    public SelenideElement getProfileHeaderBackgroundEl() {
         return $(profileHeaderBackgroundBy);
     }
 }
