@@ -1,11 +1,8 @@
 package pages.profile.personalDataTab;
 
-import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
 import pages.profile.ProfileHeader;
-
-import java.util.Objects;
 
 import static com.codeborne.selenide.Selenide.$;
 

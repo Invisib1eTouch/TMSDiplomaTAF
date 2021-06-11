@@ -9,7 +9,7 @@ import static com.codeborne.selenide.Selenide.$;
 public class ProfileEditPage extends BasePage {
 
     private static final By saveBtnBy = By.className("auth-button_primary");
-    private final String fullNameCommonLocator = "input[placeholder='%s']";
+    private final String nameCommonLocator = "input[placeholder='%s']";
     private final String dateOfBirthContainer = "//div[normalize-space()='Дата рождения']" +
             "/ancestor::div[@class='auth-form__row']//input[@maxlength=%s]";
     private static final By monthSelectorBy = By.className("auth-input__real");
@@ -29,15 +29,15 @@ public class ProfileEditPage extends BasePage {
     }
 
     public SelenideElement getLastNameInput() {
-        return $(String.format(fullNameCommonLocator, "Фамилия"));
+        return $(String.format(nameCommonLocator, "Фамилия"));
     }
 
     public SelenideElement getFirstNameInput() {
-        return $(String.format(fullNameCommonLocator, "Имя"));
+        return $(String.format(nameCommonLocator, "Имя"));
     }
 
-    public SelenideElement getPatronymicInput() {
-        return $(String.format(fullNameCommonLocator, "Отчество"));
+    public SelenideElement getSurnameInput() {
+        return $(String.format(nameCommonLocator, "Отчество"));
     }
 
     public SelenideElement getDayOfBirthInput() {

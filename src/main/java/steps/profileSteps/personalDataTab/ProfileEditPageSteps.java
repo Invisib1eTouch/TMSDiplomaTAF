@@ -29,12 +29,12 @@ public class ProfileEditPageSteps extends BaseStep<ProfileEditPage> {
         return this;
     }
 
-    public ProfileEditPageSteps fillDateOfBirthFields(String day, Month monthSelectValue, String year) {
+    public ProfileEditPageSteps fillDateOfBirthFields(String day, Month month, String year) {
         if (day != null) {
             this.fillDayOfBirthField(day);
         }
-        if (monthSelectValue != null) {
-            this.selectMonthOfBirth(monthSelectValue);
+        if (month != null) {
+            this.selectMonthOfBirth(month);
         }
         if (year != null) {
             this.fillYearOfBirthField(year);
@@ -65,7 +65,7 @@ public class ProfileEditPageSteps extends BaseStep<ProfileEditPage> {
     }
 
     public ProfileEditPageSteps clearPatronymicField() {
-        this.page.getPatronymicInput().clear();
+        this.page.getSurnameInput().clear();
         return this;
     }
 
