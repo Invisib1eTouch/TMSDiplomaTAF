@@ -1,6 +1,7 @@
 package tests;
 
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import pages.profile.personalDataTab.ProfileEditPage;
@@ -22,13 +23,20 @@ import static utils.FileHelper.getFileToUpload;
 
 public class ProfileTests extends BaseTestAfterMethodDriverDisposing {
 
-    @Test
-    @Parameters({"validLogin_1", "validPassword_1"})
-    public void changeProfileHeaderBackgroundImageTest(String login, String password) {
-        new MainPageSteps(true)
+    private ProfileMainTabSteps profileMainTabSteps;
+
+    @BeforeMethod
+    @Parameters({"validLogin_3", "validPassword_3"})
+    public void loginBeforeTest(String login, String password) {
+        this.profileMainTabSteps = new MainPageSteps(true)
                 .loginWithCorrectCredentials(MainPageSteps.class, login, password)
                 .openProfileMenu()
-                .openProfilePageOnMainTab()
+                .openProfilePageOnMainTab();
+    }
+
+    @Test
+    public void changeProfileHeaderBackgroundImageTest() {
+        this.profileMainTabSteps
                 .uploadNewProfileHeaderBackground
                         (ProfileMainTabSteps.class, getFileToUpload("this_is_fine_background.png"))
                 .getPageInstance()
@@ -37,17 +45,13 @@ public class ProfileTests extends BaseTestAfterMethodDriverDisposing {
     }
 
     @Test
-    @Parameters({"validLogin_3", "validPassword_3"})
-    public void editDateAndYearWithExceedingValuesTest(String login, String password) {
+    public void editDateAndYearWithExceedingValuesTest() {
         // Case: both day and year have exceeding values
         String enteredDay = "54";
         String enteredYear = "5678";
         String expectedErrorText = "Значение поля не является датой. Значение поля не соответствует формату Y-m-d";
 
-        new MainPageSteps(true)
-                .loginWithCorrectCredentials(MainPageSteps.class, login, password)
-                .openProfileMenu()
-                .openProfilePageOnMainTab()
+        this.profileMainTabSteps
                 .openPersonalDataTab()
                 .openProfileEditPage()
                 .fillDateOfBirthFields(enteredDay, null, enteredYear)
@@ -67,22 +71,17 @@ public class ProfileTests extends BaseTestAfterMethodDriverDisposing {
                 .getPageInstance()
                 .getErrorLabel()
                 .shouldHave(text(expectedErrorText));
-
     }
 
     @Test
-    @Parameters({"validLogin_3", "validPassword_3"})
-    public void lastNameFieldBoundaryValuesTest(String login, String password) {
+    public void lastNameFieldBoundaryValuesTest() {
         final int lastNameMaxLength = 255;
 
         // CASE: Entering to the field a string with length that exceeds the max length
         int enteredLastNameLength = lastNameMaxLength + 1;
         String generatedBySizeString = Utils.getRandomAlphaNumericString(enteredLastNameLength);
 
-        ProfileEditPage profileEditPage = new MainPageSteps(true)
-                .loginWithCorrectCredentials(MainPageSteps.class, login, password)
-                .openProfileMenu()
-                .openProfilePageOnMainTab()
+        ProfileEditPage profileEditPage = this.profileMainTabSteps
                 .openPersonalDataTab()
                 .openProfileEditPage()
                 .fillLastNameField(generatedBySizeString)
@@ -158,7 +157,6 @@ public class ProfileTests extends BaseTestAfterMethodDriverDisposing {
 
         Assert.assertEquals(profilePersonalDataTab.getEmptyFullName().getOwnText().replaceAll("\\s+", ""),
                 "—");
-
     }
 }
 
