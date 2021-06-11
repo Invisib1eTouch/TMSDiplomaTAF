@@ -5,6 +5,7 @@ import com.codeborne.selenide.SelenideElement;
 import core.PropertyReader;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.openqa.selenium.By;
 
 import java.util.Objects;
@@ -12,9 +13,14 @@ import java.util.Objects;
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$;
 
+/**
+ * Constructor w/o args is required in case page cannot be opened by url
+ * So that neither path nor urlPrefix can be provided
+ */
+@NoArgsConstructor
 public abstract class BasePage {
 
-    private final String path;
+    private String path;
 
     /**
      * @param urlPrefix - prefix for the page e.g. catalog, profile, etc.
@@ -63,5 +69,4 @@ public abstract class BasePage {
     public int getElementTextLength(SelenideElement selenideElement) {
         return Objects.requireNonNull(selenideElement.getValue()).length();
     }
-
 }

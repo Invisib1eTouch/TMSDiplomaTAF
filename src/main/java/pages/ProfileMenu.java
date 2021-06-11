@@ -8,10 +8,6 @@ import static com.codeborne.selenide.Selenide.*;
 public class ProfileMenu extends CommonHeader {
     private static final By userIdBy = By.cssSelector(".b-top-profile__name a");
 
-    public ProfileMenu() {
-        super(null);
-    }
-
     @Override
     protected By getCorrectPageOpenedIndicatorElLocator() {
         return userIdBy;

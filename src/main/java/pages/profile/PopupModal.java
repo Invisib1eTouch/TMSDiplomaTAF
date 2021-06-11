@@ -9,10 +9,6 @@ public class PopupModal extends ProfileHeader {
 
     private static final String popupContainerCssLocator = ".popup-style__container_visible .profile-popup";
 
-    public PopupModal() {
-        super(null);
-    }
-
     @Override
     protected By getCorrectPageOpenedIndicatorElLocator() {
         return By.cssSelector(popupContainerCssLocator);
