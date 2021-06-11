@@ -18,7 +18,6 @@ public abstract class CommonHeader extends BasePage {
         super(UrlPrefix.CATALOG_PREFIX, path);
     }
 
-
     public SelenideElement getLoginBtn() {
         return $(loginBtnBy);
     }
