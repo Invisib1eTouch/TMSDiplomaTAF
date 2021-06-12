@@ -22,15 +22,18 @@ public class StaticProvider {
     public static Object[][] loginWithIncorrectData(Method m) {
 
 //   Set the data from .csv file to List
-        List<LoginTestDataContainer> beans =
+        List<LoginTestDataContainer> loginTestData =
                 readFromCsv(m.getAnnotation(Test.class).groups()[0],
                         LoginTestDataContainer.class);
 
 
-        LoginTestDataContainer[][] loginTestDataContainers = new LoginTestDataContainer[beans.size()][];
+        LoginTestDataContainer[][] loginTestDataContainers = new LoginTestDataContainer[loginTestData.size()][];
 
-        for (int i = 0; i < beans.size(); i++) {
-            loginTestDataContainers[i] = new LoginTestDataContainer[]{beans.get(i)};
+        /**
+         * Set the parsed from .csv login test data to object
+         */
+        for (int i = 0; i < loginTestData.size(); i++) {
+            loginTestDataContainers[i] = new LoginTestDataContainer[]{loginTestData.get(i)};
         }
         return loginTestDataContainers;
     }
