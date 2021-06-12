@@ -16,7 +16,7 @@ public class ProfileEditPage extends BasePage {
     private static final By errorLabelBy = By.cssSelector(".auth-form__description_error");
 
     public ProfileEditPage() {
-        super(UrlPrefix.PROFILE_PREFIX, null);
+        super(UrlPrefix.DEFAULT, null);
     }
 
     @Override

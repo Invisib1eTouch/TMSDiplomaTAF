@@ -13,10 +13,11 @@ public abstract class ProfileHeader extends CommonHeader {
     private static final By editHeaderBackgroundBtnBy = By.className("profile-header__button");
 
     /**
-     * @param path - if page has no constant path then path = null (e.g. dialogue or dynamic path)
+     * @param urlPrefix - prefix for the page e.g. catalog, profile, etc.
+     * @param path      - if page has no constant path then path = null (e.g. dialogue or dynamic path)
      */
-    public ProfileHeader(String path) {
-        super(path);
+    public ProfileHeader(UrlPrefix urlPrefix, String path) {
+        super(urlPrefix, path);
     }
 
     public SelenideElement getPersonalDataBtn() {

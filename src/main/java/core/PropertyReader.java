@@ -16,11 +16,11 @@ public class PropertyReader {
         }
     }
 
-    public static String getBaseUrl(){
+    public static String getBaseUrl() {
         return properties.getProperty("base.url");
     }
 
-    public static String getUrlPrefix(String prefixName){
+    public static String getUrlPrefix(String prefixName) {
         return properties.getProperty(prefixName);
     }
 
@@ -28,7 +28,19 @@ public class PropertyReader {
         return properties.getProperty("browser").toLowerCase();
     }
 
-    public static String getApiPath(){
-        return  properties.getProperty("api.path").toLowerCase();
+    public static String getApiPath() {
+        return properties.getProperty("api.path").toLowerCase();
+    }
+
+    public static String getDbUrl() {
+        return properties.getProperty("db_url");
+    }
+
+    public static String getDbUser() {
+        return properties.getProperty("db_user");
+    }
+
+    public static String getDbPassword() {
+        return properties.getProperty("db_psw");
     }
 }
