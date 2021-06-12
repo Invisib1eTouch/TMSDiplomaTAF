@@ -20,11 +20,15 @@ public class PropertyReader {
         return properties.getProperty("base.url");
     }
 
-    public static String getUrlPrefix(String prefixConfigName){
-        return properties.getProperty(prefixConfigName);
+    public static String getUrlPrefix(String prefixName){
+        return properties.getProperty(prefixName);
     }
 
     public static String getBrowserName() {
         return properties.getProperty("browser").toLowerCase();
+    }
+
+    public static String getApiPath(){
+        return  properties.getProperty("api.path").toLowerCase();
     }
 }
