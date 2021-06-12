@@ -14,10 +14,11 @@ public abstract class CommonHeader extends BasePage {
     private static final By searchResultsIFrameBy = By.className("modal-iframe");
 
     /**
-     * @param path - if page has no constant path then path = null (e.g. dialogue or dynamic path)
+     * @param urlPrefix - prefix for the page e.g. catalog, profile, etc.
+     * @param path      - if page has no constant path then path = null (e.g. dialogue or dynamic path)
      */
-    public CommonHeader(String path) {
-        super(UrlPrefix.CATALOG_PREFIX, path);
+    public CommonHeader(UrlPrefix urlPrefix, String path) {
+        super(urlPrefix, path);
     }
 
     public SelenideElement getLoginBtn() {

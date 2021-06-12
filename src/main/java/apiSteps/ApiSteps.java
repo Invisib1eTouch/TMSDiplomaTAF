@@ -15,7 +15,7 @@ public class ApiSteps {
     protected static String authToken;
 
    static {
-        RestAssured.baseURI = String.format("https://%s.%s/%s", PropertyReader.getUrlPrefix("base.api.prefix"),
+        RestAssured.baseURI = String.format("https://%s.%s/%s", PropertyReader.getUrlPrefix("default.url.prefix"),
                 PropertyReader.getBaseUrl(), PropertyReader.getApiPath());
     }
 
