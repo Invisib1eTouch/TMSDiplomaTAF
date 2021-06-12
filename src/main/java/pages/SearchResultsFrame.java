@@ -11,7 +11,6 @@ import static com.codeborne.selenide.Selenide.$;
 
 public class SearchResultsFrame extends BasePage {
 
-    private static final By searchResultsIFrameBy = By.className("modal-iframe");
     private static final By searchInputBy = By.className("search__input");
     private static final By searchLoaderBy = By.className("search__bar_searching");
     //private static final By searchResultItemBy = By.className("search__result");
@@ -23,10 +22,6 @@ public class SearchResultsFrame extends BasePage {
     @Override
     protected By getCorrectPageOpenedIndicatorElLocator() {
         return searchInputBy;
-    }
-
-    public SelenideElement getSearchResultsIFrame() {
-        return $(searchResultsIFrameBy);
     }
 
     public SelenideElement getSearchLoader() {
