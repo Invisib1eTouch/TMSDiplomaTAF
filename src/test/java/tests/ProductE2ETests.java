@@ -20,6 +20,9 @@ public class ProductE2ETests extends BaseTestAfterClassDriverDisposing {
     @Test
     public void findProductTest() {
         // сделали запрос в апи, получили имя
-       this.mainPageSteps.searchProduct("Samsung Galaxy A52 SM-A525F/DS 4GB/128GB (синий)");
+        String productName = "Samsung Galaxy A52 SM-A525F/DS 4GB/128GB (синий)";
+        this.mainPageSteps
+                .searchProduct(productName)
+                .openProductDetailsPageByName(productName);
     }
 }

@@ -13,9 +13,14 @@ public class SearchResultsFrameSteps extends BaseStep<SearchResultsFrame> {
         super(false);
     }
 
-    public SearchResultsFrameSteps waitLoadingFinished(){
+    public SearchResultsFrameSteps waitLoadingFinished() {
         this.page.getSearchLoader().shouldNot(exist, Duration.ofSeconds(10));
         return this;
+    }
+
+    public ProductDetailsPageSteps openProductDetailsPageByName(String productName) {
+        this.page.getSearchResultItemByName(productName).getTitle().click();
+        return new ProductDetailsPageSteps();
     }
 
 }
