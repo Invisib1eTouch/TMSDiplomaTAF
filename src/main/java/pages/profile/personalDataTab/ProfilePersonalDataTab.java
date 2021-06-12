@@ -16,7 +16,7 @@ public class ProfilePersonalDataTab extends ProfileHeader {
     private static final String fullNameEmptyLocator = "div[contains(@class, 'profile-form__hint')]";
 
     public ProfilePersonalDataTab() {
-        super("/personal");
+        super(UrlPrefix.PROFILE, "/personal");
     }
 
     @Override
