@@ -10,6 +10,7 @@ public abstract class CommonHeader extends BasePage {
 
     private static final By loginBtnBy = By.className("auth-bar__item--text");
     private static final By profileIconBy = By.className("b-top-profile__preview");
+    private static final By searchInputBy = By.className("fast-search__input");
 
     /**
      * @param path - if page has no constant path then path = null (e.g. dialogue or dynamic path)
@@ -25,4 +26,9 @@ public abstract class CommonHeader extends BasePage {
     public SelenideElement getProfileIcon() {
         return $(profileIconBy);
     }
+
+    public SelenideElement getSearchInput() {
+        return $(searchInputBy);
+    }
+
 }

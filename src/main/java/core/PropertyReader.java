@@ -31,4 +31,5 @@ public class PropertyReader {
     public static String getApiPath(){
         return  properties.getProperty("api.path").toLowerCase();
     }
+
 }

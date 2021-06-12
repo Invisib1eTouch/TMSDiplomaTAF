@@ -52,6 +52,10 @@ public abstract class BasePage {
 
     @AllArgsConstructor
     protected enum UrlPrefix {
+        // temporary solution
+        DEFAULT(PropertyReader.getUrlPrefix("base.api.prefix")),
+        // temporary solution
+
         CATALOG_PREFIX(PropertyReader.getUrlPrefix("catalog.url.prefix")),
         PROFILE_PREFIX(PropertyReader.getUrlPrefix("profile.url.prefix")),
         CART_PREFIX(PropertyReader.getUrlPrefix("cart.url.prefix"));
