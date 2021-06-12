@@ -3,11 +3,15 @@ package pages.profile;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
 
-import static com.codeborne.selenide.Selenide.*;
+import static com.codeborne.selenide.Selenide.$;
 
 public class PopupModal extends ProfileHeader {
 
     private static final String popupContainerCssLocator = ".popup-style__container_visible .profile-popup";
+
+    public PopupModal() {
+        super(UrlPrefix.DEFAULT, null);
+    }
 
     @Override
     protected By getCorrectPageOpenedIndicatorElLocator() {

@@ -12,6 +12,10 @@ public class LoginPage extends BasePage {
     private static final By passwordInputBy = By.cssSelector("[type=password]");
     private static final By loginBtnBy = By.className("auth-button_primary");
 
+    public LoginPage() {
+        super(UrlPrefix.DEFAULT, null);
+    }
+
     @Override
     protected By getCorrectPageOpenedIndicatorElLocator() {
         return loginBtnBy;

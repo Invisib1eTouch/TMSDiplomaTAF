@@ -1,13 +1,11 @@
 package pages.profile;
 
 import com.codeborne.selenide.SelenideElement;
-import lombok.NoArgsConstructor;
 import org.openqa.selenium.By;
 import pages.CommonHeader;
 
 import static com.codeborne.selenide.Selenide.$;
 
-@NoArgsConstructor
 public abstract class ProfileHeader extends CommonHeader {
 
     private static final By personalDataBtnBy = By.cssSelector("[href='/personal'] div");

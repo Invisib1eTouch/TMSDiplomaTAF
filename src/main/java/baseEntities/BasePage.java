@@ -5,7 +5,6 @@ import com.codeborne.selenide.SelenideElement;
 import core.PropertyReader;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import org.openqa.selenium.By;
 
 import java.util.Objects;
@@ -13,17 +12,13 @@ import java.util.Objects;
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$;
 
-/**
- * Constructor w/o args is required in case page cannot be opened by url
- * So that neither path nor urlPrefix can be provided
- */
-@NoArgsConstructor
 public abstract class BasePage {
 
-    private String path;
+    private final String path;
 
     /**
-     * @param urlPrefix - prefix for the page e.g. catalog, profile, etc.
+     * @param urlPrefix - prefix for the page e.g. catalog, profile, etc.,
+     *                  if path = null, use - DEFAULT
      * @param path      - if page has no constant path then path = null (e.g. dialogue or dynamic path)
      */
     public BasePage(UrlPrefix urlPrefix, String path) {
@@ -58,9 +53,10 @@ public abstract class BasePage {
 
     @AllArgsConstructor
     protected enum UrlPrefix {
-        CATALOG_PREFIX(PropertyReader.getUrlPrefix("catalog.url.prefix")),
-        PROFILE_PREFIX(PropertyReader.getUrlPrefix("profile.url.prefix")),
-        CART_PREFIX(PropertyReader.getUrlPrefix("cart.url.prefix"));
+        CATALOG(PropertyReader.getUrlPrefix("catalog.url.prefix")),
+        PROFILE(PropertyReader.getUrlPrefix("profile.url.prefix")),
+        CART(PropertyReader.getUrlPrefix("cart.url.prefix")),
+        DEFAULT(PropertyReader.getUrlPrefix("default.url.prefix"));
 
         @Getter
         private final String value;

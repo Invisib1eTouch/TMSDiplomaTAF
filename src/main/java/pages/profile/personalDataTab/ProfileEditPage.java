@@ -15,6 +15,10 @@ public class ProfileEditPage extends BasePage {
     private static final By monthSelectorBy = By.className("auth-input__real");
     private static final By errorLabelBy = By.cssSelector(".auth-form__description_error");
 
+    public ProfileEditPage() {
+        super(UrlPrefix.DEFAULT, null);
+    }
+
     @Override
     protected By getCorrectPageOpenedIndicatorElLocator() {
         return saveBtnBy;

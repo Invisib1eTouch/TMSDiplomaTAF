@@ -2,12 +2,10 @@ package pages;
 
 import baseEntities.BasePage;
 import com.codeborne.selenide.SelenideElement;
-import lombok.NoArgsConstructor;
 import org.openqa.selenium.By;
 
 import static com.codeborne.selenide.Selenide.$;
 
-@NoArgsConstructor
 public abstract class CommonHeader extends BasePage {
 
     private static final By loginBtnBy = By.className("auth-bar__item--text");
