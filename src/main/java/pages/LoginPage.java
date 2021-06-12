@@ -35,11 +35,11 @@ public class LoginPage extends BasePage {
         return $(loginBtnBy);
     }
 
-    public SelenideElement getLoginInputError(){
+    public SelenideElement getLoginInputError() {
         return $(byXpath(emailInputLocator + "/" + authFieldErrorMesLocator));
     }
 
-    public SelenideElement getPasswordInputError(){
+    public SelenideElement getPasswordInputError() {
         return $(byXpath(passwordInputLocator + "/" + authFieldErrorMesLocator));
     }
 }
