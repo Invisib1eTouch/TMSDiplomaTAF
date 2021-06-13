@@ -6,7 +6,7 @@ import org.testng.annotations.Test;
 import pages.LoginPage;
 import steps.MainPageSteps;
 import templates.BaseTestAfterMethodDriverDisposing;
-import testData.StaticProvider;
+import testData.StaticProviders;
 
 import static com.codeborne.selenide.Condition.*;
 
@@ -23,20 +23,23 @@ public class LoginTests extends BaseTestAfterMethodDriverDisposing {
                 .should(be(visible), have(exactOwnText(userId)));
     }
 
-    @Test(dataProvider = "loginWithIncorrectData", dataProviderClass = StaticProvider.class, groups = {"users.csv"})
-    public void negativeLoginTest(LoginTestDataContainer loginTestDataContainer) {
+    @Test(dataProvider = "incorrectLoginData", dataProviderClass = StaticProviders.class, groups = {"csvFiles/invalid_login_test_data.csv"})
+    public void negativeLoginTest(LoginTestDataContainer loginTestData) {
         LoginPage loginPage = new MainPageSteps(true)
-                .loginWithIncorrectCredentials(loginTestDataContainer.getLogin(), loginTestDataContainer.getPassword())
+                .loginWithIncorrectCredentials(loginTestData.getLogin(), loginTestData.getPassword())
                 .getPageInstance();
-        if (!loginTestDataContainer.getLoginFieldError().equals("")) {
+        if (!loginTestData.getLoginFieldError().equals("")) {
             loginPage
                     .getLoginInputError()
-                    .should(be(visible), have(ownText(loginTestDataContainer.getLoginFieldError())));
+                    .should(be(visible),
+                            have(ownText(loginTestData.getLoginFieldError())));
         }
-        if(!loginTestDataContainer.getPasswordFieldError().equals("")){
+
+        if(!loginTestData.getPasswordFieldError().equals("")){
             loginPage
                     .getPasswordInputError()
-                    .should(be(visible), have(ownText(loginTestDataContainer.getPasswordFieldError())));
+                    .should(be(visible),
+                            have(ownText(loginTestData.getPasswordFieldError())));
         }
     }
 }
