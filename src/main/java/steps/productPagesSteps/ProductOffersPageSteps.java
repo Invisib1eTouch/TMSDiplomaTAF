@@ -8,4 +8,10 @@ public class ProductOffersPageSteps extends ProductSummaryPageSteps<ProductOffer
         this.page.getLowerPriceOffer().getAddToCartBtn().click();
         return this;
     }
+
+    public ProductOffersPageSteps handleFirstVisitLocationPopover(){
+        var locationPopover = this.page.getLocationPopoverOnFirstPageVisit();
+        locationPopover.getYesBtn().click();
+        return this;
+    }
 }

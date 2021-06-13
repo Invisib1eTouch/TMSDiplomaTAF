@@ -37,4 +37,15 @@ public class ProductOffersPage extends ProductSummaryPage {
                         offerSelenideEl.$(offerAddToCartBtnBy)))
                 .collect(Collectors.toList());
     }
+
+    /**
+     * @return - LocationPopover
+     * @implNote - returns Location popover that appears ONLY on first entering on the page
+     */
+    public LocationPopover getLocationPopoverOnFirstPageVisit() {
+        $(offersListContainerBy).scrollTo();
+        LocationPopover locationPopover = new LocationPopover();
+        locationPopover.verifyCorrectPageOpened();
+        return locationPopover;
+    }
 }
