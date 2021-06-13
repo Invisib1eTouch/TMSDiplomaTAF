@@ -16,8 +16,7 @@ import utils.Utils;
 import java.util.Calendar;
 import java.util.Objects;
 
-import static com.codeborne.selenide.Condition.attributeMatching;
-import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Condition.*;
 import static utils.FileHelper.getFileToUpload;
 
 
@@ -58,7 +57,7 @@ public class ProfileTests extends BaseTestAfterMethodDriverDisposing {
                 .saveIncorrectData()
                 .getPageInstance()
                 .getErrorLabel()
-                .shouldHave(text(expectedErrorText));
+                .shouldHave(exactOwnText(expectedErrorText));
 
         // Case: year is in the future
         enteredDay = "21";
@@ -70,7 +69,7 @@ public class ProfileTests extends BaseTestAfterMethodDriverDisposing {
                 .saveIncorrectData()
                 .getPageInstance()
                 .getErrorLabel()
-                .shouldHave(text(expectedErrorText));
+                .shouldHave(exactOwnText(expectedErrorText));
     }
 
     @Test
@@ -176,7 +175,7 @@ public class ProfileTests extends BaseTestAfterMethodDriverDisposing {
                 .saveIncorrectData()
                 .getPageInstance()
                 .getErrorLabel()
-                .shouldHave(text(expectedErrorText));
+                .shouldHave(exactOwnText(expectedErrorText));
     }
 }
 
