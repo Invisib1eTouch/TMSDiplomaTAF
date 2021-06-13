@@ -7,7 +7,7 @@ public class ProductDetailsPage extends CommonHeader {
     private static final By productTitleBy = By.className("catalog-masthead__title");
 
     public ProductDetailsPage() {
-        super(null);
+        super(UrlPrefix.DEFAULT, null);
     }
 
     @Override
