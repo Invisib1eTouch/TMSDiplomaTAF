@@ -2,6 +2,7 @@ package steps;
 
 import baseEntities.BaseStep;
 import pages.SearchResultsFrame;
+import steps.productPagesSteps.ProductDetailsPageSteps;
 
 import java.time.Duration;
 

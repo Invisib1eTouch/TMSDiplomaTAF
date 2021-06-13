@@ -1,12 +1,10 @@
 package tests;
 
-import com.codeborne.selenide.Condition;
-import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import steps.MainPageSteps;
-import steps.ProductDetailsPageSteps;
+import steps.productPagesSteps.ProductDetailsPageSteps;
 import steps.SearchResultsFrameSteps;
 import templates.BaseTestAfterClassDriverDisposing;
 
@@ -15,6 +13,9 @@ import static com.codeborne.selenide.Condition.exactOwnText;
 public class ProductE2ETests extends BaseTestAfterClassDriverDisposing {
 
     private MainPageSteps mainPageSteps;
+    private ProductDetailsPageSteps productDetailsPageSteps;
+    private String productName = "Samsung Galaxy A52 SM-A525F/DS 4GB/128GB (синий)";
+    private String extendedProductName = "Смартфон Samsung Galaxy A52 SM-A525F/DS 4GB/128GB (синий)";
 
     @BeforeClass
     @Parameters({"validLogin_3", "validPassword_3"})
@@ -26,23 +27,26 @@ public class ProductE2ETests extends BaseTestAfterClassDriverDisposing {
     @Test
     public void findProductTest() {
         // сделали запрос в апи, получили имя
-        String productName = "Samsung Galaxy A52 SM-A525F/DS 4GB/128GB (синий)";
-        String productExtendedName = "Смартфон Samsung Galaxy A52 SM-A525F/DS 4GB/128GB (синий)";
         SearchResultsFrameSteps searchResultsFrameSteps = this.mainPageSteps
-                .searchProduct(productName);
+                .searchProduct(this.productName);
 
         searchResultsFrameSteps
                 .getPageInstance()
-                .getSearchResultItemByName(productName)
+                .getSearchResultItemByName(this.productName)
                 .getTitle()
-                .shouldHave(exactOwnText(productExtendedName));
+                .shouldHave(exactOwnText(this.extendedProductName));
 
-        ProductDetailsPageSteps productDetailsPageSteps =  searchResultsFrameSteps.openProductDetailsPageByName(productName);
+        this.productDetailsPageSteps = searchResultsFrameSteps.openProductDetailsPageByName(this.productName);
 
         productDetailsPageSteps
                 .getPageInstance()
-                .getProductDetails()
+                .getProductSummary()
                 .getTitle()
-                .shouldHave(exactOwnText(productExtendedName));
+                .shouldHave(exactOwnText(this.extendedProductName));
+    }
+
+    @Test(dependsOnMethods = "findProductTest")
+    public void addProductToCartTest() {
+        this.productDetailsPageSteps.openProductOffersPageThroughPrice();
     }
 }
