@@ -1,0 +1,5 @@
+LOGIN,PASSWORD,LOGIN FIELD ERROR,PASSWORD FIELD ERROR
+login_invalid,,,"Укажите пароль"
+,password_invalid,"Укажите ник или e-mail",
+,,"Укажите ник или e-mail","Укажите пароль"
+login_invalid,password_invalid,,"Неверный логин или пароль"
