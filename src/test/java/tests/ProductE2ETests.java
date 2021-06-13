@@ -14,8 +14,8 @@ public class ProductE2ETests extends BaseTestAfterClassDriverDisposing {
 
     private MainPageSteps mainPageSteps;
     private ProductDetailsPageSteps productDetailsPageSteps;
-    private String productName = "Samsung Galaxy A52 SM-A525F/DS 4GB/128GB (синий)";
-    private String extendedProductName = "Смартфон Samsung Galaxy A52 SM-A525F/DS 4GB/128GB (синий)";
+    private String productName = "Electrolux EHF56547X";
+    private String extendedProductName = "Варочная панель Electrolux EHF56547XK";
 
     @BeforeClass
     @Parameters({"validLogin_3", "validPassword_3"})
