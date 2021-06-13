@@ -13,7 +13,6 @@ public class SearchResultsFrame extends BasePage {
 
     private static final By searchInputBy = By.className("search__input");
     private static final By searchLoaderBy = By.className("search__bar_searching");
-    //private static final By searchResultItemBy = By.className("search__result");
 
     public SearchResultsFrame() {
         super(UrlPrefix.DEFAULT, null);

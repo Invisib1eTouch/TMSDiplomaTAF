@@ -1,6 +1,11 @@
 package pages;
 
+import com.codeborne.selenide.SelenideElement;
+import models.containers.ProductContainer;
 import org.openqa.selenium.By;
+
+import static com.codeborne.selenide.Selectors.byClassName;
+import static com.codeborne.selenide.Selenide.$;
 
 public class ProductDetailsPage extends CommonHeader {
 
@@ -13,5 +18,12 @@ public class ProductDetailsPage extends CommonHeader {
     @Override
     protected By getCorrectPageOpenedIndicatorElLocator() {
         return productTitleBy;
+    }
+
+    public ProductContainer getProductDetails() {
+        return new ProductContainer(
+                $(productTitleBy),
+                $(".offers-description__specs p"),
+                $(".offers-description__price a"));
     }
 }

@@ -1,10 +1,16 @@
 package tests;
 
+import com.codeborne.selenide.Condition;
+import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import steps.MainPageSteps;
+import steps.ProductDetailsPageSteps;
+import steps.SearchResultsFrameSteps;
 import templates.BaseTestAfterClassDriverDisposing;
+
+import static com.codeborne.selenide.Condition.exactOwnText;
 
 public class ProductE2ETests extends BaseTestAfterClassDriverDisposing {
 
@@ -21,8 +27,22 @@ public class ProductE2ETests extends BaseTestAfterClassDriverDisposing {
     public void findProductTest() {
         // сделали запрос в апи, получили имя
         String productName = "Samsung Galaxy A52 SM-A525F/DS 4GB/128GB (синий)";
-        this.mainPageSteps
-                .searchProduct(productName)
-                .openProductDetailsPageByName(productName);
+        String productExtendedName = "Смартфон Samsung Galaxy A52 SM-A525F/DS 4GB/128GB (синий)";
+        SearchResultsFrameSteps searchResultsFrameSteps = this.mainPageSteps
+                .searchProduct(productName);
+
+        searchResultsFrameSteps
+                .getPageInstance()
+                .getSearchResultItemByName(productName)
+                .getTitle()
+                .shouldHave(exactOwnText(productExtendedName));
+
+        ProductDetailsPageSteps productDetailsPageSteps =  searchResultsFrameSteps.openProductDetailsPageByName(productName);
+
+        productDetailsPageSteps
+                .getPageInstance()
+                .getProductDetails()
+                .getTitle()
+                .shouldHave(exactOwnText(productExtendedName));
     }
 }
