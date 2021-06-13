@@ -14,11 +14,11 @@ public class ProductE2ETests extends BaseTestAfterClassDriverDisposing {
 
     private MainPageSteps mainPageSteps;
     private ProductDetailsPageSteps productDetailsPageSteps;
-    private String productName = "Electrolux EHF56547X";
-    private String extendedProductName = "Варочная панель Electrolux EHF56547XK";
+    private String productName = "Samsung Galaxy A52 SM-A525F/DS 4GB/128GB (синий)";
+    private String extendedProductName = "Смартфон Samsung Galaxy A52 SM-A525F/DS 4GB/128GB (синий)";
 
     @BeforeClass
-    @Parameters({"validLogin_3", "validPassword_3"})
+    @Parameters({"validLogin_1", "validPassword_1"})
     public void loginBeforeTest(String login, String password) {
         this.mainPageSteps = new MainPageSteps(true)
                 .loginWithCorrectCredentials(MainPageSteps.class, login, password);
@@ -47,6 +47,8 @@ public class ProductE2ETests extends BaseTestAfterClassDriverDisposing {
 
     @Test(dependsOnMethods = "findProductTest")
     public void addProductToCartTest() {
-        this.productDetailsPageSteps.openProductOffersPageThroughPrice();
+        this.productDetailsPageSteps
+                .openProductOffersPageThroughPrice()
+                .addLowerPriceOfferToCart();
     }
 }

@@ -3,6 +3,10 @@ package utils;
 import org.apache.commons.text.CharacterPredicates;
 import org.apache.commons.text.RandomStringGenerator;
 
+import java.util.Objects;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class Utils {
     /**
      * @param n - number of needed characters in the generated string
@@ -28,6 +32,13 @@ public class Utils {
             return textWords[wordIndex];
         }
         throw new ArrayIndexOutOfBoundsException("Entered word index: " + wordIndex + ", number of the words in text: " + textWords.length);
+    }
+
+    public static String getMatchedText(String text, String pattern){
+        Matcher m = Pattern.compile(pattern).matcher(Objects.requireNonNull(text));
+        if(m.find())
+            return m.group(0);
+        throw new IllegalStateException("No pattern match found in provided text");
     }
 
 }
