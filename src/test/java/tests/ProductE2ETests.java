@@ -50,6 +50,7 @@ public class ProductE2ETests extends BaseTestAfterClassDriverDisposing {
         this.productDetailsPageSteps
                 .openProductOffersPageThroughPrice()
                 .handleFirstVisitLocationPopover()
-                .addLowerPriceOfferToCart();
+                .addLowerPriceOfferToCart()
+                .openCartPage();
     }
 }

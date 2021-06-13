@@ -2,6 +2,7 @@ package steps.commonSteps;
 
 import baseEntities.BaseStep;
 import pages.CommonHeader;
+import steps.CartPageSteps;
 import steps.SearchResultsFrameSteps;
 
 import static com.codeborne.selenide.Selenide.switchTo;
@@ -58,9 +59,11 @@ public abstract class CommonHeaderSteps<Page extends CommonHeader> extends BaseS
     public SearchResultsFrameSteps searchProduct(String searchQuery) {
         this.page.getSearchInput().sendKeys(searchQuery);
         switchTo().frame(this.page.getSearchResultsIFrame());
-
         return new SearchResultsFrameSteps().waitLoadingFinished();
     }
 
-
+    public CartPageSteps openCartPage(){
+        this.page.getCartBtnBy().click();
+        return new CartPageSteps(false);
+    }
 }
