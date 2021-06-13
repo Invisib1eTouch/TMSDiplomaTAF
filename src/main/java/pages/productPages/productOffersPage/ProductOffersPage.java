@@ -16,6 +16,7 @@ public class ProductOffersPage extends ProductSummaryPage {
     private static final By offerContainerBy = By.className("offers-list__item");
     private static final By offerPriceBy = By.className("offers-list__description_nodecor");
     private static final By offerAddToCartBtnBy = By.cssSelector(".offers-list__part_action .offers-list__button_cart");
+    private static final By offerProceedToCartBtnBy = By.cssSelector(".offers-list__part_action .button-style_another");
 
     @Override
     protected By getCorrectPageOpenedIndicatorElLocator() {

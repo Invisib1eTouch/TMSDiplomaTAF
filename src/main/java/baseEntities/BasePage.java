@@ -65,4 +65,18 @@ public abstract class BasePage {
     public int getElementTextLength(SelenideElement selenideElement) {
         return Objects.requireNonNull(selenideElement.getValue()).length();
     }
+
+    /**
+     *
+     * @param locatorParts - parts of css locator
+     * @return - concatenated by space css locator
+     */
+    protected String getConcatenatedBySpaceCssLocator(String... locatorParts) {
+        StringBuilder resultingLocator = new StringBuilder(locatorParts[0]);
+
+        for (int i = 1; i < locatorParts.length; i++){
+            resultingLocator.append(" ").append(locatorParts[i]);
+        }
+        return resultingLocator.toString();
+    }
 }
