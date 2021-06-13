@@ -158,6 +158,26 @@ public class ProfileTests extends BaseTestAfterMethodDriverDisposing {
         Assert.assertEquals(profilePersonalDataTab.getEmptyFullName().getOwnText().replaceAll("\\s+", ""),
                 "—");
     }
+
+    @Test
+    public void editDateOfBirthWithTextValueIssueTest() {
+        // CASE: when user enters letters into the day of birth field,
+        // there should be a validation error (same as for year, for consistency) and no changes are saved,
+        // but now changes are saved and letters value is replaced with '1' on the Personal Data page
+
+        String enteredInvalidDay = "hgtu";
+        String enteredValidYear = "1997";
+        String expectedErrorText = "Недопустимая дата";
+
+        this.profileMainTabSteps
+                .openPersonalDataTab()
+                .openProfileEditPage()
+                .fillDateOfBirthFields(enteredInvalidDay, ProfileEditPageSteps.Month.APR, enteredValidYear)
+                .saveIncorrectData()
+                .getPageInstance()
+                .getErrorLabel()
+                .shouldHave(text(expectedErrorText));
+    }
 }
 
 
