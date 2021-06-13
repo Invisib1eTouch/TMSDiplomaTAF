@@ -1,7 +1,8 @@
-package pages.productPages;
+package pages.productPages.productOffersPage;
 
 import models.containers.OfferContainer;
 import org.openqa.selenium.By;
+import pages.productPages.ProductSummaryPage;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -28,7 +29,7 @@ public class ProductOffersPage extends ProductSummaryPage {
                 .orElseThrow();
     }
 
-    private List<OfferContainer> getOffersList() {
+    public List<OfferContainer> getOffersList() {
         return $$(offerContainerBy)
                 .stream()
                 .map(offerSelenideEl -> new OfferContainer(

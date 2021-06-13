@@ -1,6 +1,6 @@
 package steps.productPagesSteps;
 
-import pages.productPages.ProductOffersPage;
+import pages.productPages.productOffersPage.ProductOffersPage;
 
 public class ProductOffersPageSteps extends ProductSummaryPageSteps<ProductOffersPage> {
 

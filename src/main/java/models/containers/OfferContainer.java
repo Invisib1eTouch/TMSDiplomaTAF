@@ -11,7 +11,6 @@ public class OfferContainer {
     private final SelenideElement addToCartBtn;
 
     public float getFloatPrice(){
-        var pr = this.price.getOwnText();
         return Float.parseFloat(getMatchedText(this.price.getOwnText(),"(?<=.*)\\d*,\\d{2}(?=.*)")
                 .replace(',', '.'));
     }
