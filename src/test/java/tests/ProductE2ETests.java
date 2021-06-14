@@ -49,6 +49,9 @@ public class ProductE2ETests extends BaseTestAfterClassDriverDisposing {
     public void addProductToCartTest() {
         this.productDetailsPageSteps
                 .openProductOffersPageThroughPrice()
-                .addLowerPriceOfferToCart();
+                .handleFirstVisitLocationPopover()
+                .addLowerPriceOfferToCart()
+                .openCartPage();
+
     }
 }

@@ -1,7 +1,8 @@
-package pages.productPages;
+package pages.productPages.productOffersPage;
 
 import models.containers.OfferContainer;
 import org.openqa.selenium.By;
+import pages.productPages.ProductSummaryPage;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -15,6 +16,7 @@ public class ProductOffersPage extends ProductSummaryPage {
     private static final By offerContainerBy = By.className("offers-list__item");
     private static final By offerPriceBy = By.className("offers-list__description_nodecor");
     private static final By offerAddToCartBtnBy = By.cssSelector(".offers-list__part_action .offers-list__button_cart");
+    private static final By offerProceedToCartBtnBy = By.cssSelector(".offers-list__part_action .button-style_another");
 
     @Override
     protected By getCorrectPageOpenedIndicatorElLocator() {
@@ -28,12 +30,23 @@ public class ProductOffersPage extends ProductSummaryPage {
                 .orElseThrow();
     }
 
-    private List<OfferContainer> getOffersList() {
+    public List<OfferContainer> getOffersList() {
         return $$(offerContainerBy)
                 .stream()
                 .map(offerSelenideEl -> new OfferContainer(
                         offerSelenideEl.$(offerPriceBy),
                         offerSelenideEl.$(offerAddToCartBtnBy)))
                 .collect(Collectors.toList());
+    }
+
+    /**
+     * @return - LocationPopover
+     * @implNote - returns Location popover that appears ONLY on first entering on the page
+     */
+    public LocationPopover getLocationPopoverOnFirstPageVisit() {
+        $(offersListContainerBy).scrollTo();
+        LocationPopover locationPopover = new LocationPopover();
+        locationPopover.verifyCorrectPageOpened();
+        return locationPopover;
     }
 }
