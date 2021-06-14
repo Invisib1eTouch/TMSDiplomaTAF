@@ -27,6 +27,7 @@ public class ProductE2ETests extends BaseTestAfterClassDriverDisposing {
     @Test
     public void findProductTest() {
         // сделали запрос в апи, получили имя
+        // очистить корзину через апи
         SearchResultsFrameSteps searchResultsFrameSteps = this.mainPageSteps
                 .searchProduct(this.productName);
 
