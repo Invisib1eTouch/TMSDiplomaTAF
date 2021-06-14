@@ -2,6 +2,9 @@ package models.containers;
 
 import com.codeborne.selenide.SelenideElement;
 import lombok.Getter;
+import utils.Utils;
+
+import static utils.Utils.getMatchedText;
 
 @Getter
 public class ProductContainer {
@@ -16,6 +19,7 @@ public class ProductContainer {
     }
 
     public String getTextName() {
-        return this.name.getValue();
+        var test = getMatchedText(this.name.getValue(), "(?<=\\s)[^\\s].+(?=\\s)");
+        return getMatchedText(this.name.getValue(), "(?<=\\s)[^\\s].+(?=\\s)");
     }
 }

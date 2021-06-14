@@ -22,7 +22,18 @@ public class CartPageSteps extends BaseStep<CartPage> {
         return this.page.getCartItems()
                 .stream()
                 .filter(el -> el.getTextName().equals(productName))
-                .reduce((el1, el2) -> { throw new IllegalStateException("More than one item found with provided name: " + productName);})
+                .reduce((el1, el2) -> {
+                    throw new IllegalStateException("More than one item found with provided name: " + productName);
+                })
                 .orElseThrow(() -> new NoSuchElementException("No such item in the cart with provided name: " + productName));
+    }
+
+    public boolean cartItemExist(String productName) {
+        try {
+            this.getCartItemByName(productName);
+        } catch (NoSuchElementException ex) {
+            return false;
+        }
+        return true;
     }
 }

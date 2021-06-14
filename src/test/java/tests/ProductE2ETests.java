@@ -1,5 +1,6 @@
 package tests;
 
+import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
@@ -55,6 +56,6 @@ public class ProductE2ETests extends BaseTestAfterClassDriverDisposing {
                 .addLowerPriceOfferToCart()
                 .openCartPage();
 
-        cartPageSteps.getCartItemByName(productName).getName().shouldHave(exactOwnText(productName));
+        Assert.assertTrue(cartPageSteps.cartItemExist(productName));
     }
 }
