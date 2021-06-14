@@ -2,20 +2,14 @@ package pages;
 
 import baseEntities.BasePage;
 import com.codeborne.selenide.CollectionCondition;
-import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.SelenideElement;
-import com.codeborne.selenide.ex.SoftAssertionError;
-import com.codeborne.selenide.testng.SoftAsserts;
 import models.containers.CartItemContainer;
 import org.openqa.selenium.By;
 import wrappers.HiddenButton;
 
-import java.time.Duration;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.codeborne.selenide.Condition.exist;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 
@@ -27,14 +21,16 @@ public class CartPage extends BasePage {
     private static final By cartItemProductDescriptionBy = By.cssSelector(".cart-form__description_primary.helpers_hide_tablet");
     private static final By cartItemProductPriceBy = By.cssSelector(".cart-form__offers-part_action span");
     private static final By cartItemDeleteBtnBy = By.className("cart-form__button_remove");
+    private static final By cartPageLoaderBy = By.className("cart-form_animated");
 
     public CartPage() {
         super(UrlPrefix.CART, "");
+        this.waitForNonexistenceOfIndicator = true;
     }
 
     @Override
     protected By getCorrectPageOpenedIndicatorElLocator() {
-        return titleBy;
+        return cartPageLoaderBy;
     }
 
     public List<CartItemContainer> getCartItems() {
