@@ -1,16 +1,14 @@
 package pages;
 
 import baseEntities.BasePage;
+import com.codeborne.selenide.CollectionCondition;
 import models.containers.CartItemContainer;
-import models.containers.OfferContainer;
 import org.openqa.selenium.By;
 import wrappers.HiddenButton;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.codeborne.selenide.Selectors.byClassName;
-import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 
 public class CartPage extends BasePage {
@@ -31,13 +29,13 @@ public class CartPage extends BasePage {
     }
 
     public List<CartItemContainer> getCartItems() {
-        return $$(cartItemContainerBy)
+        return $$(cartItemContainerBy).should(CollectionCondition.sizeGreaterThan(0))
                 .stream()
                 .map(cartItemEl -> new CartItemContainer(
-                        $(cartItemProductNameBy),
-                        $(cartItemProductDescriptionBy),
-                        $(cartItemProductPriceBy),
-                        new HiddenButton(cartItemDeleteBtnBy)))
+                        cartItemEl.$(cartItemProductNameBy),
+                        cartItemEl.$(cartItemProductDescriptionBy),
+                        cartItemEl.$(cartItemProductPriceBy),
+                        new HiddenButton(cartItemEl.$(cartItemDeleteBtnBy))))
                 .collect(Collectors.toList());
     }
 }

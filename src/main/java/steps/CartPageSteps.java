@@ -4,9 +4,7 @@ import baseEntities.BaseStep;
 import models.containers.CartItemContainer;
 import pages.CartPage;
 
-import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.Objects;
 
 public class CartPageSteps extends BaseStep<CartPage> {
     /**

@@ -6,8 +6,8 @@ import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import steps.CartPageSteps;
 import steps.MainPageSteps;
-import steps.productPagesSteps.ProductDetailsPageSteps;
 import steps.SearchResultsFrameSteps;
+import steps.productPagesSteps.ProductDetailsPageSteps;
 import templates.BaseTestAfterClassDriverDisposing;
 
 import static com.codeborne.selenide.Condition.exactOwnText;
@@ -16,6 +16,7 @@ public class ProductE2ETests extends BaseTestAfterClassDriverDisposing {
 
     private MainPageSteps mainPageSteps;
     private ProductDetailsPageSteps productDetailsPageSteps;
+    private CartPageSteps cartPageSteps;
     private String productName = "Samsung Galaxy A52 SM-A525F/DS 4GB/128GB (синий)";
     private String extendedProductName = "Смартфон Samsung Galaxy A52 SM-A525F/DS 4GB/128GB (синий)";
 
@@ -41,7 +42,7 @@ public class ProductE2ETests extends BaseTestAfterClassDriverDisposing {
 
         this.productDetailsPageSteps = searchResultsFrameSteps.openProductDetailsPageByName(this.productName);
 
-        productDetailsPageSteps
+        this.productDetailsPageSteps
                 .getPageInstance()
                 .getProductSummary()
                 .getName()
@@ -50,12 +51,12 @@ public class ProductE2ETests extends BaseTestAfterClassDriverDisposing {
 
     @Test(dependsOnMethods = "findProductTest")
     public void addProductToCartTest() {
-        CartPageSteps cartPageSteps = this.productDetailsPageSteps
+        this.cartPageSteps = this.productDetailsPageSteps
                 .openProductOffersPageThroughPrice()
                 .handleFirstVisitLocationPopover()
                 .addLowerPriceOfferToCart()
                 .openCartPage();
 
-        Assert.assertTrue(cartPageSteps.cartItemExist(productName));
+        Assert.assertTrue(this.cartPageSteps.cartItemExist(this.productName));
     }
 }
