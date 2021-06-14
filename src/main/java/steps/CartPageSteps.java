@@ -27,6 +27,8 @@ public class CartPageSteps extends BaseStep<CartPage> {
     }
 
     public boolean cartItemExist(String productName) {
+        if(!this.page.getTotalProductsAddedLabel().exists()) return false;
+
         try {
             this.getCartItemByName(productName);
         } catch (NoSuchElementException ex) {

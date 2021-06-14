@@ -21,7 +21,7 @@ public class ProductE2ETests extends BaseTestAfterClassDriverDisposing {
     private String extendedProductName = "Смартфон Samsung Galaxy A52 SM-A525F/DS 4GB/128GB (синий)";
 
     @BeforeClass
-    @Parameters({"validLogin_1", "validPassword_1"})
+    @Parameters({"validLogin_2", "validPassword_2"})
     public void loginBeforeTest(String login, String password) {
         this.mainPageSteps = new MainPageSteps(true)
                 .loginWithCorrectCredentials(MainPageSteps.class, login, password);
@@ -58,5 +58,6 @@ public class ProductE2ETests extends BaseTestAfterClassDriverDisposing {
                 .openCartPage();
 
         Assert.assertTrue(this.cartPageSteps.cartItemExist(this.productName));
+        Assert.assertEquals(this.cartPageSteps.getPageInstance().getCartItemsNumber(), 1);
     }
 }
