@@ -3,6 +3,7 @@ package tests;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
+import steps.CartPageSteps;
 import steps.MainPageSteps;
 import steps.productPagesSteps.ProductDetailsPageSteps;
 import steps.SearchResultsFrameSteps;
@@ -34,7 +35,7 @@ public class ProductE2ETests extends BaseTestAfterClassDriverDisposing {
         searchResultsFrameSteps
                 .getPageInstance()
                 .getSearchResultItemByName(this.productName)
-                .getTitle()
+                .getName()
                 .shouldHave(exactOwnText(this.extendedProductName));
 
         this.productDetailsPageSteps = searchResultsFrameSteps.openProductDetailsPageByName(this.productName);
@@ -42,17 +43,18 @@ public class ProductE2ETests extends BaseTestAfterClassDriverDisposing {
         productDetailsPageSteps
                 .getPageInstance()
                 .getProductSummary()
-                .getTitle()
+                .getName()
                 .shouldHave(exactOwnText(this.extendedProductName));
     }
 
     @Test(dependsOnMethods = "findProductTest")
     public void addProductToCartTest() {
-        this.productDetailsPageSteps
+        CartPageSteps cartPageSteps = this.productDetailsPageSteps
                 .openProductOffersPageThroughPrice()
                 .handleFirstVisitLocationPopover()
                 .addLowerPriceOfferToCart()
                 .openCartPage();
 
+        cartPageSteps.getCartItemByName(productName).getName().shouldHave(exactOwnText(productName));
     }
 }

@@ -20,7 +20,7 @@ public class SearchResultsFrameSteps extends BaseStep<SearchResultsFrame> {
     }
 
     public ProductDetailsPageSteps openProductDetailsPageByName(String productName) {
-        this.page.getSearchResultItemByName(productName).getTitle().click();
+        this.page.getSearchResultItemByName(productName).getName().click();
         return new ProductDetailsPageSteps();
     }
 
