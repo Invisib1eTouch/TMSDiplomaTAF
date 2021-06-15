@@ -25,7 +25,7 @@ public class ProfileTests extends BaseTestAfterMethodDriverDisposing {
     private ProfileMainTabSteps profileMainTabSteps;
 
     @BeforeMethod
-    @Parameters({"validLogin_3", "validPassword_3"})
+    @Parameters({"validLogin_5", "validPassword_5"})
     public void loginBeforeTest(String login, String password) {
         this.profileMainTabSteps = new MainPageSteps(true)
                 .loginWithCorrectCredentials(MainPageSteps.class, login, password)

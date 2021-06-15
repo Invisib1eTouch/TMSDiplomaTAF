@@ -5,6 +5,7 @@ import pages.CommonHeader;
 import steps.CartPageSteps;
 import steps.SearchResultsFrameSteps;
 
+import static com.codeborne.selenide.Selenide.sleep;
 import static com.codeborne.selenide.Selenide.switchTo;
 
 public abstract class CommonHeaderSteps<Page extends CommonHeader> extends BaseStep<Page> {
@@ -40,6 +41,8 @@ public abstract class CommonHeaderSteps<Page extends CommonHeader> extends BaseS
 
     public ProfileMenuSteps openProfileMenu() {
         this.page.getProfileIcon().click();
+        // Animation of profile menu opening takes 200ms
+        sleep(200);
         return new ProfileMenuSteps();
     }
 
