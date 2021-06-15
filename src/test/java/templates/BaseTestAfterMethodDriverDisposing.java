@@ -6,7 +6,7 @@ import org.testng.annotations.AfterMethod;
 
 public class BaseTestAfterMethodDriverDisposing extends BaseTest {
 
-    @AfterMethod
+    @AfterMethod(alwaysRun = true)
     public void methodTeardown(){
         WebDriverRunner.closeWebDriver();
     }
