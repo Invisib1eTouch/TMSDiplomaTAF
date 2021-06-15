@@ -22,6 +22,7 @@ public class CartPage extends BasePage {
     private static final By cartItemProductPriceBy = By.cssSelector(".cart-form__offers-part_action span");
     private static final By cartItemDeleteBtnBy = By.className("cart-form__button_remove");
     private static final By cartPageLoaderBy = By.className("cart-form_animated");
+    private static final By cartDeletedItemProductDescriptionBy = By.className("cart-form__description_condensed-extra");
 
     public CartPage() {
         super(UrlPrefix.CART, "");

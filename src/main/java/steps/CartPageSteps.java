@@ -36,4 +36,9 @@ public class CartPageSteps extends BaseStep<CartPage> {
         }
         return true;
     }
+
+    public CartPageSteps deleteItemFromCartByName(String productName){
+        this.getCartItemByName(productName).getDeleteBtn().click();
+        return this;
+    }
 }
