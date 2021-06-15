@@ -4,7 +4,6 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-import pages.CartPage;
 import steps.CartPageSteps;
 import steps.MainPageSteps;
 import steps.SearchResultsFrameSteps;
@@ -64,6 +63,11 @@ public class ProductE2ETests extends BaseTestAfterClassDriverDisposing {
 
     @Test(dependsOnMethods = "addProductToCartTest")
     public void deleteProductFromCartTest(){
-        CartPage cartPage = this.cartPageSteps.deleteItemFromCartByName(this.productName).getPageInstance();
+        boolean cartItemExist = this.cartPageSteps
+                .deleteItemFromCartByName(this.productName)
+                .cartItemExist(this.productName);
+
+        Assert.assertFalse(cartItemExist);
+        Assert.assertEquals(this.cartPageSteps.getPageInstance().getDeletedCartItemsNumber(), 1);
     }
 }
