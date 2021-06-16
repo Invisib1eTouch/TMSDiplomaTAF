@@ -3,6 +3,7 @@ package pages;
 import baseEntities.BasePage;
 import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.SelenideElement;
+import enums.UrlPrefix;
 import models.containers.CartItemContainer;
 import org.openqa.selenium.By;
 import wrappers.HiddenButton;

@@ -1,5 +1,7 @@
 package tests;
 
+import apiSteps.CatalogApiSteps;
+import apiSteps.UserApiSteps;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
@@ -9,6 +11,7 @@ import steps.MainPageSteps;
 import steps.SearchResultsFrameSteps;
 import steps.productPagesSteps.ProductDetailsPageSteps;
 import templates.BaseTestAfterClassDriverDisposing;
+import utils.Utils;
 
 import static com.codeborne.selenide.Condition.exactOwnText;
 
@@ -16,13 +19,17 @@ public class ProductE2ETests extends BaseTestAfterClassDriverDisposing {
 
     private MainPageSteps mainPageSteps;
     private ProductDetailsPageSteps productDetailsPageSteps;
-    private CartPageSteps cartPageSteps;
-    private String productName = "Samsung Galaxy A52 SM-A525F/DS 4GB/128GB (синий)";
-    private String extendedProductName = "Смартфон Samsung Galaxy A52 SM-A525F/DS 4GB/128GB (синий)";
+    private String productFullName;
+    private String extendedProductName;
 
     @BeforeClass
     @Parameters({"validLogin_2", "validPassword_2"})
-    public void loginBeforeTest(String login, String password) {
+    public void testSetup(String login, String password) {
+        var products = CatalogApiSteps.getAvailableMobilePhones().getProducts();
+        var product = products.get(Utils.getRandomNumber(0, products.size()));
+        this.productFullName = product.getFullName();
+        this.extendedProductName = product.getExtendedName();
+
         this.mainPageSteps = new MainPageSteps(true)
                 .loginWithCorrectCredentials(MainPageSteps.class, login, password);
     }
@@ -32,15 +39,15 @@ public class ProductE2ETests extends BaseTestAfterClassDriverDisposing {
         // сделали запрос в апи, получили имя
         // очистить корзину через апи
         SearchResultsFrameSteps searchResultsFrameSteps = this.mainPageSteps
-                .searchProduct(this.productName);
+                .searchProduct(this.productFullName);
 
         searchResultsFrameSteps
                 .getPageInstance()
-                .getSearchResultItemByName(this.productName)
+                .getSearchResultItemByName(this.productFullName)
                 .getName()
                 .shouldHave(exactOwnText(this.extendedProductName));
 
-        this.productDetailsPageSteps = searchResultsFrameSteps.openProductDetailsPageByName(this.productName);
+        this.productDetailsPageSteps = searchResultsFrameSteps.openProductDetailsPageByName(this.productFullName);
 
         this.productDetailsPageSteps
                 .getPageInstance()
@@ -51,13 +58,13 @@ public class ProductE2ETests extends BaseTestAfterClassDriverDisposing {
 
     @Test(dependsOnMethods = "findProductTest")
     public void addProductToCartTest() {
-        this.cartPageSteps = this.productDetailsPageSteps
+        var cartPageSteps = this.productDetailsPageSteps
                 .openProductOffersPageThroughPrice()
                 .handleFirstVisitLocationPopover()
                 .addLowerPriceOfferToCart()
                 .openCartPage();
 
-        Assert.assertTrue(this.cartPageSteps.cartItemExist(this.productName));
-        Assert.assertEquals(this.cartPageSteps.getPageInstance().getCartItemsNumber(), 1);
+        Assert.assertTrue(cartPageSteps.cartItemExist(this.productFullName));
+        Assert.assertEquals(cartPageSteps.getPageInstance().getCartItemsNumber(), 1);
     }
 }

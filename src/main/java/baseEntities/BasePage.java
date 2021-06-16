@@ -5,6 +5,7 @@ import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.SelenideElement;
 import core.PropertyReader;
 import enums.UrlPrefix;
+import lombok.Getter;
 import org.openqa.selenium.By;
 
 import java.util.Objects;

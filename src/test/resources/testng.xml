@@ -21,14 +21,14 @@
 <!--            <class name="tests.LoginTests"/>-->
 <!--        </classes>-->
 <!--    </test>-->
-    <test name="ProfileTests">
-        <classes>
-            <class name="tests.ProfileTests"/>
-        </classes>
-    </test>
-<!--    <test name="ProductE2ETests">-->
+<!--    <test name="ProfileTests">-->
 <!--        <classes>-->
-<!--            <class name="tests.ProductE2ETests"/>-->
+<!--            <class name="tests.ProfileTests"/>-->
 <!--        </classes>-->
 <!--    </test>-->
+    <test name="ProductE2ETests">
+        <classes>
+            <class name="tests.ProductE2ETests"/>
+        </classes>
+    </test>
 </suite>

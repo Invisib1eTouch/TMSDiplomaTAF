@@ -1,5 +1,6 @@
 package pages.productPages;
 
+import enums.UrlPrefix;
 import models.containers.ProductContainer;
 import org.openqa.selenium.By;
 import pages.CommonHeader;
