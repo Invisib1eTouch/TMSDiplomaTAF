@@ -67,4 +67,14 @@ public class ProductE2ETests extends BaseTestAfterClassDriverDisposing {
         Assert.assertTrue(cartPageSteps.cartItemExist(this.productFullName));
         Assert.assertEquals(cartPageSteps.getPageInstance().getCartItemsNumber(), 1);
     }
+
+    @Test(dependsOnMethods = "addProductToCartTest")
+    public void deleteProductFromCartTest(){
+        boolean cartItemExist = this.cartPageSteps
+                .deleteItemFromCartByName(this.productName)
+                .cartItemExist(this.productName);
+
+        Assert.assertFalse(cartItemExist);
+        Assert.assertEquals(this.cartPageSteps.getPageInstance().getDeletedCartItemsNumber(), 1);
+    }
 }

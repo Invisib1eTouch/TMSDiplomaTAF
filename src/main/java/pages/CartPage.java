@@ -23,6 +23,8 @@ public class CartPage extends BasePage {
     private static final By cartItemProductPriceBy = By.cssSelector(".cart-form__offers-part_action span");
     private static final By cartItemDeleteBtnBy = By.className("cart-form__button_remove");
     private static final By cartPageLoaderBy = By.className("cart-form_animated");
+    private static final By cartDeletedItemProductDescriptionBy = By.className("cart-form__description_condensed-extra");
+    private static final By cartDeletedItemProductContainerBy = By.xpath("//a[contains(@class , 'cart-form__link_small')]//ancestor::div[contains(@class, 'cart-form__offers-unit')]");
 
     public CartPage() {
         super(UrlPrefix.CART, "");
@@ -32,6 +34,10 @@ public class CartPage extends BasePage {
     @Override
     protected By getCorrectPageOpenedIndicatorElLocator() {
         return cartPageLoaderBy;
+    }
+
+    public SelenideElement getCartPageLoader(){
+        return $(cartPageLoaderBy);
     }
 
     public List<CartItemContainer> getCartItems() {
@@ -53,5 +59,9 @@ public class CartPage extends BasePage {
         if (!this.getTotalProductsAddedLabel().exists())
             return 0;
         return $$(cartItemContainerBy).shouldHave(CollectionCondition.sizeGreaterThan(0)).size();
+    }
+
+    public int getDeletedCartItemsNumber() {
+        return $$(cartDeletedItemProductContainerBy).size();
     }
 }

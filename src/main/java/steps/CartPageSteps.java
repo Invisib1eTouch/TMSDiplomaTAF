@@ -6,6 +6,8 @@ import pages.CartPage;
 
 import java.util.NoSuchElementException;
 
+import static com.codeborne.selenide.Condition.exist;
+
 public class CartPageSteps extends BaseStep<CartPage> {
     /**
      * @param openPageByUrl - if true page will be opened by url
@@ -35,5 +37,11 @@ public class CartPageSteps extends BaseStep<CartPage> {
             return false;
         }
         return true;
+    }
+
+    public CartPageSteps deleteItemFromCartByName(String productName){
+        this.getCartItemByName(productName).getDeleteBtn().click();
+        this.page.getCartPageLoader().shouldNot(exist);
+        return this;
     }
 }
