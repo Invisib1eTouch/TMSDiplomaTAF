@@ -23,7 +23,7 @@ public class ProductE2ETests extends BaseTestAfterClassDriverDisposing {
     private String extendedProductName;
 
     @BeforeClass
-    @Parameters({"validLogin_2", "validPassword_2"})
+    @Parameters({"validLogin_3", "validPassword_3"})
     public void testSetup(String login, String password) {
         var products = CatalogApiSteps.getAvailableMobilePhones().getProducts();
         var product = products.get(Utils.getRandomNumber(0, products.size()));
