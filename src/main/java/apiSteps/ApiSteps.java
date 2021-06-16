@@ -3,6 +3,7 @@ package apiSteps;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import core.PropertyReader;
+import enums.UrlPrefix;
 import io.restassured.RestAssured;
 
 public class ApiSteps {
@@ -10,7 +11,7 @@ public class ApiSteps {
     protected static String authToken;
 
    static {
-        RestAssured.baseURI = String.format("https://%s.%s/%s", PropertyReader.getUrlPrefix("default.url.prefix"),
+        RestAssured.baseURI = String.format("https://%s.%s/%s", UrlPrefix.DEFAULT,
                 PropertyReader.getBaseUrl(), PropertyReader.getApiPath());
     }
 }

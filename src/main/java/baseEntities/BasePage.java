@@ -3,8 +3,7 @@ package baseEntities;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.SelenideElement;
 import core.PropertyReader;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
+import enums.UrlPrefix;
 import org.openqa.selenium.By;
 
 import java.util.Objects;
@@ -49,17 +48,6 @@ public abstract class BasePage {
     public void openAndVerifyCorrectPageOpened() {
         this.open();
         this.verifyCorrectPageOpened();
-    }
-
-    @AllArgsConstructor
-    protected enum UrlPrefix {
-        CATALOG(PropertyReader.getUrlPrefix("catalog.url.prefix")),
-        PROFILE(PropertyReader.getUrlPrefix("profile.url.prefix")),
-        CART(PropertyReader.getUrlPrefix("cart.url.prefix")),
-        DEFAULT(PropertyReader.getUrlPrefix("default.url.prefix"));
-
-        @Getter
-        private final String value;
     }
 
     public int getElementTextLength(SelenideElement selenideElement) {
