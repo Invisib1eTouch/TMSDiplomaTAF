@@ -1,7 +1,6 @@
 package tests;
 
 import apiSteps.CatalogApiSteps;
-import apiSteps.UserApiSteps;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
@@ -19,6 +18,7 @@ public class ProductE2ETests extends BaseTestAfterClassDriverDisposing {
 
     private MainPageSteps mainPageSteps;
     private ProductDetailsPageSteps productDetailsPageSteps;
+    private CartPageSteps cartPageSteps;
     private String productFullName;
     private String extendedProductName;
 
@@ -36,8 +36,6 @@ public class ProductE2ETests extends BaseTestAfterClassDriverDisposing {
 
     @Test
     public void findProductTest() {
-        // сделали запрос в апи, получили имя
-        // очистить корзину через апи
         SearchResultsFrameSteps searchResultsFrameSteps = this.mainPageSteps
                 .searchProduct(this.productFullName);
 
@@ -58,7 +56,7 @@ public class ProductE2ETests extends BaseTestAfterClassDriverDisposing {
 
     @Test(dependsOnMethods = "findProductTest")
     public void addProductToCartTest() {
-        var cartPageSteps = this.productDetailsPageSteps
+        this.cartPageSteps = this.productDetailsPageSteps
                 .openProductOffersPageThroughPrice()
                 .handleFirstVisitLocationPopover()
                 .addLowerPriceOfferToCart()
@@ -71,8 +69,8 @@ public class ProductE2ETests extends BaseTestAfterClassDriverDisposing {
     @Test(dependsOnMethods = "addProductToCartTest")
     public void deleteProductFromCartTest(){
         boolean cartItemExist = this.cartPageSteps
-                .deleteItemFromCartByName(this.productName)
-                .cartItemExist(this.productName);
+                .deleteItemFromCartByName(this.productFullName)
+                .cartItemExist(this.productFullName);
 
         Assert.assertFalse(cartItemExist);
         Assert.assertEquals(this.cartPageSteps.getPageInstance().getDeletedCartItemsNumber(), 1);
