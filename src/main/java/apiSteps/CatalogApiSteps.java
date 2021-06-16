@@ -1,5 +1,6 @@
 package apiSteps;
 
+import dataObjects.json.ProductsModelJson;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 
@@ -11,7 +12,7 @@ public class CatalogApiSteps extends ApiSteps {
         RestAssured.basePath = "catalog.api/search";
     }
 
-    public static Response getAvailableMobilePhones() {
+    public static ProductsModelJson getAvailableMobilePhones() {
         Response response = given()
                 .log().all()
                 .get("mobile?in_stock=1");
@@ -20,6 +21,6 @@ public class CatalogApiSteps extends ApiSteps {
             response.prettyPrint();
         }
 
-        return response;
+        return gson.fromJson(response.getBody().asString(), ProductsModelJson.class);
     }
 }

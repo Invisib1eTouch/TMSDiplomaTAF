@@ -1,5 +1,6 @@
 package pages;
 
+import enums.UrlPrefix;
 import org.openqa.selenium.By;
 
 public class MainPage extends CommonHeader {

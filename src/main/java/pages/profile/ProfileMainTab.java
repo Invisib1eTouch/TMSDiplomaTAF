@@ -1,5 +1,6 @@
 package pages.profile;
 
+import enums.UrlPrefix;
 import org.openqa.selenium.By;
 
 public class ProfileMainTab extends ProfileHeader {

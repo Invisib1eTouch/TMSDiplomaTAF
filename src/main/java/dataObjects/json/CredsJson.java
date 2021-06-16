@@ -2,10 +2,8 @@ package dataObjects.json;
 
 import com.google.gson.annotations.Expose;
 import lombok.Data;
-import lombok.RequiredArgsConstructor;
 
 @Data
-@RequiredArgsConstructor
 public class CredsJson {
 
     @Expose
