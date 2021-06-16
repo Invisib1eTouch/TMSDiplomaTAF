@@ -2,6 +2,11 @@ package steps.commonSteps;
 
 import baseEntities.BaseStep;
 import pages.CommonHeader;
+import steps.CartPageSteps;
+import steps.SearchResultsFrameSteps;
+
+import static com.codeborne.selenide.Selenide.sleep;
+import static com.codeborne.selenide.Selenide.switchTo;
 
 public abstract class CommonHeaderSteps<Page extends CommonHeader> extends BaseStep<Page> {
 
@@ -13,11 +18,10 @@ public abstract class CommonHeaderSteps<Page extends CommonHeader> extends BaseS
     }
 
     /**
-     *
      * @param methodCallerStepsClass - steps class, that invokes method; necessary to know to maintain invocation chain
      * @param login
      * @param password
-     * @param <Steps> - method caller steps class type
+     * @param <Steps>                - method caller steps class type
      * @return - instance of Steps class that extends CommonHeaderSteps class from which method was invoked
      */
     public <Steps extends CommonHeaderSteps<Page>> Steps loginWithCorrectCredentials(Class<Steps> methodCallerStepsClass, String login, String password) {
@@ -37,6 +41,8 @@ public abstract class CommonHeaderSteps<Page extends CommonHeader> extends BaseS
 
     public ProfileMenuSteps openProfileMenu() {
         this.page.getProfileIcon().click();
+        // Animation of profile menu opening takes 200ms
+        sleep(200);
         return new ProfileMenuSteps();
     }
 
@@ -51,5 +57,16 @@ public abstract class CommonHeaderSteps<Page extends CommonHeader> extends BaseS
         page.getEmailInput().sendKeys(login);
         page.getPasswordInput().sendKeys(password);
         page.getLoginBtn().click();
+    }
+
+    public SearchResultsFrameSteps searchProduct(String searchQuery) {
+        this.page.getSearchInput().sendKeys(searchQuery);
+        switchTo().frame(this.page.getSearchResultsIFrame());
+        return new SearchResultsFrameSteps().waitLoadingFinished();
+    }
+
+    public CartPageSteps openCartPage(){
+        this.page.getCartBtnBy().click();
+        return new CartPageSteps(false);
     }
 }

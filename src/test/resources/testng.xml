@@ -13,14 +13,22 @@
     <parameter name="validLogin_4" value="ktafaniuk@yandex.by"/>
     <parameter name="validPassword_4" value="Qwerty_2206"/>
     <parameter name="validUserId_4" value="3313009"/>
+    <parameter name="validLogin_5" value="testuser1andrew@yandex.ru"/>
+    <parameter name="validPassword_5" value="testuser1andrew1"/>
+    <parameter name="validUserId_5" value="2939310"/>
 <!--    <test name="LoginTests">-->
 <!--        <classes>-->
 <!--            <class name="tests.LoginTests"/>-->
 <!--        </classes>-->
 <!--    </test>-->
-    <test name="ProfileTests">
+<!--    <test name="ProfileTests">-->
+<!--        <classes>-->
+<!--            <class name="tests.ProfileTests"/>-->
+<!--        </classes>-->
+<!--    </test>-->
+    <test name="ProductE2ETests">
         <classes>
-            <class name="tests.ProfileTests"/>
+            <class name="tests.ProductE2ETests"/>
         </classes>
     </test>
 </suite>

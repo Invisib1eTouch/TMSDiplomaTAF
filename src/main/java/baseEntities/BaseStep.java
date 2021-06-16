@@ -69,7 +69,9 @@ public abstract class BaseStep<Page extends BasePage> {
         try {
             return stepsClassType.getConstructor(Boolean.class).newInstance(false);
         } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
-            throw new RuntimeException("Cannot initialize steps class object:" + e.getMessage());
+            throw new RuntimeException("Cannot initialize steps class object:" +
+                    stepsClassType.getSimpleName() +
+                    "\nMessage: " + e.getMessage());
         }
     }
 }

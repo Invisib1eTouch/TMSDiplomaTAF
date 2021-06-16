@@ -43,4 +43,5 @@ public class PropertyReader {
     public static String getDbPassword() {
         return properties.getProperty("db_psw");
     }
+
 }
