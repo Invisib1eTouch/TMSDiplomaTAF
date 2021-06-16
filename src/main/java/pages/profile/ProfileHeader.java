@@ -1,6 +1,7 @@
 package pages.profile;
 
 import com.codeborne.selenide.SelenideElement;
+import enums.UrlPrefix;
 import org.openqa.selenium.By;
 import pages.CommonHeader;
 
