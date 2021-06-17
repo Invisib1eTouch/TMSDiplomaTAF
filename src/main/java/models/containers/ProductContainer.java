@@ -24,8 +24,12 @@ public class ProductContainer {
 
     public CartItemModel getCartItemModel(){
         return new CartItemModel(
-                this.getTextName(),
-                description.getOwnText(),
+                this.getFullNameFromExtended(),
+                this.description.getOwnText(),
                 getMatchedText(this.price.getText(), "(?<=.*)\\d*,\\d{2}(?=.*)"));
+    }
+
+    public String getFullNameFromExtended(){
+        return getMatchedText(this.getTextName(), "(?<=.+ ).+");
     }
 }

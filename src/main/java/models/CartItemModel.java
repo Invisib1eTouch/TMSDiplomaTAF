@@ -1,10 +1,12 @@
 package models;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
+@AllArgsConstructor
 public class CartItemModel {
-    private final String name;
-    private final String description;
-    private final String price;
+    private String name;
+    private String description;
+    private String price;
 }
