@@ -2,6 +2,7 @@ package models.containers;
 
 import com.codeborne.selenide.SelenideElement;
 import lombok.Getter;
+import models.CartItemModel;
 
 import static utils.Utils.getMatchedText;
 
@@ -19,5 +20,12 @@ public class ProductContainer {
 
     public String getTextName() {
         return getMatchedText(this.name.getOwnText(), "(?<=\\s)[^\\s].+(?=\\s)");
+    }
+
+    public CartItemModel getCartItemModel(){
+        return new CartItemModel(
+                this.getTextName(),
+                description.getOwnText(),
+                getMatchedText(this.price.getOwnText(), "(?<=.*)\\d*,\\d{2}(?=.*)"));
     }
 }
