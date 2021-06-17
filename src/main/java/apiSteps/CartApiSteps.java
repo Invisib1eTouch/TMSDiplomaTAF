@@ -49,6 +49,7 @@ public class CartApiSteps extends ApiSteps {
 
     public static void deleteAllCartPositionsIfExist() {
         List<PositionToDeleteJson> positionsToDelete =
+                // TypeToken - specifying type that should be returned after deserialization from obtained json string
                 gson.fromJson(getCartPositions().getBody().asString(), new TypeToken<ArrayList<PositionToDeleteJson>>() {
                 }.getType());
 
