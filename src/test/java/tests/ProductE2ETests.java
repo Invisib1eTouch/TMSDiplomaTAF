@@ -3,10 +3,12 @@ package tests;
 import apiSteps.CartApiSteps;
 import apiSteps.CatalogApiSteps;
 import apiSteps.UserApiSteps;
+import models.CartItemModel;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
+import services.SQLRequestSender;
 import steps.CartPageSteps;
 import steps.MainPageSteps;
 import steps.SearchResultsFrameSteps;
@@ -66,8 +68,15 @@ public class ProductE2ETests extends BaseTestAfterClassDriverDisposing {
                 .addLowerPriceOfferToCart()
                 .openCartPage();
 
+        CartItemModel cartItem = this.cartPageSteps
+                .getCartItemByName(this.productFullName)
+                .getCartItemModel();
+
+        CartItemModel cartItemFromDb = SQLRequestSender.getCartItemByProductName(this.productFullName).get(0);
+
         Assert.assertTrue(cartPageSteps.cartItemExist(this.productFullName));
         Assert.assertEquals(cartPageSteps.getPageInstance().getCartItemsNumber(), 1);
+        Assert.assertEquals(cartItem, cartItemFromDb);
     }
 
     @Test(dependsOnMethods = "addProductToCartTest")

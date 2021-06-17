@@ -3,6 +3,7 @@ package steps;
 import baseEntities.BaseStep;
 import models.containers.CartItemContainer;
 import pages.CartPage;
+import services.SQLRequestSender;
 
 import java.util.NoSuchElementException;
 
@@ -42,6 +43,7 @@ public class CartPageSteps extends BaseStep<CartPage> {
     public CartPageSteps deleteItemFromCartByName(String productName){
         this.getCartItemByName(productName).getDeleteBtn().click();
         this.page.getCartPageLoader().shouldNot(exist);
+        SQLRequestSender.deleteCartItemByProductName(productName);
         return this;
     }
 }
