@@ -16,16 +16,16 @@
     <parameter name="validLogin_5" value="testuser1andrew@yandex.ru"/>
     <parameter name="validPassword_5" value="testuser1andrew1"/>
     <parameter name="validUserId_5" value="2939310"/>
-    <test name="LoginTests">
-        <classes>
-            <class name="tests.LoginTests"/>
-        </classes>
-    </test>
-    <test name="ProfileTests">
-        <classes>
-            <class name="tests.ProfileTests"/>
-        </classes>
-    </test>
+<!--    <test name="LoginTests">-->
+<!--        <classes>-->
+<!--            <class name="tests.LoginTests"/>-->
+<!--        </classes>-->
+<!--    </test>-->
+<!--    <test name="ProfileTests">-->
+<!--        <classes>-->
+<!--            <class name="tests.ProfileTests"/>-->
+<!--        </classes>-->
+<!--    </test>-->
     <test name="ProductE2ETests">
         <classes>
             <class name="tests.ProductE2ETests"/>

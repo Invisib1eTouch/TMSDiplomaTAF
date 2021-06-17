@@ -1,6 +1,8 @@
 package tests;
 
+import apiSteps.CartApiSteps;
 import apiSteps.CatalogApiSteps;
+import apiSteps.UserApiSteps;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
@@ -25,6 +27,8 @@ public class ProductE2ETests extends BaseTestAfterClassDriverDisposing {
     @BeforeClass
     @Parameters({"validLogin_3", "validPassword_3"})
     public void testSetup(String login, String password) {
+        UserApiSteps.login(login, password);
+        CartApiSteps.deleteAllCartPositionsIfExist();
         var products = CatalogApiSteps.getAvailableMobilePhones().getProducts();
         var product = products.get(Utils.getRandomNumber(0, products.size()));
         this.productFullName = product.getFullName();
