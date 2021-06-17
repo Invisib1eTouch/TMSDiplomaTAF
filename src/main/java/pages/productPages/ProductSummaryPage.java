@@ -11,7 +11,7 @@ public abstract class ProductSummaryPage extends CommonHeader {
 
     private static final By productTitleBy = By.className("catalog-masthead__title");
     private static final By productDescriptionBy = By.cssSelector(".offers-description__specs p");
-    private static final By productPriceBy = By.cssSelector(".offers-description__price a");
+    private static final By productPriceBy = By.cssSelector(".offers-description__price");
 
     public ProductSummaryPage() {
         super(UrlPrefix.DEFAULT, null);

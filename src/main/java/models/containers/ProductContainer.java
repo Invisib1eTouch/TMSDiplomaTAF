@@ -26,6 +26,6 @@ public class ProductContainer {
         return new CartItemModel(
                 this.getTextName(),
                 description.getOwnText(),
-                getMatchedText(this.price.getOwnText(), "(?<=.*)\\d*,\\d{2}(?=.*)"));
+                getMatchedText(this.price.getText(), "(?<=.*)\\d*,\\d{2}(?=.*)"));
     }
 }
