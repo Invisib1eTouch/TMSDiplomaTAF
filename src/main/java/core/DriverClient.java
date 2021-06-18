@@ -1,8 +1,10 @@
 package core;
 
-
 import com.codeborne.selenide.Configuration;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
+
+import java.util.Map;
 
 /**
  * Setup selenide config
@@ -10,19 +12,26 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 public class DriverClient {
 
     public static void init() {
-        Configuration.browser = PropertyReader.getBrowserName();
-        Configuration.startMaximized = true;
-
-//        Configuration.remote = "http://localhost:4444/wd/hub";
-//        Configuration.driverManagerEnabled = false;
 //        Configuration.browser = PropertyReader.getBrowserName();
 //        Configuration.startMaximized = true;
-//        Configuration.browserCapabilities = new DesiredCapabilities();
-//        Configuration.browserCapabilities.setCapability("browserName", PropertyReader.getBrowserName());
-//        Configuration.browserCapabilities.setCapability("enableVNC", true);
-//        Configuration.browserCapabilities.setCapability("enableVideo", true);
-//        Configuration.browserCapabilities.setCapability("sessionTimeout", "5m");
-//        Configuration.browserCapabilities.setCapability("--no-sandbox", true);
-//        Configuration.browserCapabilities.setCapability("--disable-gpu", true);
+
+        Configuration.remote = "http://localhost:4444/wd/hub";
+        Configuration.driverManagerEnabled = false;
+        Configuration.browser = PropertyReader.getBrowserName();
+        Configuration.startMaximized = true;
+        Configuration.browserCapabilities = new DesiredCapabilities();
+        Configuration.pageLoadTimeout = 60000L;
+        Configuration.browserCapabilities.setCapability("browserName", PropertyReader.getBrowserName());
+        Configuration.browserCapabilities.setCapability("selenoid:options", Map.<String, Object>of(
+                "enableVNC", true,
+                "enableVideo", true
+        ));
+        ChromeOptions chromeOptions = new ChromeOptions();
+        chromeOptions.addArguments("--no-sandbox");
+        chromeOptions.addArguments("--disable-gpu");
+        chromeOptions.addArguments("--incognito");
+        chromeOptions.addArguments("--disable-infobars");
+        chromeOptions.addArguments("--disable-dev-shm-usage");
+        Configuration.browserCapabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
     }
 }

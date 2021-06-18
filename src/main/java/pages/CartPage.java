@@ -28,7 +28,7 @@ public class CartPage extends BasePage {
 
     public CartPage() {
         super(UrlPrefix.CART, "");
-        this.pageOpenIndCheckCond = PageOpenIndCheckCond.NOT_EXIST;
+        this.pageOpenIndConditionToFulfill = PageOpenIndConditionToFulfill.NOT_EXIST;
     }
 
     @Override

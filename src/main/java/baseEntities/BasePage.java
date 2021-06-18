@@ -17,7 +17,7 @@ import static com.codeborne.selenide.Selenide.$;
 public abstract class BasePage {
 
     private final String path;
-    protected PageOpenIndCheckCond pageOpenIndCheckCond = PageOpenIndCheckCond.EXIST_AND_VISIBLE;
+    protected PageOpenIndConditionToFulfill pageOpenIndConditionToFulfill = PageOpenIndConditionToFulfill.EXIST_AND_VISIBLE;
 
     /**
      * @param urlPrefix - prefix for the page e.g. catalog, profile, etc., if path = null, use - DEFAULT
@@ -35,12 +35,8 @@ public abstract class BasePage {
 
     public void verifyCorrectPageOpened() {
         try {
-            if (this.pageOpenIndCheckCond == PageOpenIndCheckCond.EXIST_AND_VISIBLE) {
-                $(this.getCorrectPageOpenedIndicatorElLocator()).should(exist, Duration.ofSeconds(30)).shouldBe(visible, Duration.ofSeconds(30));
-            } else {
-                $(this.getCorrectPageOpenedIndicatorElLocator()).shouldNot(exist, Duration.ofSeconds(30));
-            }
-            // Check that element that indicates particular page can be found and visible
+            // Check that page opened indicator element fulfills provided conditions
+            $(this.getCorrectPageOpenedIndicatorElLocator()).should(this.pageOpenIndConditionToFulfill.condition, Duration.ofSeconds(10));
         } catch (Error e) {
             throw new AssertionError(String.format("%s was not opened\n Detailed Message:\n%s",
                     this.getClass().getSimpleName(), e.getMessage()));
@@ -74,15 +70,15 @@ public abstract class BasePage {
         return resultingLocator.toString();
     }
 
-    protected enum PageOpenIndCheckCond {
-        EXIST_AND_VISIBLE(exist, be(visible)),
+    protected enum PageOpenIndConditionToFulfill {
+        EXIST_AND_VISIBLE(and("", exist, be(visible))),
         NOT_EXIST(not(exist));
 
         @Getter
-        private final Condition[] conditions;
+        private final Condition condition;
 
-        PageOpenIndCheckCond(Condition... conditions) {
-            this.conditions = conditions;
+        PageOpenIndConditionToFulfill(Condition condition) {
+            this.condition = condition;
         }
     }
 }
