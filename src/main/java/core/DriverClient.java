@@ -9,22 +9,51 @@ import org.openqa.selenium.remote.DesiredCapabilities;
  */
 public class DriverClient {
 
-    public static void init() {
-        Configuration.remote = "http://localhost:4444/wd/hub";
-        Configuration.driverManagerEnabled = false;
+    private static DriverClient driverClient;
+
+    public static DriverClient get() {
+        if (driverClient == null) {
+            driverClient = new DriverClient();
+            Configuration.browserCapabilities = new DesiredCapabilities();
+        }
+        return driverClient;
+    }
+
+    public DriverClient init() {
         Configuration.browser = PropertyReader.getBrowserName();
         Configuration.startMaximized = true;
-        Configuration.browserCapabilities = new DesiredCapabilities();
-        Configuration.browserCapabilities.setCapability("browserName", PropertyReader.getBrowserName());
         ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.addArguments("--no-sandbox");
         chromeOptions.addArguments("--disable-gpu");
         chromeOptions.addArguments("--incognito");
         chromeOptions.addArguments("--disable-infobars");
+        chromeOptions.addArguments("--window-size=1920,1080");
         Configuration.browserCapabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
-//        Configuration.browserCapabilities.setCapability("selenoid:options", Map.<String, Object>of(
-//                "enableVNC", true,
-//                "enableVideo", true
-//        ));
+        return this;
+    }
+
+    public DriverClient initRemote() {
+        this.init();
+
+        // Selenoid
+        Configuration.remote = "http://localhost:4444/wd/hub";
+        Configuration.driverManagerEnabled = false;
+        Configuration.browserCapabilities.setCapability("browserName", PropertyReader.getBrowserName());
+        return this;
+    }
+
+    public DriverClient enableHeadlessMode() {
+        Configuration.headless = true;
+        return this;
+    }
+
+    public DriverClient enableVNC() {
+        Configuration.browserCapabilities.setCapability("enableVNC", true);
+        return this;
+    }
+
+    public DriverClient enableVideo() {
+        Configuration.browserCapabilities.setCapability("enableVideo", true);
+        return this;
     }
 }
