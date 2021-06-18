@@ -33,7 +33,7 @@
 <!--    </test>    -->
     <test name="PopoverTests">
         <classes>
-            <class name="tests.PopoverTests"/>
+            <class name="tests.PopupTests"/>
         </classes>
     </test>
 </suite>

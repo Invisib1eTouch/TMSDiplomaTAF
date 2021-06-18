@@ -29,7 +29,7 @@ public class LocationPopover extends BasePage {
         return $(byXpath(popupContainerLocator + yesBtnLocator));
     }
 
-    public SelenideElement getPopoverContainer(){
+    public SelenideElement getPopupContainer(){
         return $(byXpath(popupContainerLocator));
     }
 }
