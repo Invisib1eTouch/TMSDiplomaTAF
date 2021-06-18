@@ -5,8 +5,11 @@ import com.codeborne.selenide.SelenideElement;
 import enums.UrlPrefix;
 import org.openqa.selenium.By;
 
+import java.time.Duration;
+
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Condition.*;
 
 public class LoginPage extends BasePage {
 

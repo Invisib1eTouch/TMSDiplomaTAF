@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Main Test Suite" data-provider-thread-count="1" parallel="tests" thread-count="3">
+<suite name="Main Test Suite" data-provider-thread-count="1" parallel="tests">
     <parameter name="validLogin_1" value="test.ondrey.ondreev@gmail.com"/>
     <parameter name="validPassword_1" value="weflknel12123knwkljef"/>
     <parameter name="validUserId_1" value="3308965"/>
@@ -25,7 +25,7 @@
     <parameter name="validLogin_8" value="testuser4andrew@yandex.ru"/>
     <parameter name="validPassword_8" value="testuser4andrew1"/>
     <parameter name="validUserId_8" value="2939319"/>
-    <test name="LoginTests" parallel="methods" thread-count="1">
+    <test name="LoginTests" parallel="methods" thread-count="3">
         <classes>
             <class name="tests.LoginTests"/>
         </classes>

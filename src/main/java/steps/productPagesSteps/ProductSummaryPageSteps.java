@@ -11,9 +11,13 @@ public abstract class ProductSummaryPageSteps<Page extends ProductSummaryPage> e
     }
 
     public ProductOffersPageSteps openProductOffersPageThroughPrice() {
-//        var cartItemModel = this.page.getProductSummary().getCartItemModel();
-//        SQLRequestSender.addProductToCartTable(cartItemModel);
+        var cartItemModel = this.page.getProductSummary().getCartItemModel();
+
+        // DB crutch
+        SQLRequestSender.addProductToCartTable(cartItemModel);
         this.page.getProductSummary().getPrice().click();
+        // DB crutch
+
         return new ProductOffersPageSteps();
     }
 }
