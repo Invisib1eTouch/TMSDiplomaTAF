@@ -26,9 +26,14 @@
 <!--            <class name="tests.ProfileTests"/>-->
 <!--        </classes>-->
 <!--    </test>-->
-    <test name="ProductE2ETests">
+<!--    <test name="ProductE2ETests">-->
+<!--        <classes>-->
+<!--            <class name="tests.ProductE2ETests"/>-->
+<!--        </classes>-->
+<!--    </test>-->
+    <test name="SearchApiTests">
         <classes>
-            <class name="tests.ProductE2ETests"/>
+            <class name="tests.apiTests.SearchApiTests"/>
         </classes>
     </test>
 </suite>
