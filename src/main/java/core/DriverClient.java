@@ -12,20 +12,22 @@ import java.util.Map;
 public class DriverClient {
 
     public static void init() {
-//        Configuration.browser = PropertyReader.getBrowserName();
-//        Configuration.startMaximized = true;
-
-        Configuration.remote = "http://localhost:4444/wd/hub";
-        Configuration.driverManagerEnabled = false;
         Configuration.browser = PropertyReader.getBrowserName();
         Configuration.startMaximized = true;
-        Configuration.browserCapabilities = new DesiredCapabilities();
+
+//        Configuration.remote = "http://localhost:4444/wd/hub";
+//        Configuration.driverManagerEnabled = false;
+//        Configuration.browser = PropertyReader.getBrowserName();
+//        Configuration.startMaximized = true;
+//        Configuration.browserCapabilities = new DesiredCapabilities();
+//        Configuration.browserCapabilities.setCapability("browserName", PropertyReader.getBrowserName());
+//        Configuration.browserCapabilities.setCapability("selenoid:options", Map.<String, Object>of(
+//                "enableVNC", true,
+//                "enableVideo", true
+//        ));
+
+
         Configuration.pageLoadTimeout = 60000L;
-        Configuration.browserCapabilities.setCapability("browserName", PropertyReader.getBrowserName());
-        Configuration.browserCapabilities.setCapability("selenoid:options", Map.<String, Object>of(
-                "enableVNC", true,
-                "enableVideo", true
-        ));
         ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.addArguments("--no-sandbox");
         chromeOptions.addArguments("--disable-gpu");
