@@ -8,6 +8,7 @@ import enums.UrlPrefix;
 import lombok.Getter;
 import org.openqa.selenium.By;
 
+import java.time.Duration;
 import java.util.Objects;
 
 import static com.codeborne.selenide.Condition.*;
@@ -17,9 +18,9 @@ public abstract class BasePage {
 
     private final String path;
     protected PageOpenIndCheckCond pageOpenIndCheckCond = PageOpenIndCheckCond.EXIST_AND_VISIBLE;
+
     /**
-     * @param urlPrefix - prefix for the page e.g. catalog, profile, etc.,
-     *                  if path = null, use - DEFAULT
+     * @param urlPrefix - prefix for the page e.g. catalog, profile, etc., if path = null, use - DEFAULT
      * @param path      - if page has no constant path then path = null (e.g. dialogue or dynamic path)
      */
     public BasePage(UrlPrefix urlPrefix, String path) {
@@ -34,8 +35,12 @@ public abstract class BasePage {
 
     public void verifyCorrectPageOpened() {
         try {
+            if (this.pageOpenIndCheckCond == PageOpenIndCheckCond.EXIST_AND_VISIBLE) {
+                $(this.getCorrectPageOpenedIndicatorElLocator()).should(exist, Duration.ofSeconds(30)).shouldBe(visible);
+            } else {
+                $(this.getCorrectPageOpenedIndicatorElLocator()).shouldNot(exist, Duration.ofSeconds(30));
+            }
             // Check that element that indicates particular page can be found and visible
-            $(this.getCorrectPageOpenedIndicatorElLocator()).should(this.pageOpenIndCheckCond.conditions);
         } catch (Error e) {
             throw new AssertionError(String.format("%s was not opened\n Detailed Message:\n%s",
                     this.getClass().getSimpleName(), e.getMessage()));
@@ -57,14 +62,13 @@ public abstract class BasePage {
     }
 
     /**
-     *
      * @param locatorParts - parts of css locator
      * @return - concatenated by space css locator
      */
     protected String getConcatenatedBySpaceCssLocator(String... locatorParts) {
         StringBuilder resultingLocator = new StringBuilder(locatorParts[0]);
 
-        for (int i = 1; i < locatorParts.length; i++){
+        for (int i = 1; i < locatorParts.length; i++) {
             resultingLocator.append(" ").append(locatorParts[i]);
         }
         return resultingLocator.toString();

@@ -1,0 +1,18 @@
+[
+  {
+    "login": "testuser1andrew@yandex.ru",
+    "password": "testuser1andrew1"
+  },
+  {
+    "login": "testuser2andrew@yandex.ru",
+    "password": "testuser2andrew1"
+  },
+  {
+    "login": "testuser3andrew@yandex.ru",
+    "password": "testuser3andrew1"
+  },
+  {
+    "login": "testuser4andrew@yandex.ru",
+    "password": "testuser4andrew1"
+  }
+]

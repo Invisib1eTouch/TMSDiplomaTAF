@@ -42,6 +42,7 @@ public abstract class BaseStep<Page extends BasePage> {
 //                Create page instance based on defined class
                 this.page = pageClass.getConstructor().newInstance();
             } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
+                System.out.println(e.getMessage());
                 throw new RuntimeException("Page instance was not initialised:" + e.getMessage());
             }
         }
