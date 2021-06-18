@@ -1,6 +1,7 @@
 package apiSteps;
 
 import dataObjects.json.CredsJson;
+import dataObjects.json.user.UserDataJson;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.http.Header;
@@ -47,6 +48,23 @@ public class UserApiSteps extends ApiSteps {
         Response response = given()
                 .log().all()
                 .get("users/{userId}", userId);
+
+        if (response.getStatusCode() != 200) {
+            response.prettyPrint();
+        }
+
+        return response;
+    }
+
+    public static Response removeProfileHeaderCoverImage() {
+        var userId = getMe().getBody().jsonPath().getInt("id");
+
+        Response response = given()
+                .header(new Header("Authorization", "Bearer " + authToken))
+                .contentType(ContentType.JSON)
+                .body(gson.toJson(new UserDataJson().setCover(null)))
+                .log().all()
+                .patch("users/{userId}", userId);
 
         if (response.getStatusCode() != 200) {
             response.prettyPrint();
