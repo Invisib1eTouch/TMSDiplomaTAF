@@ -36,7 +36,7 @@ public abstract class BasePage {
     public void verifyCorrectPageOpened() {
         try {
             if (this.pageOpenIndCheckCond == PageOpenIndCheckCond.EXIST_AND_VISIBLE) {
-                $(this.getCorrectPageOpenedIndicatorElLocator()).should(exist, Duration.ofSeconds(30)).shouldBe(visible);
+                $(this.getCorrectPageOpenedIndicatorElLocator()).should(exist, Duration.ofSeconds(30)).shouldBe(visible, Duration.ofSeconds(30));
             } else {
                 $(this.getCorrectPageOpenedIndicatorElLocator()).shouldNot(exist, Duration.ofSeconds(30));
             }

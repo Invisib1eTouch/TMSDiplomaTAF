@@ -1,5 +1,7 @@
 package baseEntities;
 
+import lombok.SneakyThrows;
+
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.ParameterizedType;
 
@@ -42,7 +44,6 @@ public abstract class BaseStep<Page extends BasePage> {
 //                Create page instance based on defined class
                 this.page = pageClass.getConstructor().newInstance();
             } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
-                System.out.println(e.getMessage());
                 throw new RuntimeException("Page instance was not initialised:" + e.getMessage());
             }
         }
@@ -66,13 +67,26 @@ public abstract class BaseStep<Page extends BasePage> {
      * @param <Steps> - steps class type
      * @return - instance of Steps class
      */
+    @SneakyThrows
     protected <Steps extends BaseStep<Page>> Steps getStepsObjectInstance(Class<Steps> stepsClassType){
-        try {
+//        try {
             return stepsClassType.getConstructor(Boolean.class).newInstance(false);
-        } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
-            throw new RuntimeException("Cannot initialize steps class object:" +
-                    stepsClassType.getSimpleName() +
-                    "\nMessage: " + e.getMessage());
-        }
+//        } catch (InstantiationException e) {
+//            throw new RuntimeException("Cannot initialize steps class object:" +
+//                    stepsClassType.getSimpleName() +
+//                    "\nMessage: " + e.getMessage());
+//        } catch (IllegalAccessException e) {
+//            throw new RuntimeException("Cannot initialize steps class object:" +
+//                    stepsClassType.getSimpleName() +
+//                    "\nMessage: " + e.getMessage());
+//        } catch (InvocationTargetException e) {
+//            throw new RuntimeException("Cannot initialize steps class object:" +
+//                    stepsClassType.getSimpleName() +
+//                    "\nMessage: " + e.getMessage());
+//        } catch (NoSuchMethodException e) {
+//            throw new RuntimeException("Cannot initialize steps class object:" +
+//                    stepsClassType.getSimpleName() +
+//                    "\nMessage: " + e.getMessage());
+//        }
     }
 }
