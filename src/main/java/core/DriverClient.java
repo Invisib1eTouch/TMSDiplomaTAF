@@ -12,15 +12,15 @@ import java.util.Map;
 public class DriverClient {
 
     public static void init() {
-        Configuration.browser = PropertyReader.getBrowserName();
-        Configuration.startMaximized = true;
-
-//        Configuration.remote = "http://localhost:4444/wd/hub";
-//        Configuration.driverManagerEnabled = false;
 //        Configuration.browser = PropertyReader.getBrowserName();
 //        Configuration.startMaximized = true;
-//        Configuration.browserCapabilities = new DesiredCapabilities();
-//        Configuration.browserCapabilities.setCapability("browserName", PropertyReader.getBrowserName());
+
+        Configuration.remote = "http://localhost:4444/wd/hub";
+        Configuration.driverManagerEnabled = false;
+        Configuration.browser = PropertyReader.getBrowserName();
+        Configuration.startMaximized = true;
+        Configuration.browserCapabilities = new DesiredCapabilities();
+        Configuration.browserCapabilities.setCapability("browserName", PropertyReader.getBrowserName());
 //        Configuration.browserCapabilities.setCapability("selenoid:options", Map.<String, Object>of(
 //                "enableVNC", true,
 //                "enableVideo", true
@@ -33,7 +33,6 @@ public class DriverClient {
         chromeOptions.addArguments("--disable-gpu");
         chromeOptions.addArguments("--incognito");
         chromeOptions.addArguments("--disable-infobars");
-        chromeOptions.addArguments("--disable-dev-shm-usage");
         Configuration.browserCapabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
     }
 }
