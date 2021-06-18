@@ -54,7 +54,7 @@ public class ProfileTests extends BaseTestAfterMethodDriverDisposing {
                 .shouldHave(attributeMatching("style", "background-image: url\\(\".+\"\\);"));
     }
 
-    @Test(enabled = false)
+    @Test
     public void editDateAndYearWithExceedingValuesTest() {
         // Case: both day and year have exceeding values
         String enteredDay = "54";
@@ -83,7 +83,7 @@ public class ProfileTests extends BaseTestAfterMethodDriverDisposing {
                 .shouldHave(exactOwnText(expectedErrorText));
     }
 
-    @Test(enabled = false)
+    @Test
     public void lastNameFieldBoundaryValuesTest() {
         final int lastNameMaxLength = 255;
 
@@ -169,7 +169,7 @@ public class ProfileTests extends BaseTestAfterMethodDriverDisposing {
                 "—");
     }
 
-    @Test(enabled = false)
+    @Test
     public void editDateOfBirthWithTextValueIssueTest() {
         // CASE: when user enters letters into the day of birth field,
         // there should be a validation error (same as for year, for consistency) and no changes are saved,
