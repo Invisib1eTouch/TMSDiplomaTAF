@@ -28,7 +28,7 @@ public class CatalogApiSteps extends ApiSteps {
         Response response = given()
                 .queryParam("query", productName)
                 .log().all()
-                .get("search/products");
+                .get("products");
 
         if (response.getStatusCode() != 200) {
             response.prettyPrint();
