@@ -4,12 +4,13 @@ import apiSteps.UserApiSteps;
 import org.testng.Assert;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
+import utils.Utils;
 
 public class ProfileApiTests {
 
     @Test
     public void getInternalUserInfoWithNonexistentIdTest() {
-        final int nonexistentUserId = 35311180;
+        final String nonexistentUserId = Utils.getRandomAlphaNumericString(5);
         var internalUserInfoResponse = UserApiSteps.getInternalUserInfoById(nonexistentUserId);
         Assert.assertEquals(internalUserInfoResponse.getStatusCode(), 404);
     }

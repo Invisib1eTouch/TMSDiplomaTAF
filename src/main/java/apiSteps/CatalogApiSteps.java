@@ -24,7 +24,7 @@ public class CatalogApiSteps extends ApiSteps {
         return gson.fromJson(response.getBody().asString(), ProductsJson.class);
     }
 
-    public static Response getSearchResultNameByName(String productName){
+    public static Response getSearchResultByProductName(String productName) {
         Response response = given()
                 .queryParam("query", productName)
                 .log().all()

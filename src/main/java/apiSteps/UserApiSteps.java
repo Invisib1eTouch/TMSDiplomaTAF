@@ -43,7 +43,7 @@ public class UserApiSteps extends ApiSteps {
         return response;
     }
 
-    public static Response getInternalUserInfoById(int userId) {
+    public static Response getInternalUserInfoById(String userId) {
 
         Response response = given()
                 .log().all()

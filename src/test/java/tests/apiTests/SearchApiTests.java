@@ -13,7 +13,7 @@ public class SearchApiTests {
         var product = products.get(Utils.getRandomNumber(0, products.size()));
         String extendedProductName = product.getExtendedName();
 
-        var searchResultsResponse = CatalogApiSteps.getSearchResultNameByName(extendedProductName);
+        var searchResultsResponse = CatalogApiSteps.getSearchResultByProductName(extendedProductName);
         Assert.assertTrue(searchResultsResponse
                 .getBody()
                 .jsonPath()

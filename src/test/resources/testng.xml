@@ -31,13 +31,9 @@
             <class name="tests.ProductE2ETests"/>
         </classes>
     </test>
-    <test name="ProfileApiTests">
+    <test name="ApiTests">
         <classes>
             <class name="tests.apiTests.ProfileApiTests"/>
-        </classes>
-    </test>
-    <test name="SearchApiTests">
-        <classes>
             <class name="tests.apiTests.SearchApiTests"/>
         </classes>
     </test>
