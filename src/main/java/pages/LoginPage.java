@@ -5,11 +5,8 @@ import com.codeborne.selenide.SelenideElement;
 import enums.UrlPrefix;
 import org.openqa.selenium.By;
 
-import java.time.Duration;
-
-import static com.codeborne.selenide.Selectors.*;
+import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Condition.*;
 
 public class LoginPage extends BasePage {
 
@@ -17,6 +14,7 @@ public class LoginPage extends BasePage {
     private static final String passwordInputLocator = "//*[@type='password']";
     private static final String authFieldErrorMesLocator = "following::div[contains(@class, 'auth-form__description_error')]";
     private static final By loginBtnBy = By.className("auth-button_primary");
+    private static final By loginBtnLoaderBy = By.className("auth-button_animated");
 
     public LoginPage() {
         super(UrlPrefix.DEFAULT, null);
@@ -45,5 +43,9 @@ public class LoginPage extends BasePage {
 
     public SelenideElement getPasswordInputError() {
         return $(byXpath(passwordInputLocator + "/" + authFieldErrorMesLocator));
+    }
+
+    public SelenideElement getLoginBtnLoaderBy() {
+        return $(loginBtnLoaderBy);
     }
 }

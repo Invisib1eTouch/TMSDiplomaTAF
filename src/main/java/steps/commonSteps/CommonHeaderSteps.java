@@ -1,11 +1,11 @@
 package steps.commonSteps;
 
 import baseEntities.BaseStep;
-import com.codeborne.selenide.ClickOptions;
 import pages.CommonHeader;
 import steps.CartPageSteps;
 import steps.SearchResultsFrameSteps;
 
+import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.sleep;
 import static com.codeborne.selenide.Selenide.switchTo;
 
@@ -57,7 +57,8 @@ public abstract class CommonHeaderSteps<Page extends CommonHeader> extends BaseS
         var page = this.openLoginPage().getPageInstance();
         page.getEmailInput().sendKeys(login);
         page.getPasswordInput().sendKeys(password);
-        page.getLoginBtn().click(ClickOptions.usingJavaScript());
+        page.getLoginBtn().click();
+        page.getLoginBtnLoaderBy().should(disappear);
     }
 
     public SearchResultsFrameSteps searchProduct(String searchQuery) {
