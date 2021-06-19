@@ -1,6 +1,7 @@
 package steps;
 
 import baseEntities.BaseStep;
+import io.qameta.allure.Step;
 import models.containers.CartItemContainer;
 import pages.CartPage;
 import services.SQLRequestSender;
@@ -19,6 +20,7 @@ public class CartPageSteps extends BaseStep<CartPage> {
         super(openPageByUrl);
     }
 
+    @Step("Getting cart item by name '{productName}'.")
     public CartItemContainer getCartItemByName(String productName) {
         return this.page.getCartItems()
                 .stream()
@@ -29,6 +31,7 @@ public class CartPageSteps extends BaseStep<CartPage> {
                 .orElseThrow(() -> new NoSuchElementException("No such item in the cart with provided name: " + productName));
     }
 
+    @Step("Verifying cart item '{productName}' exists.")
     public boolean cartItemExist(String productName) {
         if(!this.page.getTotalProductsAddedLabel().exists()) return false;
 
@@ -40,6 +43,7 @@ public class CartPageSteps extends BaseStep<CartPage> {
         return true;
     }
 
+    @Step("Deleting item from cart by name '{productName}'.")
     public CartPageSteps deleteItemFromCartByName(String productName){
         this.getCartItemByName(productName).getDeleteBtn().click();
         this.page.getCartPageLoader().shouldNot(exist);

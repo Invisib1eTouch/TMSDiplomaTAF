@@ -1,6 +1,7 @@
 package steps.commonSteps;
 
 import baseEntities.BaseStep;
+import io.qameta.allure.Step;
 import pages.CommonHeader;
 import steps.CartPageSteps;
 import steps.SearchResultsFrameSteps;
@@ -24,21 +25,25 @@ public abstract class CommonHeaderSteps<Page extends CommonHeader> extends BaseS
      * @param <Steps>                - method caller steps class type
      * @return - instance of Steps class that extends CommonHeaderSteps class from which method was invoked
      */
+    @Step("Login with correct credentials '{login}'/'{password}'.")
     public <Steps extends CommonHeaderSteps<Page>> Steps loginWithCorrectCredentials(Class<Steps> methodCallerStepsClass, String login, String password) {
         this.login(login, password);
         return this.getStepsObjectInstance(methodCallerStepsClass);
     }
 
+    @Step("Login with incorrect credentials '{login}'/'{password}'.")
     public LoginPageSteps loginWithIncorrectCredentials(String login, String password) {
         this.login(login, password);
         return new LoginPageSteps();
     }
 
+    @Step("Open Login page by clicking Login button.")
     public LoginPageSteps openLoginPage() {
         this.page.getLoginBtn().click();
         return new LoginPageSteps();
     }
 
+    @Step("Open profile menu by clicking Profile Icon.")
     public ProfileMenuSteps openProfileMenu() {
         this.page.getProfileIcon().click();
         // Animation of profile menu opening takes 200ms
@@ -59,13 +64,15 @@ public abstract class CommonHeaderSteps<Page extends CommonHeader> extends BaseS
         page.getLoginBtn().click();
     }
 
+    @Step("Searching for '{searchQuery}' product in catalog.")
     public SearchResultsFrameSteps searchProduct(String searchQuery) {
         this.page.getSearchInput().sendKeys(searchQuery);
         switchTo().frame(this.page.getSearchResultsIFrame());
         return new SearchResultsFrameSteps().waitLoadingFinished();
     }
 
-    public CartPageSteps openCartPage(){
+    @Step("Open Cart page by clicking Cart button for selected product.")
+    public CartPageSteps openCartPage() {
         this.page.getCartBtnBy().click();
         return new CartPageSteps(false);
     }

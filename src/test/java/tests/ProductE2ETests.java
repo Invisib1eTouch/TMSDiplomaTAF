@@ -3,6 +3,7 @@ package tests;
 import apiSteps.CartApiSteps;
 import apiSteps.CatalogApiSteps;
 import apiSteps.UserApiSteps;
+import io.qameta.allure.Description;
 import models.CartItemModel;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
@@ -40,7 +41,8 @@ public class ProductE2ETests extends BaseTestAfterClassDriverDisposing {
                 .loginWithCorrectCredentials(MainPageSteps.class, login, password);
     }
 
-    @Test
+    @Test(description = "Find product test")
+    @Description("Finding product by text and make sure correct product details page is opened.")
     public void findProductTest() {
         SearchResultsFrameSteps searchResultsFrameSteps = this.mainPageSteps
                 .searchProduct(this.productFullName);
@@ -60,7 +62,8 @@ public class ProductE2ETests extends BaseTestAfterClassDriverDisposing {
                 .shouldHave(exactOwnText(this.extendedProductName));
     }
 
-    @Test(dependsOnMethods = "findProductTest")
+    @Test(description = "Add product to cart test", dependsOnMethods = "findProductTest")
+    @Description("Adding product to cart and make sure correct product is added.")
     public void addProductToCartTest() {
         this.cartPageSteps = this.productDetailsPageSteps
                 .openProductOffersPageThroughPrice()
@@ -79,8 +82,9 @@ public class ProductE2ETests extends BaseTestAfterClassDriverDisposing {
         Assert.assertEquals(cartItem, cartItemFromDb);
     }
 
-    @Test(dependsOnMethods = "addProductToCartTest")
-    public void deleteProductFromCartTest(){
+    @Test(description = "Delete product from cart", dependsOnMethods = "addProductToCartTest")
+    @Description("Removing product from cart and make sure product hasn't already existed in cart.")
+    public void deleteProductFromCartTest() {
         boolean cartItemExist = this.cartPageSteps
                 .deleteItemFromCartByName(this.productFullName)
                 .cartItemExist(this.productFullName);

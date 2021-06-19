@@ -1,6 +1,7 @@
 package tests;
 
 import apiSteps.UserApiSteps;
+import io.qameta.allure.Description;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeMethod;
@@ -44,7 +45,8 @@ public class ProfileTests extends BaseTestAfterMethodDriverDisposing {
         UserApiSteps.removeProfileHeaderCoverImage();
     }
 
-    @Test
+    @Test(description = "Change profile background image test")
+    @Description("Changing background image in user profile and make sure new image is applied.")
     public void changeProfileHeaderBackgroundImageTest() {
         this.profileMainTabSteps
                 .uploadNewProfileHeaderBackground
@@ -54,7 +56,8 @@ public class ProfileTests extends BaseTestAfterMethodDriverDisposing {
                 .shouldHave(attributeMatching("style", "background-image: url\\(\".+\"\\);"));
     }
 
-    @Test
+    @Test(description = "Edit date and year test")
+    @Description("Editing date and year in future and make sure error form is displayed for date fields.")
     public void editDateAndYearWithExceedingValuesTest() {
         // Case: both day and year have exceeding values
         String enteredDay = "54";
@@ -83,7 +86,8 @@ public class ProfileTests extends BaseTestAfterMethodDriverDisposing {
                 .shouldHave(exactOwnText(expectedErrorText));
     }
 
-    @Test
+    @Test(description = "Last Name boundary test")
+    @Description("Verification of Last Name field when field is editable and can contain only values with limited length.")
     public void lastNameFieldBoundaryValuesTest() {
         final int lastNameMaxLength = 255;
 
@@ -121,7 +125,7 @@ public class ProfileTests extends BaseTestAfterMethodDriverDisposing {
 
         lastNameEditProfileText = profileEditPage.getLastNameInput().getValue();
 
-        // Verification that entered string was cut by max  field's length
+        // Verification that entered string was cut by max field's length
         Assert.assertEquals(profileEditPage.getElementTextLength(profileEditPage.getLastNameInput()),
                 lastNameMaxLength);
 
@@ -169,7 +173,8 @@ public class ProfileTests extends BaseTestAfterMethodDriverDisposing {
                 "—");
     }
 
-    @Test
+    @Test(description = "Edit date of b-day test")
+    @Description("Editing Date of birthday with incorrect value and make sure changes are not applied and error alert is displayed.")
     public void editDateOfBirthWithTextValueIssueTest() {
         // CASE: when user enters letters into the day of birth field,
         // there should be a validation error (same as for year, for consistency) and no changes are saved,
