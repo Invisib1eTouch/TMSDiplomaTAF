@@ -40,7 +40,7 @@
             <class name="tests.ProductE2ETests"/>
         </classes>
     </test>
-    <test name="ApiTests">
+    <test name="ApiTests" parallel="methods">
         <classes>
             <class name="tests.apiTests.ProfileApiTests"/>
             <class name="tests.apiTests.SearchApiTests"/>
