@@ -27,7 +27,7 @@ public class ProductE2ETests extends BaseTestAfterClassDriverDisposing {
     private String extendedProductName;
 
     @BeforeClass
-    @Parameters({"validLogin_3", "validPassword_3"})
+    @Parameters({"validLogin_7", "validPassword_7"})
     public void testSetup(String login, String password) {
         UserApiSteps.login(login, password);
         CartApiSteps.deleteAllCartPositionsIfExist();
@@ -68,15 +68,17 @@ public class ProductE2ETests extends BaseTestAfterClassDriverDisposing {
                 .addLowerPriceOfferToCart()
                 .openCartPage();
 
+        // DB crutch
         CartItemModel cartItem = this.cartPageSteps
                 .getCartItemByName(this.productFullName)
                 .getCartItemModel();
 
         CartItemModel cartItemFromDb = SQLRequestSender.getCartItemByProductName(this.productFullName).get(0);
+        Assert.assertEquals(cartItem, cartItemFromDb);
+        // DB crutch
 
         Assert.assertTrue(cartPageSteps.cartItemExist(this.productFullName));
         Assert.assertEquals(cartPageSteps.getPageInstance().getCartItemsNumber(), 1);
-        Assert.assertEquals(cartItem, cartItemFromDb);
     }
 
     @Test(dependsOnMethods = "addProductToCartTest")

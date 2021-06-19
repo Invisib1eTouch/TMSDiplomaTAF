@@ -14,6 +14,7 @@ public abstract class CommonHeader extends BasePage {
     private static final By searchInputBy = By.className("fast-search__input");
     private static final By searchResultsIFrameBy = By.className("modal-iframe");
     private static final By cartBtnBy = By.className("b-top-profile__cart");
+    private static final By authWrapperBy = By.className("auth-wrapper");
 
     /**
      * @param urlPrefix - prefix for the page e.g. catalog, profile, etc.
@@ -41,5 +42,9 @@ public abstract class CommonHeader extends BasePage {
 
     public SelenideElement getCartBtnBy(){
         return $(cartBtnBy);
+    }
+
+    public SelenideElement getAuthWrapper() {
+        return $(authWrapperBy);
     }
 }

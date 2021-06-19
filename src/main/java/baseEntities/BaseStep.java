@@ -1,11 +1,13 @@
 package baseEntities;
 
+import lombok.SneakyThrows;
+
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.ParameterizedType;
 
 /**
- * @param <Page> - generics used to connect step with corresponding page and get access to page methods
- *               so that incorrect methods of other pages con not be used in steps
+ * @param <Page> - generics used to connect step with corresponding page and get access to page methods so that
+ *               incorrect methods of other pages con not be used in steps
  */
 public abstract class BaseStep<Page extends BasePage> {
     //    Instance of the page
@@ -13,11 +15,8 @@ public abstract class BaseStep<Page extends BasePage> {
 
     /**
      * @param openPageByUrl - if true page will be opened by url
-     * @implNote - if page can not be opened by url, false value hardcoded to super constructor
-     * e.g.
-     * public ProfileMenuSteps() {
-     * super(false);
-     * }
+     * @implNote - if page can not be opened by url, false value hardcoded to super constructor e.g. public
+     * ProfileMenuSteps() { super(false); }
      */
     public BaseStep(Boolean openPageByUrl) {
 //        Set page instance
@@ -49,29 +48,22 @@ public abstract class BaseStep<Page extends BasePage> {
     }
 
     /**
-     *
      * @param callerStepsClass - steps class, that calls method; necessary to know to maintain invocation chain
-     * @param <Steps> - method caller steps class type
+     * @param <Steps>          - method caller steps class type
      * @return - instance of Steps class from which method was invoked
      */
-    public <Steps extends BaseStep<Page>> Steps openPage(Class<Steps> callerStepsClass){
+    public <Steps extends BaseStep<Page>> Steps openPage(Class<Steps> callerStepsClass) {
         this.page.open();
         return this.getStepsObjectInstance(callerStepsClass);
     }
 
     /**
-     *
      * @param stepsClassType steps class
-     * @param <Steps> - steps class type
+     * @param <Steps>        - steps class type
      * @return - instance of Steps class
      */
-    protected <Steps extends BaseStep<Page>> Steps getStepsObjectInstance(Class<Steps> stepsClassType){
-        try {
-            return stepsClassType.getConstructor(Boolean.class).newInstance(false);
-        } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
-            throw new RuntimeException("Cannot initialize steps class object:" +
-                    stepsClassType.getSimpleName() +
-                    "\nMessage: " + e.getMessage());
-        }
+    @SneakyThrows
+    protected <Steps extends BaseStep<Page>> Steps getStepsObjectInstance(Class<Steps> stepsClassType) {
+        return stepsClassType.getConstructor(Boolean.class).newInstance(false);
     }
 }

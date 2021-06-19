@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Main Test Suite">
+<suite name="Main Test Suite" data-provider-thread-count="1" parallel="tests">
     <parameter name="validLogin_1" value="test.ondrey.ondreev@gmail.com"/>
     <parameter name="validPassword_1" value="weflknel12123knwkljef"/>
     <parameter name="validUserId_1" value="3308965"/>
@@ -16,17 +16,26 @@
     <parameter name="validLogin_5" value="testuser1andrew@yandex.ru"/>
     <parameter name="validPassword_5" value="testuser1andrew1"/>
     <parameter name="validUserId_5" value="2939310"/>
-    <test name="LoginTests">
+    <parameter name="validLogin_6" value="testuser2andrew@yandex.ru"/>
+    <parameter name="validPassword_6" value="testuser2andrew1"/>
+    <parameter name="validUserId_6" value="2939313"/>
+    <parameter name="validLogin_7" value="testuser3andrew@yandex.ru"/>
+    <parameter name="validPassword_7" value="testuser3andrew1"/>
+    <parameter name="validUserId_7" value="2939317"/>
+    <parameter name="validLogin_8" value="testuser4andrew@yandex.ru"/>
+    <parameter name="validPassword_8" value="testuser4andrew1"/>
+    <parameter name="validUserId_8" value="2939319"/>
+    <test name="LoginTests" parallel="methods" thread-count="3">
         <classes>
             <class name="tests.LoginTests"/>
         </classes>
     </test>
-    <test name="ProfileTests">
+    <test name="ProfileTests" thread-count="1">
         <classes>
             <class name="tests.ProfileTests"/>
         </classes>
     </test>
-    <test name="ProductE2ETests">
+    <test name="ProductE2ETests" thread-count="1">
         <classes>
             <class name="tests.ProductE2ETests"/>
         </classes>

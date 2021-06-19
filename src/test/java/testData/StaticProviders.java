@@ -17,7 +17,7 @@ public class StaticProviders {
      */
     @SuppressWarnings("unchecked")
     @SneakyThrows
-    @DataProvider(name = "incorrectLoginData")
+    @DataProvider(name = "incorrectLoginData", parallel = true)
     public static Object[][] loginWithIncorrectData(Method m) {
 
 //   Set the data from .csv file to List
