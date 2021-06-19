@@ -1,6 +1,6 @@
 package tests;
 
-import apiSteps.UserApiSteps;
+import apiSteps.ApiSteps;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeMethod;
@@ -18,7 +18,8 @@ import utils.Utils;
 import java.util.Calendar;
 import java.util.Objects;
 
-import static com.codeborne.selenide.Condition.*;
+import static com.codeborne.selenide.Condition.attributeMatching;
+import static com.codeborne.selenide.Condition.exactOwnText;
 import static utils.FileHelper.getFileToUpload;
 
 
@@ -40,8 +41,10 @@ public class ProfileTests extends BaseTestAfterMethodDriverDisposing {
     @AfterClass
     @Parameters({loginForTest, passwordForTest})
     public void testClassTeardown(String login, String password) {
-        UserApiSteps.login(login, password);
-        UserApiSteps.removeProfileHeaderCoverImage();
+        ApiSteps.get()
+                .login(login, password)
+                .userApiSteps()
+                .removeProfileHeaderCoverImage();
     }
 
     @Test

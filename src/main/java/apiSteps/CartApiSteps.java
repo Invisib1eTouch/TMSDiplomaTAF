@@ -15,13 +15,13 @@ import static io.restassured.RestAssured.given;
 
 public class CartApiSteps extends ApiSteps {
 
-    static {
+    protected CartApiSteps() {
         RestAssured.basePath = "cart.api";
     }
 
-    public static Response getCartPositions() {
+    public Response getCartPositions() {
         Response response = given()
-                .header(new Header("Authorization", "Bearer " + authToken))
+                .header(new Header("Authorization", "Bearer " + this.authToken))
                 .log().all()
                 .get("positions");
 
@@ -32,9 +32,9 @@ public class CartApiSteps extends ApiSteps {
         return response;
     }
 
-    public static Response deleteCartPositions(PositionsToDeleteJson positions) {
+    public Response deleteCartPositions(PositionsToDeleteJson positions) {
         Response response = given()
-                .header(new Header("Authorization", "Bearer " + authToken))
+                .header(new Header("Authorization", "Bearer " + this.authToken))
                 .contentType(ContentType.JSON)
                 .body(gson.toJson(positions))
                 .log().all()
@@ -47,13 +47,13 @@ public class CartApiSteps extends ApiSteps {
         return response;
     }
 
-    public static void deleteAllCartPositionsIfExist() {
+    public void deleteAllCartPositionsIfExist() {
         List<PositionToDeleteJson> positionsToDelete =
                 // TypeToken - specifying type that should be returned after deserialization from obtained json string
-                gson.fromJson(getCartPositions().getBody().asString(), new TypeToken<ArrayList<PositionToDeleteJson>>() {
+                gson.fromJson(this.getCartPositions().getBody().asString(), new TypeToken<ArrayList<PositionToDeleteJson>>() {
                 }.getType());
 
         if (positionsToDelete.size() > 0)
-            deleteCartPositions(new PositionsToDeleteJson(positionsToDelete));
+            this.deleteCartPositions(new PositionsToDeleteJson(positionsToDelete));
     }
 }

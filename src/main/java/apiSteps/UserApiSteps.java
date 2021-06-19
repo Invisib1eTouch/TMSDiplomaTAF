@@ -11,11 +11,11 @@ import static io.restassured.RestAssured.given;
 
 public class UserApiSteps extends ApiSteps {
 
-    static {
+    protected UserApiSteps() {
         RestAssured.basePath = "user.api";
     }
 
-    public static Response login(String login, String password) {
+    public Response postLogin(String login, String password) {
         Response response = given()
                 .contentType(ContentType.JSON)
                 .body(gson.toJson(new CredsJson(login, password)))
@@ -26,13 +26,13 @@ public class UserApiSteps extends ApiSteps {
             response.prettyPrint();
         }
 
-        authToken = response.getBody().jsonPath().getString("access_token");
+        this.authToken = response.getBody().jsonPath().getString("access_token");
         return response;
     }
 
-    public static Response getMe() {
+    public Response getMe() {
         Response response = given()
-                .header(new Header("Authorization", "Bearer " + authToken))
+                .header(new Header("Authorization", "Bearer " + this.authToken))
                 .log().all()
                 .get("me");
 
@@ -43,7 +43,7 @@ public class UserApiSteps extends ApiSteps {
         return response;
     }
 
-    public static Response getInternalUserInfoById(String userId) {
+    public Response getInternalUserInfoById(String userId) {
 
         Response response = given()
                 .log().all()
@@ -56,11 +56,11 @@ public class UserApiSteps extends ApiSteps {
         return response;
     }
 
-    public static Response removeProfileHeaderCoverImage() {
-        var userId = getMe().getBody().jsonPath().getInt("id");
+    public Response removeProfileHeaderCoverImage() {
+        var userId = this.getMe().getBody().jsonPath().getInt("id");
 
         Response response = given()
-                .header(new Header("Authorization", "Bearer " + authToken))
+                .header(new Header("Authorization", "Bearer " + this.authToken))
                 .contentType(ContentType.JSON)
                 .body(gson.toJson(new UserDataJson().setCover(null)))
                 .log().all()

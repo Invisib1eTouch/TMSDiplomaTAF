@@ -1,5 +1,6 @@
 package baseEntities;
 
+import apiSteps.ApiSteps;
 import core.DriverClient;
 import org.testng.annotations.BeforeSuite;
 
@@ -10,6 +11,6 @@ public abstract class BaseTest {
      */
     @BeforeSuite
     public void driverSetup(){
-        DriverClient.get().initRemote().enableHeadlessMode();
+        DriverClient.get().init();
     }
 }

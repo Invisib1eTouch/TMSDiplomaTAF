@@ -8,11 +8,11 @@ import static io.restassured.RestAssured.given;
 
 public class CatalogApiSteps extends ApiSteps {
 
-    static {
+    protected CatalogApiSteps() {
         RestAssured.basePath = "catalog.api/search";
     }
 
-    public static ProductsJson getAvailableMobilePhones() {
+    public ProductsJson getAvailableMobilePhones() {
         Response response = given()
                 .log().all()
                 .get("mobile?in_stock=1");
@@ -24,7 +24,7 @@ public class CatalogApiSteps extends ApiSteps {
         return gson.fromJson(response.getBody().asString(), ProductsJson.class);
     }
 
-    public static Response getSearchResultByProductName(String productName) {
+    public Response getSearchResultByProductName(String productName) {
         Response response = given()
                 .queryParam("query", productName)
                 .log().all()
