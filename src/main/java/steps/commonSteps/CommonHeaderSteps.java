@@ -58,7 +58,7 @@ public abstract class CommonHeaderSteps<Page extends CommonHeader> extends BaseS
         page.getEmailInput().sendKeys(login);
         page.getPasswordInput().sendKeys(password);
         page.getLoginBtn().click();
-        page.getLoginBtnLoaderBy().should(disappear);
+        page.getLoginBtnLoaderBy().shouldNot(exist);
     }
 
     public SearchResultsFrameSteps searchProduct(String searchQuery) {
