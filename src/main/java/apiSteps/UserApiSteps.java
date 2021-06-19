@@ -72,9 +72,4 @@ public class UserApiSteps extends ApiSteps {
 
         return response;
     }
-
-    public static Response getInternalAuthorizedUserInfo() {
-        var userId = getMe().getBody().jsonPath().getInt("id");
-        return getInternalUserInfoById(userId);
-    }
 }

@@ -16,24 +16,6 @@
     <parameter name="validLogin_5" value="testuser1andrew@yandex.ru"/>
     <parameter name="validPassword_5" value="testuser1andrew1"/>
     <parameter name="validUserId_5" value="2939310"/>
-<<<<<<< HEAD
-<!--    <test name="LoginTests">-->
-<!--        <classes>-->
-<!--            <class name="tests.LoginTests"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test name="ProfileTests">-->
-<!--        <classes>-->
-<!--            <class name="tests.ProfileTests"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test name="ProductE2ETests">-->
-<!--        <classes>-->
-<!--            <class name="tests.ProductE2ETests"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-    <test name="SearchApiTests">
-=======
     <test name="LoginTests">
         <classes>
             <class name="tests.LoginTests"/>
@@ -45,7 +27,16 @@
         </classes>
     </test>
     <test name="ProductE2ETests">
->>>>>>> dev
+        <classes>
+            <class name="tests.ProductE2ETests"/>
+        </classes>
+    </test>
+    <test name="ProfileApiTests">
+        <classes>
+            <class name="tests.apiTests.ProfileApiTests"/>
+        </classes>
+    </test>
+    <test name="SearchApiTests">
         <classes>
             <class name="tests.apiTests.SearchApiTests"/>
         </classes>
