@@ -45,7 +45,7 @@ public class UserApiSteps extends ApiSteps {
         return response;
     }
 
-    @Step("Get internal personal information by id: '{userId}'.")
+    @Step("Get internal personal information by user id: '{userId}'.")
     public Response getInternalUserInfoById(String userId) {
 
         Response response = this.spec
@@ -60,7 +60,7 @@ public class UserApiSteps extends ApiSteps {
         return response;
     }
 
-    @Step("Remove profile heading image.")
+    @Step("Remove profile header image.")
     public Response removeProfileHeaderCoverImage() {
         var userId = this.getMe().getBody().jsonPath().getInt("id");
 

@@ -40,21 +40,18 @@ public class ApiSteps {
         }
     }
 
-    @Step("Get UserApiSteps instance.")
     public UserApiSteps userApiSteps() {
         synchronized (ApiSteps.class) {
             return new UserApiSteps(this.authToken);
         }
     }
 
-    @Step("Get CartApiSteps instance.")
     public CartApiSteps cartApiSteps() {
         synchronized (ApiSteps.class) {
             return new CartApiSteps(this.authToken);
         }
     }
 
-    @Step("Get CatalogApiSteps instance.")
     public CatalogApiSteps catalogApiSteps() {
         synchronized (ApiSteps.class) {
             return new CatalogApiSteps();
