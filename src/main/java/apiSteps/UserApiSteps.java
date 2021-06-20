@@ -6,8 +6,6 @@ import io.restassured.http.ContentType;
 import io.restassured.http.Header;
 import io.restassured.response.Response;
 
-import static io.restassured.RestAssured.given;
-
 public class UserApiSteps extends ApiSteps {
 
     protected UserApiSteps(String authToken) {
@@ -26,7 +24,6 @@ public class UserApiSteps extends ApiSteps {
         }
         response.prettyPrint();
 
-//        this.authToken = response.getBody().jsonPath().getString("access_token");
         return response;
     }
 
