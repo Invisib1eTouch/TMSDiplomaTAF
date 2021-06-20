@@ -20,6 +20,7 @@ public class CatalogApiSteps extends ApiSteps {
         if (response.getStatusCode() != 200) {
             response.prettyPrint();
         }
+        response.prettyPrint();
 
         return gson.fromJson(response.getBody().asString(), ProductsJson.class);
     }
@@ -33,6 +34,7 @@ public class CatalogApiSteps extends ApiSteps {
         if (response.getStatusCode() != 200) {
             response.prettyPrint();
         }
+        response.prettyPrint();
 
         return response;
     }

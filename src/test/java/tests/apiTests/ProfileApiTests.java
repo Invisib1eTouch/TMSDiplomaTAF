@@ -11,7 +11,7 @@ public class ProfileApiTests extends BaseTest {
 
     @Test
     public void getInternalUserInfoWithNonexistentIdTest() {
-        final String nonexistentUserId = Utils.getRandomAlphaNumericString(5);
+        final String nonexistentUserId = Utils.getRandomAlphaNumericString(15);
         var internalUserInfoResponse = ApiSteps.get().userApiSteps()
                 .getInternalUserInfoById(nonexistentUserId);
 
@@ -29,7 +29,8 @@ public class ProfileApiTests extends BaseTest {
     @Test(dependsOnMethods = "getPersonalDataForUnauthorizedUserTest")
     @Parameters({"validLogin_3", "validPassword_3"})
     public void correctEmailInPersonalDataTest(String email, String password) {
-        var personalDataResponse = ApiSteps.get().login(email, password)
+        var personalDataResponse = ApiSteps.get()
+                .login(email, password)
                 .userApiSteps()
                 .getMe();
 

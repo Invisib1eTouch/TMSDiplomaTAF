@@ -28,6 +28,7 @@ public class CartApiSteps extends ApiSteps {
         if (response.getStatusCode() != 200) {
             response.prettyPrint();
         }
+        response.prettyPrint();
 
         return response;
     }
@@ -43,6 +44,7 @@ public class CartApiSteps extends ApiSteps {
         if (response.getStatusCode() != 204) {
             response.prettyPrint();
         }
+        response.prettyPrint();
 
         return response;
     }

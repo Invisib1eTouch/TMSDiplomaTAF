@@ -25,6 +25,7 @@ public class UserApiSteps extends ApiSteps {
         if (response.getStatusCode() != 201) {
             response.prettyPrint();
         }
+        response.prettyPrint();
 
         this.authToken = response.getBody().jsonPath().getString("access_token");
         return response;
@@ -39,6 +40,7 @@ public class UserApiSteps extends ApiSteps {
         if (response.getStatusCode() != 200) {
             response.prettyPrint();
         }
+        response.prettyPrint();
 
         return response;
     }
@@ -52,6 +54,7 @@ public class UserApiSteps extends ApiSteps {
         if (response.getStatusCode() != 200) {
             response.prettyPrint();
         }
+        response.prettyPrint();
 
         return response;
     }
@@ -69,6 +72,7 @@ public class UserApiSteps extends ApiSteps {
         if (response.getStatusCode() != 200) {
             response.prettyPrint();
         }
+        response.prettyPrint();
 
         return response;
     }
