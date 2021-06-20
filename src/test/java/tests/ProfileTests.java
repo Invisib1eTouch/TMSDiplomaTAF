@@ -1,8 +1,7 @@
 package tests;
 
-import apiSteps.UserApiSteps;
+import apiSteps.ApiSteps;
 import io.qameta.allure.Description;
-import lombok.SneakyThrows;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeMethod;
@@ -15,7 +14,6 @@ import steps.profileSteps.ProfileMainTabSteps;
 import steps.profileSteps.personalDataTab.ProfileEditPageSteps;
 import steps.profileSteps.personalDataTab.ProfilePersonalDataTabSteps;
 import templates.BaseTestAfterMethodDriverDisposing;
-import utils.AllureUtilities;
 import utils.Utils;
 
 import java.util.Calendar;
@@ -41,13 +39,13 @@ public class ProfileTests extends BaseTestAfterMethodDriverDisposing {
                 .openProfilePageOnMainTab();
     }
 
-    @SneakyThrows
-    @AfterClass
+    @AfterClass(alwaysRun = true)
     @Parameters({loginForTest, passwordForTest})
     public void testClassTeardown(String login, String password) {
-        UserApiSteps.login(login, password);
-        UserApiSteps.removeProfileHeaderCoverImage();
-        AllureUtilities.removeParametersInReport();
+        ApiSteps.get()
+                .login(login, password)
+                .userApiSteps()
+                .removeProfileHeaderCoverImage();
     }
 
     @Test(description = "Change profile background header image test")

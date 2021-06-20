@@ -40,7 +40,12 @@
             <class name="tests.ProductE2ETests"/>
         </classes>
     </test>
-    <test name="ApiTests" parallel="methods">
+    <test name="PopupTests" thread-count="1">
+        <classes>
+            <class name="tests.PopupTests"/>
+        </classes>
+    </test>
+    <test name="ApiTests">
         <classes>
             <class name="tests.apiTests.ProfileApiTests"/>
             <class name="tests.apiTests.SearchApiTests"/>

@@ -1,12 +1,9 @@
 package tests;
 
-import apiSteps.CartApiSteps;
-import apiSteps.CatalogApiSteps;
-import apiSteps.UserApiSteps;
+import apiSteps.ApiSteps;
 import io.qameta.allure.Description;
 import models.CartItemModel;
 import org.testng.Assert;
-import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
@@ -16,7 +13,6 @@ import steps.MainPageSteps;
 import steps.SearchResultsFrameSteps;
 import steps.productPagesSteps.ProductDetailsPageSteps;
 import templates.BaseTestAfterClassDriverDisposing;
-import utils.AllureUtilities;
 import utils.Utils;
 
 import static com.codeborne.selenide.Condition.exactOwnText;
@@ -32,20 +28,20 @@ public class ProductE2ETests extends BaseTestAfterClassDriverDisposing {
     @BeforeClass
     @Parameters({"validLogin_7", "validPassword_7"})
     public void testSetup(String login, String password) {
-        UserApiSteps.login(login, password);
-        CartApiSteps.deleteAllCartPositionsIfExist();
-        var products = CatalogApiSteps.getAvailableMobilePhones().getProducts();
+        ApiSteps.get().login(login, password)
+                .cartApiSteps()
+                .deleteAllCartPositionsIfExist();
+
+        var products = ApiSteps.get().catalogApiSteps()
+                .getAvailableMobilePhones()
+                .getProducts();
+
         var product = products.get(Utils.getRandomNumber(0, products.size()));
         this.productFullName = product.getFullName();
         this.extendedProductName = product.getExtendedName();
 
         this.mainPageSteps = new MainPageSteps(true)
                 .loginWithCorrectCredentials(MainPageSteps.class, login, password);
-    }
-
-    @AfterClass
-    public void tearDown() throws Exception {
-        AllureUtilities.removeParametersInReport();
     }
 
     @Test(description = "Find product test")

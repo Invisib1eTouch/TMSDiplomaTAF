@@ -65,7 +65,7 @@ public abstract class CommonHeaderSteps<Page extends CommonHeader> extends BaseS
         var page = this.openLoginPage().getPageInstance();
         page.getEmailInput().sendKeys(login);
         page.getPasswordInput().sendKeys(password);
-        page.getLoginBtn().click();
+        page.getLoginBtn().submit();
     }
 
     @Step("Search for product. Search query: '{searchQuery}'.")

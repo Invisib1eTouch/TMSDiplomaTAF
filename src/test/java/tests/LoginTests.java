@@ -1,7 +1,6 @@
 package tests;
 
 import io.qameta.allure.Description;
-import org.testng.annotations.AfterClass;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import pages.LoginPage;
@@ -9,16 +8,10 @@ import steps.MainPageSteps;
 import templates.BaseTestAfterMethodDriverDisposing;
 import testData.StaticProviders;
 import testData.containers.LoginTestDataContainer;
-import utils.AllureUtilities;
 
 import static com.codeborne.selenide.Condition.*;
 
 public class LoginTests extends BaseTestAfterMethodDriverDisposing {
-    @AfterClass
-    public void tearDown() throws Exception {
-        AllureUtilities.removeParametersInReport();
-    }
-
 
     @Test(description = "Positive login test")
     @Description("Login test with valid user credentials.")

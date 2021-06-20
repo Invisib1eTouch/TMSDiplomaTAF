@@ -1,5 +1,6 @@
 package utils;
 
+import lombok.SneakyThrows;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
@@ -12,7 +13,8 @@ import java.util.List;
 
 public class AllureUtilities {
 
-    public static void removeParametersInReport() throws Exception {
+    @SneakyThrows
+    public static void removeParametersInReport() {
         File dir = new File(System.getProperty("user.dir") + "/target/allure-results");
         File[] directoryListing = dir.listFiles();
         if (directoryListing != null) {
@@ -26,7 +28,8 @@ public class AllureUtilities {
         }
     }
 
-    private static void removeParameterInJson(File fileToBeUpdated) throws Exception {
+    @SneakyThrows
+    private static void removeParameterInJson(File fileToBeUpdated) {
         try {
             FileReader reader = new FileReader(fileToBeUpdated);
             JSONParser jsonParser = new JSONParser();
