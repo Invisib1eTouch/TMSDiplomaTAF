@@ -1,6 +1,8 @@
 package tests;
 
+import apiSteps.UserApiSteps;
 import org.testng.Assert;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
@@ -23,14 +25,23 @@ import static utils.FileHelper.getFileToUpload;
 public class ProfileTests extends BaseTestAfterMethodDriverDisposing {
 
     private ProfileMainTabSteps profileMainTabSteps;
+    private static final String loginForTest = "validLogin_5";
+    private static final String passwordForTest = "validPassword_5";
 
     @BeforeMethod
-    @Parameters({"validLogin_5", "validPassword_5"})
+    @Parameters({loginForTest, passwordForTest})
     public void loginBeforeTest(String login, String password) {
         this.profileMainTabSteps = new MainPageSteps(true)
                 .loginWithCorrectCredentials(MainPageSteps.class, login, password)
                 .openProfileMenu()
                 .openProfilePageOnMainTab();
+    }
+
+    @AfterClass
+    @Parameters({loginForTest, passwordForTest})
+    public void testClassTeardown(String login, String password) {
+        UserApiSteps.login(login, password);
+        UserApiSteps.removeProfileHeaderCoverImage();
     }
 
     @Test

@@ -8,6 +8,7 @@ import enums.UrlPrefix;
 import lombok.Getter;
 import org.openqa.selenium.By;
 
+import java.time.Duration;
 import java.util.Objects;
 
 import static com.codeborne.selenide.Condition.*;
@@ -16,10 +17,10 @@ import static com.codeborne.selenide.Selenide.$;
 public abstract class BasePage {
 
     private final String path;
-    protected PageOpenIndCheckCond pageOpenIndCheckCond = PageOpenIndCheckCond.EXIST_AND_VISIBLE;
+    protected PageOpenIndConditionToFulfill pageOpenIndConditionToFulfill = PageOpenIndConditionToFulfill.EXIST_AND_VISIBLE;
+
     /**
-     * @param urlPrefix - prefix for the page e.g. catalog, profile, etc.,
-     *                  if path = null, use - DEFAULT
+     * @param urlPrefix - prefix for the page e.g. catalog, profile, etc., if path = null, use - DEFAULT
      * @param path      - if page has no constant path then path = null (e.g. dialogue or dynamic path)
      */
     public BasePage(UrlPrefix urlPrefix, String path) {
@@ -34,8 +35,8 @@ public abstract class BasePage {
 
     public void verifyCorrectPageOpened() {
         try {
-            // Check that element that indicates particular page can be found and visible
-            $(this.getCorrectPageOpenedIndicatorElLocator()).should(this.pageOpenIndCheckCond.conditions);
+            // Check that page opened indicator element fulfills provided conditions
+            $(this.getCorrectPageOpenedIndicatorElLocator()).should(this.pageOpenIndConditionToFulfill.condition, Duration.ofSeconds(10));
         } catch (Error e) {
             throw new AssertionError(String.format("%s was not opened\n Detailed Message:\n%s",
                     this.getClass().getSimpleName(), e.getMessage()));
@@ -57,28 +58,27 @@ public abstract class BasePage {
     }
 
     /**
-     *
      * @param locatorParts - parts of css locator
      * @return - concatenated by space css locator
      */
     protected String getConcatenatedBySpaceCssLocator(String... locatorParts) {
         StringBuilder resultingLocator = new StringBuilder(locatorParts[0]);
 
-        for (int i = 1; i < locatorParts.length; i++){
+        for (int i = 1; i < locatorParts.length; i++) {
             resultingLocator.append(" ").append(locatorParts[i]);
         }
         return resultingLocator.toString();
     }
 
-    protected enum PageOpenIndCheckCond {
-        EXIST_AND_VISIBLE(exist, be(visible)),
+    protected enum PageOpenIndConditionToFulfill {
+        EXIST_AND_VISIBLE(and("", exist, be(visible))),
         NOT_EXIST(not(exist));
 
         @Getter
-        private final Condition[] conditions;
+        private final Condition condition;
 
-        PageOpenIndCheckCond(Condition... conditions) {
-            this.conditions = conditions;
+        PageOpenIndConditionToFulfill(Condition condition) {
+            this.condition = condition;
         }
     }
 }

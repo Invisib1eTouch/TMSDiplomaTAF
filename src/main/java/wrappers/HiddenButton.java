@@ -3,6 +3,7 @@ package wrappers;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
 
+import static com.codeborne.selenide.Condition.appear;
 import static com.codeborne.selenide.Selenide.$;
 
 public class HiddenButton {
@@ -18,6 +19,6 @@ public class HiddenButton {
     }
 
     public void click() {
-        this.element.hover().click();
+        this.element.hover().should(appear).click();
     }
 }
