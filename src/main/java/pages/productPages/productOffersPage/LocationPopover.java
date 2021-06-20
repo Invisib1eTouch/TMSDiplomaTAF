@@ -28,4 +28,8 @@ public class LocationPopover extends BasePage {
     public SelenideElement getYesBtn(){
         return $(byXpath(popupContainerLocator + yesBtnLocator));
     }
+
+    public SelenideElement getPopupContainer(){
+        return $(byXpath(popupContainerLocator));
+    }
 }
