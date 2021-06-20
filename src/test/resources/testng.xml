@@ -25,22 +25,22 @@
     <parameter name="validLogin_8" value="testuser4andrew@yandex.ru"/>
     <parameter name="validPassword_8" value="testuser4andrew1"/>
     <parameter name="validUserId_8" value="2939319"/>
-<!--    <test name="LoginTests" parallel="methods" thread-count="3">-->
-<!--        <classes>-->
-<!--            <class name="tests.LoginTests"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test name="ProfileTests" thread-count="1">-->
-<!--        <classes>-->
-<!--            <class name="tests.ProfileTests"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test name="ProductE2ETests" thread-count="1">-->
-<!--        <classes>-->
-<!--            <class name="tests.ProductE2ETests"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-    <test name="ApiTests" parallel="methods">
+    <test name="LoginTests" parallel="methods" thread-count="3">
+        <classes>
+            <class name="tests.LoginTests"/>
+        </classes>
+    </test>
+    <test name="ProfileTests" thread-count="1">
+        <classes>
+            <class name="tests.ProfileTests"/>
+        </classes>
+    </test>
+    <test name="ProductE2ETests" thread-count="1">
+        <classes>
+            <class name="tests.ProductE2ETests"/>
+        </classes>
+    </test>
+    <test name="ApiTests">
         <classes>
             <class name="tests.apiTests.ProfileApiTests"/>
             <class name="tests.apiTests.SearchApiTests"/>

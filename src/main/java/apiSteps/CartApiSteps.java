@@ -3,7 +3,6 @@ package apiSteps;
 import com.google.gson.reflect.TypeToken;
 import dataObjects.json.cart.PositionToDeleteJson;
 import dataObjects.json.cart.PositionsToDeleteJson;
-import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.http.Header;
 import io.restassured.response.Response;
@@ -16,11 +15,11 @@ import static io.restassured.RestAssured.given;
 public class CartApiSteps extends ApiSteps {
 
     protected CartApiSteps() {
-        RestAssured.basePath = "cart.api";
+        super("cart.api");
     }
 
     public Response getCartPositions() {
-        Response response = given()
+        Response response = this.spec
                 .header(new Header("Authorization", "Bearer " + this.authToken))
                 .log().all()
                 .get("positions");
@@ -34,7 +33,7 @@ public class CartApiSteps extends ApiSteps {
     }
 
     public Response deleteCartPositions(PositionsToDeleteJson positions) {
-        Response response = given()
+        Response response = this.spec
                 .header(new Header("Authorization", "Bearer " + this.authToken))
                 .contentType(ContentType.JSON)
                 .body(gson.toJson(positions))

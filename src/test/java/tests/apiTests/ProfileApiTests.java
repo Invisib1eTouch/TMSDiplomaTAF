@@ -7,7 +7,7 @@ import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import utils.Utils;
 
-public class ProfileApiTests extends BaseTest {
+public class ProfileApiTests {
 
     @Test
     public void getInternalUserInfoWithNonexistentIdTest() {

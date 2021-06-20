@@ -6,7 +6,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import utils.Utils;
 
-public class SearchApiTests extends BaseTest {
+public class SearchApiTests {
 
     @Test
     public void searchResultsTest() {
