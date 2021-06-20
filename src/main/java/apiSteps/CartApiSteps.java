@@ -19,7 +19,7 @@ public class CartApiSteps extends ApiSteps {
     }
 
     public Response getCartPositions() {
-        Response response = this.spec
+        Response response = given(this.spec)
                 .header(new Header("Authorization", "Bearer " + this.authToken))
                 .log().all()
                 .get("positions");
@@ -33,7 +33,7 @@ public class CartApiSteps extends ApiSteps {
     }
 
     public Response deleteCartPositions(PositionsToDeleteJson positions) {
-        Response response = this.spec
+        Response response = given(this.spec)
                 .header(new Header("Authorization", "Bearer " + this.authToken))
                 .contentType(ContentType.JSON)
                 .body(gson.toJson(positions))
