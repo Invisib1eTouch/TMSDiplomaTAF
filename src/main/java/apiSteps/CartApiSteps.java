@@ -11,6 +11,8 @@ import io.restassured.response.Response;
 import java.util.ArrayList;
 import java.util.List;
 
+import static io.restassured.RestAssured.given;
+
 public class CartApiSteps extends ApiSteps {
 
     protected CartApiSteps(String authToken) {
@@ -19,7 +21,7 @@ public class CartApiSteps extends ApiSteps {
 
     @Step("Get cart positions.")
     public Response getCartPositions() {
-        Response response = this.spec
+        Response response = given(this.spec)
                 .header(new Header("Authorization", "Bearer " + this.authToken))
                 .log().all()
                 .get("positions");
@@ -34,7 +36,7 @@ public class CartApiSteps extends ApiSteps {
 
     @Step("Delete cart positions.")
     public Response deleteCartPositions(PositionsToDeleteJson positions) {
-        Response response = this.spec
+        Response response = given(this.spec)
                 .header(new Header("Authorization", "Bearer " + this.authToken))
                 .contentType(ContentType.JSON)
                 .body(gson.toJson(positions))

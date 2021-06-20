@@ -26,7 +26,7 @@ public class ProductE2ETests extends BaseTestAfterClassDriverDisposing {
     private String extendedProductName;
 
     @BeforeClass
-    @Parameters({"validLogin_7", "validPassword_7"})
+    @Parameters({"validLogin_8", "validPassword_8"})
     public void testSetup(String login, String password) {
         ApiSteps.get().login(login, password)
                 .cartApiSteps()
@@ -71,7 +71,7 @@ public class ProductE2ETests extends BaseTestAfterClassDriverDisposing {
         this.cartPageSteps = this.productDetailsPageSteps
                 .openProductOffersPageThroughPrice()
                 .handleFirstVisitLocationPopover()
-                .addLowerPriceOfferToCart()
+                .addLowestPriceOfferToCart()
                 .openCartPage();
 
         // DB crutch

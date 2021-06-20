@@ -8,6 +8,8 @@ import io.restassured.http.ContentType;
 import io.restassured.http.Header;
 import io.restassured.response.Response;
 
+import static io.restassured.RestAssured.given;
+
 public class UserApiSteps extends ApiSteps {
 
     protected UserApiSteps(String authToken) {
@@ -16,7 +18,7 @@ public class UserApiSteps extends ApiSteps {
 
     @Description("Login with credentials: ({login} / {password}).")
     public Response postLogin(String login, String password) {
-        Response response = this.spec
+        Response response = given(this.spec)
                 .contentType(ContentType.JSON)
                 .body(gson.toJson(new CredsJson(login, password)))
                 .log().all()
@@ -32,7 +34,7 @@ public class UserApiSteps extends ApiSteps {
 
     @Step("Get personal information.")
     public Response getMe() {
-        Response response = this.spec
+        Response response = given(this.spec)
                 .header(new Header("Authorization", "Bearer " + this.authToken))
                 .log().all()
                 .get("me");
@@ -48,7 +50,7 @@ public class UserApiSteps extends ApiSteps {
     @Step("Get internal personal information by user id: '{userId}'.")
     public Response getInternalUserInfoById(String userId) {
 
-        Response response = this.spec
+        Response response = given(this.spec)
                 .log().all()
                 .get("users/{userId}", userId);
 
@@ -64,7 +66,7 @@ public class UserApiSteps extends ApiSteps {
     public Response removeProfileHeaderCoverImage() {
         var userId = this.getMe().getBody().jsonPath().getInt("id");
 
-        Response response = this.spec
+        Response response = given(this.spec)
                 .header(new Header("Authorization", "Bearer " + this.authToken))
                 .contentType(ContentType.JSON)
                 .body(gson.toJson(new UserDataJson().setCover(null)))

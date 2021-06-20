@@ -6,7 +6,7 @@ import pages.productPages.productOffersPage.ProductOffersPage;
 public class ProductOffersPageSteps extends ProductSummaryPageSteps<ProductOffersPage> {
 
     @Step("Add offer with the lowest price to the cart.")
-    public ProductOffersPageSteps addLowerPriceOfferToCart() {
+    public ProductOffersPageSteps addLowestPriceOfferToCart() {
         this.page.getLowerPriceOffer().getAddToCartBtn().click();
         return this;
     }

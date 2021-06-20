@@ -6,9 +6,6 @@ import pages.CommonHeader;
 import steps.CartPageSteps;
 import steps.SearchResultsFrameSteps;
 
-import java.time.Duration;
-
-import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.sleep;
 import static com.codeborne.selenide.Selenide.switchTo;
 
@@ -31,7 +28,6 @@ public abstract class CommonHeaderSteps<Page extends CommonHeader> extends BaseS
     @Step("Login with correct credentials: ({login} / {password}). Returning page steps: '{methodCallerStepsClass}'.")
     public <Steps extends CommonHeaderSteps<Page>> Steps loginWithCorrectCredentials(Class<Steps> methodCallerStepsClass, String login, String password) {
         this.login(login, password);
-        this.page.getAuthWrapper().shouldNot(exist, Duration.ofSeconds(10));
         return this.getStepsObjectInstance(methodCallerStepsClass);
     }
 
@@ -44,6 +40,8 @@ public abstract class CommonHeaderSteps<Page extends CommonHeader> extends BaseS
     @Step("Open Login page.")
     public LoginPageSteps openLoginPage() {
         this.page.getLoginBtn().click();
+        // Wait until animation ends
+        sleep(300);
         return new LoginPageSteps();
     }
 

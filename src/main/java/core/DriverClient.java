@@ -9,17 +9,17 @@ import org.openqa.selenium.remote.DesiredCapabilities;
  */
 public class DriverClient {
 
-    private static DriverClient driverClient;
+    private static DriverClient instance;
 
-    public static DriverClient get() {
-        if (driverClient == null) {
-            driverClient = new DriverClient();
+    public static DriverClient getInstance() {
+        if (instance == null) {
+            instance = new DriverClient();
             Configuration.browserCapabilities = new DesiredCapabilities();
         }
-        return driverClient;
+        return instance;
     }
 
-    public DriverClient init() {
+    public DriverClient setup() {
         Configuration.browser = PropertyReader.getBrowserName();
         Configuration.startMaximized = true;
         ChromeOptions chromeOptions = new ChromeOptions();
@@ -32,8 +32,8 @@ public class DriverClient {
         return this;
     }
 
-    public DriverClient initRemote() {
-        this.init();
+    public DriverClient setupRemote() {
+        this.setup();
 
         // Selenoid
         Configuration.remote = "http://localhost:4444/wd/hub";
