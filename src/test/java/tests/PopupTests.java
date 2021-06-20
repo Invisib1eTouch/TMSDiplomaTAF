@@ -1,7 +1,7 @@
 package tests;
 
 import apiSteps.ApiSteps;
-import apiSteps.CatalogApiSteps;
+import io.qameta.allure.Description;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -30,7 +30,8 @@ public class PopupTests extends BaseTestAfterMethodDriverDisposing {
         SQLRequestSender.deleteCartItemByProductName(productFullName);
     }
 
-    @Test
+    @Test(description = "Location popup test")
+    @Description("Display of Location popup.")
     public void locationPopoverTest() {
         final String popoverTitle = "Ваш населенный пункт";
 

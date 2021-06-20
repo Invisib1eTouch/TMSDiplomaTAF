@@ -1,14 +1,15 @@
 package tests.apiTests;
 
 import apiSteps.ApiSteps;
-import baseEntities.BaseTest;
+import io.qameta.allure.Description;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import utils.Utils;
 
 public class SearchApiTests {
 
-    @Test
+    @Test(description = "Search results test")
+    @Description("Searching for product by name.")
     public void searchResultsTest() {
         var products = ApiSteps.get()
                 .catalogApiSteps()

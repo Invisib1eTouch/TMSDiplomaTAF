@@ -2,6 +2,8 @@ package apiSteps;
 
 import dataObjects.json.CredsJson;
 import dataObjects.json.user.UserDataJson;
+import io.qameta.allure.Description;
+import io.qameta.allure.Step;
 import io.restassured.http.ContentType;
 import io.restassured.http.Header;
 import io.restassured.response.Response;
@@ -14,6 +16,7 @@ public class UserApiSteps extends ApiSteps {
         super("user.api", authToken);
     }
 
+    @Description("Login with credentials: ({login} / {password}).")
     public Response postLogin(String login, String password) {
         Response response = given(this.spec)
                 .contentType(ContentType.JSON)
@@ -29,6 +32,7 @@ public class UserApiSteps extends ApiSteps {
         return response;
     }
 
+    @Step("Get personal information.")
     public Response getMe() {
         Response response = given(this.spec)
                 .header(new Header("Authorization", "Bearer " + this.authToken))
@@ -43,6 +47,7 @@ public class UserApiSteps extends ApiSteps {
         return response;
     }
 
+    @Step("Get internal personal information by user id: '{userId}'.")
     public Response getInternalUserInfoById(String userId) {
 
         Response response = given(this.spec)
@@ -57,6 +62,7 @@ public class UserApiSteps extends ApiSteps {
         return response;
     }
 
+    @Step("Remove profile header image.")
     public Response removeProfileHeaderCoverImage() {
         var userId = this.getMe().getBody().jsonPath().getInt("id");
 

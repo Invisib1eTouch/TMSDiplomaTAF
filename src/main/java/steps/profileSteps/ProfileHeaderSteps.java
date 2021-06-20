@@ -1,5 +1,6 @@
 package steps.profileSteps;
 
+import io.qameta.allure.Step;
 import pages.profile.PopupModal;
 import pages.profile.ProfileHeader;
 import steps.commonSteps.CommonHeaderSteps;
@@ -18,6 +19,7 @@ public abstract class ProfileHeaderSteps<Page extends ProfileHeader> extends Com
         super(openPageByUrl);
     }
 
+    @Step("Open Personal data tab.")
     public ProfilePersonalDataTabSteps openPersonalDataTab() {
         this.page.getPersonalDataBtn().click();
         return new ProfilePersonalDataTabSteps(false);
@@ -29,6 +31,7 @@ public abstract class ProfileHeaderSteps<Page extends ProfileHeader> extends Com
      * @param <Steps>                - method caller steps class type
      * @return - instance of Steps class that extends ProfileHeaderSteps class from which method was invoked
      */
+    @Step("Upload new profile header background image. File path: '{backgroundImageFile}'.")
     public <Steps extends ProfileHeaderSteps<Page>> Steps uploadNewProfileHeaderBackground(
             Class<Steps> methodCallerStepsClass,
             File backgroundImageFile) {
@@ -39,5 +42,4 @@ public abstract class ProfileHeaderSteps<Page extends ProfileHeader> extends Com
         popupModal.getAnimatedSaveBtn().shouldNotBe(exist, Duration.ofSeconds(10));
         return this.getStepsObjectInstance(methodCallerStepsClass);
     }
-
 }

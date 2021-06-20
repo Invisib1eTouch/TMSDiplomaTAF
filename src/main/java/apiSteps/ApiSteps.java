@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import core.PropertyReader;
 import enums.UrlPrefix;
+import io.qameta.allure.Step;
 import io.restassured.RestAssured;
 import io.restassured.specification.RequestSpecification;
 
@@ -26,6 +27,7 @@ public class ApiSteps {
         this.authToken = authToken;
     }
 
+    @Step("Login with credentials: ({login}) / ({password}).")
     public ApiSteps login(String login, String password) {
         synchronized (ApiSteps.class) {
             this.authToken = this.userApiSteps()
