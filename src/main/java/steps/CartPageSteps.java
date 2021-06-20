@@ -20,7 +20,7 @@ public class CartPageSteps extends BaseStep<CartPage> {
         super(openPageByUrl);
     }
 
-    @Step("Getting cart item by name '{productName}'.")
+    @Step("Get cart item by name: '{productName}'.")
     public CartItemContainer getCartItemByName(String productName) {
         return this.page.getCartItems()
                 .stream()
@@ -31,7 +31,7 @@ public class CartPageSteps extends BaseStep<CartPage> {
                 .orElseThrow(() -> new NoSuchElementException("No such item in the cart with provided name: " + productName));
     }
 
-    @Step("Verifying cart item '{productName}' exists.")
+    @Step("Verify cart item with product: '{productName}' exists")
     public boolean cartItemExist(String productName) {
         if(!this.page.getTotalProductsAddedLabel().exists()) return false;
 
@@ -43,7 +43,7 @@ public class CartPageSteps extends BaseStep<CartPage> {
         return true;
     }
 
-    @Step("Deleting item from cart by name '{productName}'.")
+    @Step("Delete item from cart by product name: '{productName}'")
     public CartPageSteps deleteItemFromCartByName(String productName){
         this.getCartItemByName(productName).getDeleteBtn().click();
         this.page.getCartPageLoader().shouldNot(exist);

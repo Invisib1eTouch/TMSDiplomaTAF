@@ -11,7 +11,7 @@ public class ProfileMenuSteps extends BaseStep<ProfileMenu> {
         super(false);
     }
 
-    @Step("Open Profile page on Main tab by clicking user id.")
+    @Step("Open Profile page on Main tab.")
     public ProfileMainTabSteps openProfilePageOnMainTab(){
         this.page.getUserId().click();
         return new ProfileMainTabSteps(false);

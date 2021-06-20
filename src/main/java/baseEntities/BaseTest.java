@@ -10,6 +10,6 @@ public abstract class BaseTest {
      */
     @BeforeSuite
     public void driverSetup(){
-        DriverClient.get().initRemote().enableHeadlessMode();
+        DriverClient.get().init();
     }
 }

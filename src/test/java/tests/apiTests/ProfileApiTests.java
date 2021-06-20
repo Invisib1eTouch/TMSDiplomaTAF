@@ -2,11 +2,17 @@ package tests.apiTests;
 
 import apiSteps.UserApiSteps;
 import org.testng.Assert;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
+import utils.AllureUtilities;
 import utils.Utils;
 
 public class ProfileApiTests {
+    @AfterClass
+    public void tearDown() throws Exception {
+        AllureUtilities.removeParametersInReport();
+    }
 
     @Test
     public void getInternalUserInfoWithNonexistentIdTest() {

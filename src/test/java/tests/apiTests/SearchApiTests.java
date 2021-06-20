@@ -2,10 +2,16 @@ package tests.apiTests;
 
 import apiSteps.CatalogApiSteps;
 import org.testng.Assert;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;
+import utils.AllureUtilities;
 import utils.Utils;
 
 public class SearchApiTests {
+    @AfterClass
+    public void tearDown() throws Exception {
+        AllureUtilities.removeParametersInReport();
+    }
 
     @Test
     public void searchResultsTest() {

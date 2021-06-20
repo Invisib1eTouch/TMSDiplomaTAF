@@ -15,13 +15,13 @@ public class SearchResultsFrameSteps extends BaseStep<SearchResultsFrame> {
         super(false);
     }
 
-    @Step("Wait until the search loader hides.")
+    @Step("Wait until search result loading finished.")
     public SearchResultsFrameSteps waitLoadingFinished() {
         this.page.getSearchLoader().shouldNot(exist, Duration.ofSeconds(10));
         return this;
     }
 
-    @Step("Open Product Details page by product name '{productName}'.")
+    @Step("Open Product Details page by product name: '{productName}'.")
     public ProductDetailsPageSteps openProductDetailsPageByName(String productName) {
         this.page.getSearchResultItemByName(productName).getName().click();
         return new ProductDetailsPageSteps();

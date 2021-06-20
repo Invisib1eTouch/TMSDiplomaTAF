@@ -6,6 +6,7 @@ import apiSteps.UserApiSteps;
 import io.qameta.allure.Description;
 import models.CartItemModel;
 import org.testng.Assert;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
@@ -15,6 +16,7 @@ import steps.MainPageSteps;
 import steps.SearchResultsFrameSteps;
 import steps.productPagesSteps.ProductDetailsPageSteps;
 import templates.BaseTestAfterClassDriverDisposing;
+import utils.AllureUtilities;
 import utils.Utils;
 
 import static com.codeborne.selenide.Condition.exactOwnText;
@@ -39,6 +41,11 @@ public class ProductE2ETests extends BaseTestAfterClassDriverDisposing {
 
         this.mainPageSteps = new MainPageSteps(true)
                 .loginWithCorrectCredentials(MainPageSteps.class, login, password);
+    }
+
+    @AfterClass
+    public void tearDown() throws Exception {
+        AllureUtilities.removeParametersInReport();
     }
 
     @Test(description = "Find product test")
@@ -84,8 +91,8 @@ public class ProductE2ETests extends BaseTestAfterClassDriverDisposing {
         Assert.assertEquals(cartPageSteps.getPageInstance().getCartItemsNumber(), 1);
     }
 
-    @Test(description = "Delete product from cart", dependsOnMethods = "addProductToCartTest")
-    @Description("Removing product from cart and make sure product doesn't exist in cart.")
+    @Test(description = "Delete product from cart test", dependsOnMethods = "addProductToCartTest")
+    @Description("Removing product from cart and make sure product does not exist in cart.")
     public void deleteProductFromCartTest() {
         boolean cartItemExist = this.cartPageSteps
                 .deleteItemFromCartByName(this.productFullName)
