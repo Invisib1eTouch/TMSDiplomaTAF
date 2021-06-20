@@ -3,6 +3,7 @@ package apiSteps;
 import com.google.gson.reflect.TypeToken;
 import dataObjects.json.cart.PositionToDeleteJson;
 import dataObjects.json.cart.PositionsToDeleteJson;
+import io.qameta.allure.Step;
 import io.restassured.http.ContentType;
 import io.restassured.http.Header;
 import io.restassured.response.Response;
@@ -10,14 +11,13 @@ import io.restassured.response.Response;
 import java.util.ArrayList;
 import java.util.List;
 
-import static io.restassured.RestAssured.given;
-
 public class CartApiSteps extends ApiSteps {
 
     protected CartApiSteps(String authToken) {
         super("cart.api", authToken);
     }
 
+    @Step("Get cart positions.")
     public Response getCartPositions() {
         Response response = this.spec
                 .header(new Header("Authorization", "Bearer " + this.authToken))
@@ -32,6 +32,7 @@ public class CartApiSteps extends ApiSteps {
         return response;
     }
 
+    @Step("Delete cart positions.")
     public Response deleteCartPositions(PositionsToDeleteJson positions) {
         Response response = this.spec
                 .header(new Header("Authorization", "Bearer " + this.authToken))
@@ -48,6 +49,7 @@ public class CartApiSteps extends ApiSteps {
         return response;
     }
 
+    @Step("Delete existing cart positions.")
     public void deleteAllCartPositionsIfExist() {
         List<PositionToDeleteJson> positionsToDelete =
                 // TypeToken - specifying type that should be returned after deserialization from obtained json string

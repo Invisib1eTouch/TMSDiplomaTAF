@@ -8,6 +8,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -15,7 +16,7 @@ public class AllureUtilities {
 
     @SneakyThrows
     public static void removeParametersInReport() {
-        File dir = new File(System.getProperty("user.dir") + "/target/allure-results");
+        File dir = new File(String.valueOf(Paths.get("target", "allure-results")));
         File[] directoryListing = dir.listFiles();
         if (directoryListing != null) {
             for (File child : directoryListing) {

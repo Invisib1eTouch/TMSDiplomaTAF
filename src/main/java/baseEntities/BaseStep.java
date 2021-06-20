@@ -55,7 +55,7 @@ public abstract class BaseStep<Page extends BasePage> {
      * @return - instance of Steps class from which method was invoked
      */
 
-    @Step()
+    @Step("Open page.")
     public <Steps extends BaseStep<Page>> Steps openPage(Class<Steps> callerStepsClass) {
         this.page.open();
         return this.getStepsObjectInstance(callerStepsClass);
