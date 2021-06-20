@@ -33,7 +33,6 @@ public abstract class BaseStep<Page extends BasePage> {
      * @return page instance
      */
     @SuppressWarnings("unchecked")
-    @Step("Get corresponding page instance for step.")
     public Page getPageInstance() {
         if (this.page == null) {
 //            Defining page class

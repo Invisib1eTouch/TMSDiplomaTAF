@@ -16,7 +16,6 @@ public class ApiSteps {
     protected static final Gson gson = new GsonBuilder().serializeNulls().excludeFieldsWithoutExposeAnnotation().create();
     protected String authToken;
 
-    @Step("Get ApiSteps instance.")
     public synchronized static ApiSteps get() {
         RestAssured.baseURI = String.format("https://%s.%s/%s", UrlPrefix.DEFAULT.getValue(),
                 PropertyReader.getBaseUrl(), PropertyReader.getApiPath());

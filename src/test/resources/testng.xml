@@ -30,25 +30,25 @@
             <class name="tests.LoginTests"/>
         </classes>
     </test>
-<!--    <test name="ProfileTests" thread-count="1">-->
-<!--        <classes>-->
-<!--            <class name="tests.ProfileTests"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test name="ProductE2ETests" thread-count="1">-->
-<!--        <classes>-->
-<!--            <class name="tests.ProductE2ETests"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test name="PopupTests" thread-count="1">-->
-<!--        <classes>-->
-<!--            <class name="tests.PopupTests"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test name="ApiTests">-->
-<!--        <classes>-->
-<!--            <class name="tests.apiTests.ProfileApiTests"/>-->
-<!--            <class name="tests.apiTests.SearchApiTests"/>-->
-<!--        </classes>-->
-<!--    </test>-->
+    <test name="ProfileTests" thread-count="1">
+        <classes>
+            <class name="tests.ProfileTests"/>
+        </classes>
+    </test>
+    <test name="ProductE2ETests" thread-count="1">
+        <classes>
+            <class name="tests.ProductE2ETests"/>
+        </classes>
+    </test>
+    <test name="PopupTests" thread-count="1">
+        <classes>
+            <class name="tests.PopupTests"/>
+        </classes>
+    </test>
+    <test name="ApiTests">
+        <classes>
+            <class name="tests.apiTests.ProfileApiTests"/>
+            <class name="tests.apiTests.SearchApiTests"/>
+        </classes>
+    </test>
 </suite>
