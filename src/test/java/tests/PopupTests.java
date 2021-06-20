@@ -1,5 +1,6 @@
 package tests;
 
+import apiSteps.ApiSteps;
 import apiSteps.CatalogApiSteps;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -16,7 +17,10 @@ public class PopupTests extends BaseTestAfterMethodDriverDisposing {
 
     @BeforeMethod
     public void testSetup() {
-        var products = CatalogApiSteps.getAvailableMobilePhones().getProducts();
+        var products = ApiSteps.get()
+                .catalogApiSteps()
+                .getAvailableMobilePhones()
+                .getProducts();
         var product = products.get(Utils.getRandomNumber(0, products.size()));
         this.productFullName = product.getFullName();
     }

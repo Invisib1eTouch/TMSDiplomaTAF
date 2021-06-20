@@ -45,7 +45,7 @@
             <class name="tests.PopupTests"/>
         </classes>
     </test>
-    <test name="ApiTests" parallel="methods">
+    <test name="ApiTests">
         <classes>
             <class name="tests.apiTests.ProfileApiTests"/>
             <class name="tests.apiTests.SearchApiTests"/>
