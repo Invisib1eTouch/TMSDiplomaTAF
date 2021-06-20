@@ -68,7 +68,7 @@ public class ProductE2ETests extends BaseTestAfterClassDriverDisposing {
         this.cartPageSteps = this.productDetailsPageSteps
                 .openProductOffersPageThroughPrice()
                 .handleFirstVisitLocationPopover()
-                .addLowerPriceOfferToCart()
+                .addLowestPriceOfferToCart()
                 .openCartPage();
 
         // DB crutch

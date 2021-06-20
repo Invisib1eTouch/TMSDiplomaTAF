@@ -4,7 +4,7 @@ import pages.productPages.productOffersPage.ProductOffersPage;
 
 public class ProductOffersPageSteps extends ProductSummaryPageSteps<ProductOffersPage> {
 
-    public ProductOffersPageSteps addLowerPriceOfferToCart() {
+    public ProductOffersPageSteps addLowestPriceOfferToCart() {
         this.page.getLowerPriceOffer().getAddToCartBtn().click();
         return this;
     }
