@@ -83,7 +83,7 @@ public class ProductE2ETests extends BaseTestAfterClassDriverDisposing {
     }
 
     @Test(description = "Delete product from cart", dependsOnMethods = "addProductToCartTest")
-    @Description("Removing product from cart and make sure product hasn't already existed in cart.")
+    @Description("Removing product from cart and make sure product doesn't exist in cart.")
     public void deleteProductFromCartTest() {
         boolean cartItemExist = this.cartPageSteps
                 .deleteItemFromCartByName(this.productFullName)

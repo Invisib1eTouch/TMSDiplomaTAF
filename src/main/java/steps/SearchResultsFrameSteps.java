@@ -15,7 +15,7 @@ public class SearchResultsFrameSteps extends BaseStep<SearchResultsFrame> {
         super(false);
     }
 
-    @Step("Wait until loading finished.")
+    @Step("Wait until the search loader hides.")
     public SearchResultsFrameSteps waitLoadingFinished() {
         this.page.getSearchLoader().shouldNot(exist, Duration.ofSeconds(10));
         return this;

@@ -5,13 +5,13 @@ import pages.productPages.productOffersPage.ProductOffersPage;
 
 public class ProductOffersPageSteps extends ProductSummaryPageSteps<ProductOffersPage> {
 
-    @Step("Adding offer with the lowest price to cart by clicking Add button.")
+    @Step("Adding offer with the lowest price to the cart by clicking 'To Cart' button.")
     public ProductOffersPageSteps addLowerPriceOfferToCart() {
         this.page.getLowerPriceOffer().getAddToCartBtn().click();
         return this;
     }
 
-    @Step("Applying location popup that is displayed on first site visiting with provided value by default.")
+    @Step("Location confirmation popup that is displayed on the first site visiting with provided by default location value.")
     public ProductOffersPageSteps handleFirstVisitLocationPopover() {
         var locationPopover = this.page.getLocationPopoverOnFirstPageVisit();
         locationPopover.getYesBtn().click();

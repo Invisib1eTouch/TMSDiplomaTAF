@@ -57,7 +57,7 @@ public class ProfileTests extends BaseTestAfterMethodDriverDisposing {
     }
 
     @Test(description = "Edit date and year test")
-    @Description("Editing date and year in future and make sure error form is displayed for date fields.")
+    @Description("Editing date and year in future and make sure validation error is displayed for date fields.")
     public void editDateAndYearWithExceedingValuesTest() {
         // Case: both day and year have exceeding values
         String enteredDay = "54";
@@ -87,7 +87,7 @@ public class ProfileTests extends BaseTestAfterMethodDriverDisposing {
     }
 
     @Test(description = "Last Name boundary test")
-    @Description("Verification of Last Name field when field is editable and can contain only values with limited length.")
+    @Description("Verification of Last Name field filling with boundary values.")
     public void lastNameFieldBoundaryValuesTest() {
         final int lastNameMaxLength = 255;
 
@@ -174,7 +174,7 @@ public class ProfileTests extends BaseTestAfterMethodDriverDisposing {
     }
 
     @Test(description = "Edit date of b-day test")
-    @Description("Editing Date of birthday with incorrect value and make sure changes are not applied and error alert is displayed.")
+    @Description("Editing Date of birthday with incorrect value and make sure changes are not applied and error message is displayed.")
     public void editDateOfBirthWithTextValueIssueTest() {
         // CASE: when user enters letters into the day of birth field,
         // there should be a validation error (same as for year, for consistency) and no changes are saved,

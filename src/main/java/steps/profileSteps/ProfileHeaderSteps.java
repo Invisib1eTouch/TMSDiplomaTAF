@@ -19,7 +19,7 @@ public abstract class ProfileHeaderSteps<Page extends ProfileHeader> extends Com
         super(openPageByUrl);
     }
 
-    @Step("Open Personal data tab by clicking on it.")
+    @Step("Open Personal data tab by clicking it's header.")
     public ProfilePersonalDataTabSteps openPersonalDataTab() {
         this.page.getPersonalDataBtn().click();
         return new ProfilePersonalDataTabSteps(false);

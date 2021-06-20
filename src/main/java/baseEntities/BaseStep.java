@@ -1,5 +1,7 @@
 package baseEntities;
 
+import io.qameta.allure.Step;
+
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.ParameterizedType;
 
@@ -33,6 +35,7 @@ public abstract class BaseStep<Page extends BasePage> {
      * @return page instance
      */
     @SuppressWarnings("unchecked")
+    @Step("Get corresponding page instance for step.")
     public Page getPageInstance() {
         if (this.page == null) {
 //            Defining page class
@@ -54,6 +57,7 @@ public abstract class BaseStep<Page extends BasePage> {
      * @param <Steps> - method caller steps class type
      * @return - instance of Steps class from which method was invoked
      */
+    @Step()
     public <Steps extends BaseStep<Page>> Steps openPage(Class<Steps> callerStepsClass){
         this.page.open();
         return this.getStepsObjectInstance(callerStepsClass);

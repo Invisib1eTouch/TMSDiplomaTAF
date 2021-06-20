@@ -48,7 +48,7 @@ public class ProfileEditPageSteps extends BaseStep<ProfileEditPage> {
         return this;
     }
 
-    @Step("Filling Last Name field with '{value}' data.")
+    @Step("Filling Last Name field with '{value}' value.")
     public ProfileEditPageSteps fillLastNameField(String value) {
         this.page.getLastNameInput().clear();
         this.page.getLastNameInput().sendKeys(value);
