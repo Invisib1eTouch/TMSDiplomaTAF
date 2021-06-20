@@ -7,9 +7,11 @@ import enums.UrlPrefix;
 import io.qameta.allure.Step;
 import io.restassured.RestAssured;
 import io.restassured.specification.RequestSpecification;
+import lombok.extern.slf4j.Slf4j;
 
 import static io.restassured.RestAssured.given;
 
+@Slf4j
 public class ApiSteps {
 
     protected RequestSpecification spec;
