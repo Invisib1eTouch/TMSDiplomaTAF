@@ -13,7 +13,7 @@ public class ApiSteps {
 
     protected RequestSpecification spec;
     protected static final Gson gson = new GsonBuilder().serializeNulls().excludeFieldsWithoutExposeAnnotation().create();
-    protected static String authToken;
+    protected String authToken;
 
     public synchronized static ApiSteps get() {
         RestAssured.baseURI = String.format("https://%s.%s/%s", UrlPrefix.DEFAULT.getValue(),
@@ -27,20 +27,24 @@ public class ApiSteps {
 
     public ApiSteps login(String login, String password) {
         synchronized (ApiSteps.class){
-            this.userApiSteps().postLogin(login, password);
+            this.authToken = this.userApiSteps()
+                    .postLogin(login, password)
+                    .getBody()
+                    .jsonPath()
+                    .getString("access_token");;
             return this;
         }
     }
 
     public UserApiSteps userApiSteps() {
         synchronized (ApiSteps.class) {
-            return new UserApiSteps();
+            return new UserApiSteps(this.authToken);
         }
     }
 
     public CartApiSteps cartApiSteps() {
         synchronized (ApiSteps.class) {
-            return new CartApiSteps();
+            return new CartApiSteps(this.authToken);
         }
     }
 

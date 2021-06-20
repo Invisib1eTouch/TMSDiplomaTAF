@@ -1,7 +1,6 @@
 package tests.apiTests;
 
 import apiSteps.ApiSteps;
-import baseEntities.BaseTest;
 import org.testng.Assert;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;

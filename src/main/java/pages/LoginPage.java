@@ -14,6 +14,7 @@ public class LoginPage extends BasePage {
     private static final String passwordInputLocator = "//*[@type='password']";
     private static final String authFieldErrorMesLocator = "following::div[contains(@class, 'auth-form__description_error')]";
     private static final By loginBtnBy = By.className("auth-button_primary");
+    private static final By authWrapperBy = By.className("auth-wrapper");
 
     public LoginPage() {
         super(UrlPrefix.DEFAULT, null);
@@ -21,7 +22,7 @@ public class LoginPage extends BasePage {
 
     @Override
     protected By getCorrectPageOpenedIndicatorElLocator() {
-        return loginBtnBy;
+        return authWrapperBy;
     }
 
     public SelenideElement getEmailInput() {

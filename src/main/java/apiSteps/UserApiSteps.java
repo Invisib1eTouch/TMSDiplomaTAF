@@ -10,8 +10,9 @@ import static io.restassured.RestAssured.given;
 
 public class UserApiSteps extends ApiSteps {
 
-    protected UserApiSteps() {
+    protected UserApiSteps(String authToken) {
         super("user.api");
+        this.authToken = authToken;
     }
 
     public Response postLogin(String login, String password) {
@@ -26,7 +27,7 @@ public class UserApiSteps extends ApiSteps {
         }
         response.prettyPrint();
 
-        this.authToken = response.getBody().jsonPath().getString("access_token");
+//        this.authToken = response.getBody().jsonPath().getString("access_token");
         return response;
     }
 
