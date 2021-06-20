@@ -8,7 +8,7 @@ import static io.restassured.RestAssured.given;
 public class CatalogApiSteps extends ApiSteps {
 
     protected CatalogApiSteps() {
-        super("catalog.api");
+        super("catalog.api", null);
     }
 
     public ProductsJson getAvailableMobilePhones() {

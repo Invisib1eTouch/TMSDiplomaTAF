@@ -11,8 +11,7 @@ import static io.restassured.RestAssured.given;
 public class UserApiSteps extends ApiSteps {
 
     protected UserApiSteps(String authToken) {
-        super("user.api");
-        this.authToken = authToken;
+        super("user.api", authToken);
     }
 
     public Response postLogin(String login, String password) {

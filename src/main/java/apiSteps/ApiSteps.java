@@ -18,20 +18,21 @@ public class ApiSteps {
     public synchronized static ApiSteps get() {
         RestAssured.baseURI = String.format("https://%s.%s/%s", UrlPrefix.DEFAULT.getValue(),
                 PropertyReader.getBaseUrl(), PropertyReader.getApiPath());
-        return new ApiSteps("");
+        return new ApiSteps("", null);
     }
 
-    protected ApiSteps(String basePath) {
+    protected ApiSteps(String basePath, String authToken) {
         this.spec = given().basePath(basePath);
+        this.authToken = authToken;
     }
 
     public ApiSteps login(String login, String password) {
-        synchronized (ApiSteps.class){
+        synchronized (ApiSteps.class) {
             this.authToken = this.userApiSteps()
                     .postLogin(login, password)
                     .getBody()
                     .jsonPath()
-                    .getString("access_token");;
+                    .getString("access_token");
             return this;
         }
     }

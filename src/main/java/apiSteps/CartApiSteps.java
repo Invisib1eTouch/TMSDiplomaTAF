@@ -15,8 +15,7 @@ import static io.restassured.RestAssured.given;
 public class CartApiSteps extends ApiSteps {
 
     protected CartApiSteps(String authToken) {
-        super("cart.api");
-        this.authToken = authToken;
+        super("cart.api", authToken);
     }
 
     public Response getCartPositions() {

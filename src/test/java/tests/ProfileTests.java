@@ -38,7 +38,7 @@ public class ProfileTests extends BaseTestAfterMethodDriverDisposing {
                 .openProfilePageOnMainTab();
     }
 
-    @AfterClass
+    @AfterClass(alwaysRun = true)
     @Parameters({loginForTest, passwordForTest})
     public void testClassTeardown(String login, String password) {
         ApiSteps.get()
