@@ -14,8 +14,12 @@ public abstract class ProductSummaryPageSteps<Page extends ProductSummaryPage> e
     @Step("Open Product Offers page by clicking product price.\"")
     public ProductOffersPageSteps openProductOffersPageThroughPrice() {
         var cartItemModel = this.page.getProductSummary().getCartItemModel();
+
+        // DB crutch
         SQLRequestSender.addProductToCartTable(cartItemModel);
         this.page.getProductSummary().getPrice().click();
+        // DB crutch
+
         return new ProductOffersPageSteps();
     }
 }
