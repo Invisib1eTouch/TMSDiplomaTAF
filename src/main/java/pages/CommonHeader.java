@@ -5,6 +5,7 @@ import com.codeborne.selenide.SelenideElement;
 import enums.UrlPrefix;
 import org.openqa.selenium.By;
 
+import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$;
 
 public abstract class CommonHeader extends BasePage {
@@ -14,7 +15,6 @@ public abstract class CommonHeader extends BasePage {
     private static final By searchInputBy = By.className("fast-search__input");
     private static final By searchResultsIFrameBy = By.className("modal-iframe");
     private static final By cartBtnBy = By.className("b-top-profile__cart");
-    private static final By authWrapperBy = By.className("auth-wrapper");
 
     /**
      * @param urlPrefix - prefix for the page e.g. catalog, profile, etc.
@@ -37,14 +37,10 @@ public abstract class CommonHeader extends BasePage {
     }
 
     public SelenideElement getSearchResultsIFrame() {
-        return $(searchResultsIFrameBy);
+        return $(searchResultsIFrameBy).shouldBe(visible);
     }
 
     public SelenideElement getCartBtnBy(){
         return $(cartBtnBy);
-    }
-
-    public SelenideElement getAuthWrapper() {
-        return $(authWrapperBy);
     }
 }

@@ -12,7 +12,7 @@ public class CatalogApiSteps extends ApiSteps {
     }
 
     public ProductsJson getAvailableMobilePhones() {
-        Response response = this.spec
+        Response response = given(this.spec)
                 .log().all()
                 .get("search/mobile?in_stock=1");
 
@@ -25,7 +25,7 @@ public class CatalogApiSteps extends ApiSteps {
     }
 
     public Response getSearchResultByProductName(String productName) {
-        Response response = this.spec
+        Response response = given(this.spec)
                 .queryParam("query", productName)
                 .log().all()
                 .get("search/products");
