@@ -2,18 +2,16 @@ package tests;
 
 import apiSteps.ApiSteps;
 import io.qameta.allure.Description;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import services.SQLRequestSender;
-import steps.MainPageSteps;
+import steps.productPagesSteps.ProductDetailsPageSteps;
 import templates.BaseTestAfterMethodDriverDisposing;
 import utils.Utils;
 
 import static com.codeborne.selenide.Condition.*;
 
 public class PopupTests extends BaseTestAfterMethodDriverDisposing {
-    private String productFullName;
+    private String productUrl;
 
     @BeforeMethod
     public void testSetup() {
@@ -22,12 +20,8 @@ public class PopupTests extends BaseTestAfterMethodDriverDisposing {
                 .getAvailableMobilePhones()
                 .getProducts();
         var product = products.get(Utils.getRandomNumber(0, products.size()));
-        this.productFullName = product.getFullName();
-    }
+        this.productUrl = product.getProductUrl();
 
-    @AfterMethod
-    public void testTearDown(){
-        SQLRequestSender.deleteCartItemByProductName(productFullName);
     }
 
     @Test(description = "Location popup test")
@@ -35,9 +29,8 @@ public class PopupTests extends BaseTestAfterMethodDriverDisposing {
     public void locationPopoverTest() {
         final String popoverTitle = "Ваш населенный пункт";
 
-        new MainPageSteps(true)
-                .searchProduct(productFullName)
-                .openProductDetailsPageByName(productFullName)
+        ProductDetailsPageSteps
+                .openPage(productUrl)
                 .openProductOffersPageThroughPrice()
                 .getPageInstance()
                 .getLocationPopoverOnFirstPageVisit()
