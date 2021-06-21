@@ -1,9 +1,11 @@
 package services;
 
 import core.PropertyReader;
+import lombok.extern.slf4j.Slf4j;
 
 import java.sql.*;
 
+@Slf4j
 public class DBConnection {
     private static Connection connection = null;
 
@@ -15,8 +17,9 @@ public class DBConnection {
         try {
             Class.forName("org.postgresql.Driver");
             connection = DriverManager.getConnection(url, user, psw);
-        } catch (ClassNotFoundException | SQLException ex) {
-            ex.printStackTrace();
+        } catch (ClassNotFoundException | SQLException e) {
+            log.error(e.getMessage());
+            e.printStackTrace();
         }
     }
 
