@@ -10,7 +10,6 @@ import io.restassured.http.Header;
 import io.restassured.response.Response;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.http.HttpStatus;
 import utils.RestAssuredRequestFilter;
 
 import java.util.ArrayList;
@@ -53,9 +52,9 @@ public class CartApiSteps extends ApiSteps {
             // TypeToken - specifying type that should be returned after deserialization from obtained json string
             positionsToDelete = gson.fromJson(stringResponse, new TypeToken<ArrayList<PositionToDeleteJson>>() {
             }.getType());
-        } catch (JsonSyntaxException ex) {
-            log.error("Response body: " + stringResponse + "Message: " + ex.getMessage());
-            throw new JsonSyntaxException(ex.getMessage());
+        } catch (JsonSyntaxException e) {
+            log.error("Response body: " + stringResponse + "Message: " + e.getMessage());
+            throw new JsonSyntaxException(e.getMessage());
         }
 
         if (positionsToDelete.size() > 0)

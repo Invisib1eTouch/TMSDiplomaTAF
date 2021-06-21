@@ -6,8 +6,7 @@ import pages.CommonHeader;
 import steps.CartPageSteps;
 import steps.SearchResultsFrameSteps;
 
-import static com.codeborne.selenide.Selenide.sleep;
-import static com.codeborne.selenide.Selenide.switchTo;
+import static com.codeborne.selenide.Selenide.*;
 
 public abstract class CommonHeaderSteps<Page extends CommonHeader> extends BaseStep<Page> {
 

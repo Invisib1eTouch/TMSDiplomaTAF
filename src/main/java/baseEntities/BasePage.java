@@ -3,9 +3,12 @@ package baseEntities;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.SelenideElement;
+import com.codeborne.selenide.WebDriverRunner;
 import core.PropertyReader;
 import enums.UrlPrefix;
 import lombok.Getter;
+import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.By;
 
 import java.time.Duration;
@@ -14,6 +17,7 @@ import java.util.Objects;
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$;
 
+@Slf4j
 public abstract class BasePage {
 
     private final String path;
@@ -38,23 +42,24 @@ public abstract class BasePage {
             // Check that page opened indicator element fulfills provided conditions
             $(this.getCorrectPageOpenedIndicatorElLocator()).should(this.pageOpenIndConditionToFulfill.condition, Duration.ofSeconds(10));
         } catch (Error e) {
-            throw new AssertionError(String.format("%s was not opened\n Detailed Message:\n%s",
-                    this.getClass().getSimpleName(), e.getMessage()));
+            var errMes = String.format("%s was not opened\n Detailed Message:\n%s",
+                    this.getClass().getSimpleName(), e.getMessage());
+            log.error(errMes);
+            throw new AssertionError(errMes);
         }
     }
 
+    @SneakyThrows
     public void open() {
         if (this.path != null)
-            com.codeborne.selenide.Selenide.open(this.path);
-    }
-
-    public void openAndVerifyCorrectPageOpened() {
-        this.open();
-        this.verifyCorrectPageOpened();
-    }
-
-    public int getElementTextLength(SelenideElement selenideElement) {
-        return Objects.requireNonNull(selenideElement.getValue()).length();
+            try {
+                com.codeborne.selenide.Selenide.open(this.path);
+            } catch (Exception e){
+                var errMes = String.format("Couldn't open page with by provided url: '%s' \nDetailed message: \n%s",
+                        WebDriverRunner.url(), e.getMessage());
+                log.error(errMes);
+                throw new Exception(errMes);
+            }
     }
 
     /**
