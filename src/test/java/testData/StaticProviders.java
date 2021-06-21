@@ -15,7 +15,6 @@ public class StaticProviders {
      * @param m - argument from which file name can be obtained"
      * @return - two-dimensional array of data objects
      */
-    @SuppressWarnings("unchecked")
     @SneakyThrows
     @DataProvider(name = "incorrectLoginData", parallel = true)
     public static Object[][] loginWithIncorrectData(Method m) {
@@ -26,7 +25,7 @@ public class StaticProviders {
 
         LoginTestDataContainer[][] loginTestDataContainers = new LoginTestDataContainer[loginTestData.size()][];
 
-//   FIll the parsed from .csv login test data to array
+//   FIll the parsed from .csv auth test data to array
         for (int i = 0; i < loginTestData.size(); i++) {
             loginTestDataContainers[i] = new LoginTestDataContainer[]{loginTestData.get(i)};
         }

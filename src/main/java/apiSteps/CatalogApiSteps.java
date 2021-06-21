@@ -3,41 +3,33 @@ package apiSteps;
 import dataObjects.json.products.ProductsJson;
 import io.qameta.allure.Step;
 import io.restassured.response.Response;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.http.HttpStatus;
+import utils.RestAssuredRequestFilter;
 
 import static io.restassured.RestAssured.given;
 
+@Slf4j
 public class CatalogApiSteps extends ApiSteps {
 
     protected CatalogApiSteps() {
         super("catalog.api", null);
     }
 
-    @Step("Get available mobile phones.")
+    @Step("[API] Get available mobile phones")
     public ProductsJson getAvailableMobilePhones() {
         Response response = given(this.spec)
-                .log().all()
+                .filter(new RestAssuredRequestFilter(log, 200))
                 .get("search/mobile?in_stock=1");
-
-        if (response.getStatusCode() != 200) {
-            response.prettyPrint();
-        }
-        response.prettyPrint();
 
         return gson.fromJson(response.getBody().asString(), ProductsJson.class);
     }
 
-    @Step("Get search result by product name: '{productName}'.")
+    @Step("[API] Get search result by product name")
     public Response getSearchResultByProductName(String productName) {
-        Response response = given(this.spec)
+        return given(this.spec)
+                .filter(new RestAssuredRequestFilter(log, 200))
                 .queryParam("query", productName)
-                .log().all()
                 .get("search/products");
-
-        if (response.getStatusCode() != 200) {
-            response.prettyPrint();
-        }
-        response.prettyPrint();
-
-        return response;
     }
 }

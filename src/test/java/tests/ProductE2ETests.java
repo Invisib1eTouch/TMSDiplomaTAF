@@ -28,7 +28,7 @@ public class ProductE2ETests extends BaseTestAfterClassDriverDisposing {
     @BeforeClass
     @Parameters({"validLogin_8", "validPassword_8"})
     public void testSetup(String login, String password) {
-        ApiSteps.get().login(login, password)
+        ApiSteps.get().setToken(login, password)
                 .cartApiSteps()
                 .deleteAllCartPositionsIfExist();
 

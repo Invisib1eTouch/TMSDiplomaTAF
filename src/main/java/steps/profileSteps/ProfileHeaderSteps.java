@@ -19,7 +19,7 @@ public abstract class ProfileHeaderSteps<Page extends ProfileHeader> extends Com
         super(openPageByUrl);
     }
 
-    @Step("Open Personal data tab.")
+    @Step("Open Personal Data tab")
     public ProfilePersonalDataTabSteps openPersonalDataTab() {
         this.page.getPersonalDataBtn().click();
         return new ProfilePersonalDataTabSteps(false);
@@ -31,7 +31,7 @@ public abstract class ProfileHeaderSteps<Page extends ProfileHeader> extends Com
      * @param <Steps>                - method caller steps class type
      * @return - instance of Steps class that extends ProfileHeaderSteps class from which method was invoked
      */
-    @Step("Upload new profile header background image. File path: '{backgroundImageFile}'.")
+    @Step("Upload new profile header background image")
     public <Steps extends ProfileHeaderSteps<Page>> Steps uploadNewProfileHeaderBackground(
             Class<Steps> methodCallerStepsClass,
             File backgroundImageFile) {

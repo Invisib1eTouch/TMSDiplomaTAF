@@ -12,7 +12,7 @@ public class LoginPage extends BasePage {
 
     private static final String emailInputLocator = "//*[@type='text' and contains(@class,'auth-input')]";
     private static final String passwordInputLocator = "//*[@type='password']";
-    private static final String authFieldErrorMesLocator = "following::div[contains(@class, 'auth-form__description_error')]";
+    private static final String loginFieldErrorMesLocator = "following::div[contains(@class, 'auth-form__description_error')]";
     private static final By loginBtnBy = By.className("auth-button_primary");
 
     public LoginPage() {
@@ -37,10 +37,10 @@ public class LoginPage extends BasePage {
     }
 
     public SelenideElement getLoginInputError() {
-        return $(byXpath(emailInputLocator + "/" + authFieldErrorMesLocator));
+        return $(byXpath(emailInputLocator + "/" + loginFieldErrorMesLocator));
     }
 
     public SelenideElement getPasswordInputError() {
-        return $(byXpath(passwordInputLocator + "/" + authFieldErrorMesLocator));
+        return $(byXpath(passwordInputLocator + "/" + loginFieldErrorMesLocator));
     }
 }
