@@ -1,7 +1,9 @@
 package baseEntities;
 
 import core.DriverClient;
+import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
+import utils.AllureUtilities;
 
 public abstract class BaseTest {
 
@@ -10,6 +12,11 @@ public abstract class BaseTest {
      */
     @BeforeSuite
     public void driverSetup(){
-        DriverClient.get().initRemote().enableHeadlessMode();
+        DriverClient.getInstance().setupRemote().enableHeadlessMode();
+    }
+
+    @AfterSuite
+    public void suiteTearDown(){
+        AllureUtilities.removeParametersInReport();
     }
 }

@@ -1,5 +1,6 @@
 package steps.profileSteps.personalDataTab;
 
+import io.qameta.allure.Step;
 import pages.profile.personalDataTab.ProfilePersonalDataTab;
 import steps.profileSteps.ProfileHeaderSteps;
 
@@ -11,6 +12,7 @@ public class ProfilePersonalDataTabSteps extends ProfileHeaderSteps<ProfilePerso
         super(openPageByUrl);
     }
 
+    @Step("Open Profile Edit page.")
     public ProfileEditPageSteps openProfileEditPage() {
         this.page.getEditPersonalDataBtn().hover().click();
         return new ProfileEditPageSteps();

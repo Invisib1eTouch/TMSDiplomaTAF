@@ -2,7 +2,8 @@ package apiSteps;
 
 import dataObjects.json.CredsJson;
 import dataObjects.json.user.UserDataJson;
-import io.restassured.RestAssured;
+import io.qameta.allure.Description;
+import io.qameta.allure.Step;
 import io.restassured.http.ContentType;
 import io.restassured.http.Header;
 import io.restassured.response.Response;
@@ -11,12 +12,13 @@ import static io.restassured.RestAssured.given;
 
 public class UserApiSteps extends ApiSteps {
 
-    static {
-        RestAssured.basePath = "user.api";
+    protected UserApiSteps(String authToken) {
+        super("user.api", authToken);
     }
 
-    public static Response login(String login, String password) {
-        Response response = given()
+    @Description("Login with credentials: ({login} / {password}).")
+    public Response postLogin(String login, String password) {
+        Response response = given(this.spec)
                 .contentType(ContentType.JSON)
                 .body(gson.toJson(new CredsJson(login, password)))
                 .log().all()
@@ -25,42 +27,47 @@ public class UserApiSteps extends ApiSteps {
         if (response.getStatusCode() != 201) {
             response.prettyPrint();
         }
+        response.prettyPrint();
 
-        authToken = response.getBody().jsonPath().getString("access_token");
         return response;
     }
 
-    public static Response getMe() {
-        Response response = given()
-                .header(new Header("Authorization", "Bearer " + authToken))
+    @Step("Get personal information.")
+    public Response getMe() {
+        Response response = given(this.spec)
+                .header(new Header("Authorization", "Bearer " + this.authToken))
                 .log().all()
                 .get("me");
 
         if (response.getStatusCode() != 200) {
             response.prettyPrint();
         }
+        response.prettyPrint();
 
         return response;
     }
 
-    public static Response getInternalUserInfoById(String userId) {
+    @Step("Get internal personal information by user id: '{userId}'.")
+    public Response getInternalUserInfoById(String userId) {
 
-        Response response = given()
+        Response response = given(this.spec)
                 .log().all()
                 .get("users/{userId}", userId);
 
         if (response.getStatusCode() != 200) {
             response.prettyPrint();
         }
+        response.prettyPrint();
 
         return response;
     }
 
-    public static Response removeProfileHeaderCoverImage() {
-        var userId = getMe().getBody().jsonPath().getInt("id");
+    @Step("Remove profile header image.")
+    public Response removeProfileHeaderCoverImage() {
+        var userId = this.getMe().getBody().jsonPath().getInt("id");
 
-        Response response = given()
-                .header(new Header("Authorization", "Bearer " + authToken))
+        Response response = given(this.spec)
+                .header(new Header("Authorization", "Bearer " + this.authToken))
                 .contentType(ContentType.JSON)
                 .body(gson.toJson(new UserDataJson().setCover(null)))
                 .log().all()
@@ -69,6 +76,7 @@ public class UserApiSteps extends ApiSteps {
         if (response.getStatusCode() != 200) {
             response.prettyPrint();
         }
+        response.prettyPrint();
 
         return response;
     }
