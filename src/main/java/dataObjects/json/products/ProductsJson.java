@@ -10,4 +10,3 @@ public class ProductsJson {
     @Expose
     private final List<ProductJson> products;
 }
-

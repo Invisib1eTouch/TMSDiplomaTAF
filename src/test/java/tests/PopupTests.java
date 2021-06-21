@@ -19,9 +19,9 @@ public class PopupTests extends BaseTestAfterMethodDriverDisposing {
                 .catalogApiSteps()
                 .getAvailableMobilePhones()
                 .getProducts();
+
         var product = products.get(Utils.getRandomNumber(0, products.size()));
         this.productUrl = product.getProductUrl();
-
     }
 
     @Test(description = "Location popup test")

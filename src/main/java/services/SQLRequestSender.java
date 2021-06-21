@@ -1,5 +1,6 @@
 package services;
 
+import io.qameta.allure.Step;
 import lombok.SneakyThrows;
 import models.CartItemModel;
 
@@ -10,7 +11,8 @@ import java.util.List;
 public class SQLRequestSender {
     private static String query;
 
-    public static void addProductToCartTable(CartItemModel cartItemModel){
+    @Step("[DB] Add Product to shopping_cart table")
+    public static void addProductToShoppingCartTable(CartItemModel cartItemModel){
         query = String.format("INSERT INTO shopping_cart (product_name, product_description, product_price)" +
                 "VALUES ('%s', '%s', '%s')", cartItemModel.getName(), cartItemModel.getDescription(), cartItemModel.getPrice());
 
@@ -18,6 +20,7 @@ public class SQLRequestSender {
     }
 
     @SneakyThrows
+    @Step("[DB] Get Cart Item by Product name")
     public static List<CartItemModel> getCartItemByProductName(String productName){
         query = String.format("SELECT * FROM shopping_cart WHERE product_name = '%s'", productName);
 
@@ -34,6 +37,7 @@ public class SQLRequestSender {
         return cartItems;
     }
 
+    @Step("[DB] Delete Cart Item by Product name")
     public static void deleteCartItemByProductName(String productName){
         query = String.format("DELETE FROM shopping_cart WHERE product_name = '%s'", productName);
 

@@ -43,7 +43,7 @@ public class ProfileTests extends BaseTestAfterMethodDriverDisposing {
     @Parameters({loginForTest, passwordForTest})
     public void testClassTeardown(String login, String password) {
         ApiSteps.get()
-                .login(login, password)
+                .setToken(login, password)
                 .userApiSteps()
                 .removeProfileHeaderCoverImage();
     }
@@ -107,7 +107,7 @@ public class ProfileTests extends BaseTestAfterMethodDriverDisposing {
         String lastNameEditProfileText = profileEditPage.getLastNameInput().getValue();
 
         // Verification that entered string was cut by max  field's length
-        Assert.assertEquals(profileEditPage.getElementTextLength(profileEditPage.getLastNameInput()),
+        Assert.assertEquals(this.getElementTextLength(profileEditPage.getLastNameInput()),
                 lastNameMaxLength);
 
         ProfilePersonalDataTab profilePersonalDataTab = new ProfileEditPageSteps()
@@ -129,7 +129,7 @@ public class ProfileTests extends BaseTestAfterMethodDriverDisposing {
         lastNameEditProfileText = profileEditPage.getLastNameInput().getValue();
 
         // Verification that entered string was cut by max field's length
-        Assert.assertEquals(profileEditPage.getElementTextLength(profileEditPage.getLastNameInput()),
+        Assert.assertEquals(this.getElementTextLength(profileEditPage.getLastNameInput()),
                 lastNameMaxLength);
 
         new ProfileEditPageSteps().saveCorrectData();
@@ -150,7 +150,7 @@ public class ProfileTests extends BaseTestAfterMethodDriverDisposing {
         lastNameEditProfileText = profileEditPage.getLastNameInput().getValue();
 
         // Verification that entered string was cut by max  field's length
-        Assert.assertEquals(profileEditPage.getElementTextLength(profileEditPage.getLastNameInput()),
+        Assert.assertEquals(this.getElementTextLength(profileEditPage.getLastNameInput()),
                 enteredLastNameLength);
 
         new ProfileEditPageSteps().saveCorrectData();
@@ -167,7 +167,7 @@ public class ProfileTests extends BaseTestAfterMethodDriverDisposing {
                 .fillLastNameField("")
                 .getPageInstance();
 
-        Assert.assertEquals(profileEditPage.getElementTextLength(profileEditPage.getLastNameInput()),
+        Assert.assertEquals(this.getElementTextLength(profileEditPage.getLastNameInput()),
                 0);
 
         new ProfileEditPageSteps().saveCorrectData();

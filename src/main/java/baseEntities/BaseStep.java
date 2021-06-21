@@ -2,6 +2,7 @@ package baseEntities;
 
 import io.qameta.allure.Step;
 import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.ParameterizedType;
@@ -10,6 +11,7 @@ import java.lang.reflect.ParameterizedType;
  * @param <Page> - generics used to connect step with corresponding page and get access to page methods so that
  *               incorrect methods of other pages con not be used in steps
  */
+@Slf4j
 public abstract class BaseStep<Page extends BasePage> {
     //    Instance of the page
     protected Page page;
@@ -32,6 +34,7 @@ public abstract class BaseStep<Page extends BasePage> {
     /**
      * @return page instance
      */
+    @SneakyThrows
     @SuppressWarnings("unchecked")
     public Page getPageInstance() {
         if (this.page == null) {
@@ -41,8 +44,10 @@ public abstract class BaseStep<Page extends BasePage> {
             try {
 //                Create page instance based on defined class
                 this.page = pageClass.getConstructor().newInstance();
-            } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
-                throw new RuntimeException("Page instance was not initialised:" + e.getMessage());
+            } catch (Exception e) {
+                var errMes = "Page instance was not initialised:" + e.getMessage();
+                log.error(errMes);
+                throw new Exception(errMes);
             }
         }
         return this.page;
@@ -67,6 +72,13 @@ public abstract class BaseStep<Page extends BasePage> {
      */
     @SneakyThrows
     protected <Steps extends BaseStep<Page>> Steps getStepsObjectInstance(Class<Steps> stepsClassType) {
-        return stepsClassType.getConstructor(Boolean.class).newInstance(false);
+        try {
+            return stepsClassType.getConstructor(Boolean.class).newInstance(false);
+        } catch (Exception e) {
+            var errMes = String.format("Couldn't instantiate %s class. \nDetailed message: \n%s",
+                    stepsClassType.getSimpleName(), e.getMessage());
+            log.error(errMes);
+            throw new Exception(errMes);
+        }
     }
 }

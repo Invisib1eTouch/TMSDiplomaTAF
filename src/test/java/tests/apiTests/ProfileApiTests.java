@@ -33,7 +33,7 @@ public class ProfileApiTests {
     @Parameters({"validLogin_3", "validPassword_3"})
     public void correctEmailInPersonalDataTest(String email, String password) {
         var personalDataResponse = ApiSteps.get()
-                .login(email, password)
+                .setToken(email, password)
                 .userApiSteps()
                 .getMe();
 

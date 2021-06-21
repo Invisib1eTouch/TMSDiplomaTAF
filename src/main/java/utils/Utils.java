@@ -1,5 +1,6 @@
 package utils;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.RandomUtils;
 
@@ -7,6 +8,7 @@ import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+@Slf4j
 public class Utils {
 
     public static String getRandomAlphaNumericString(int length) {
@@ -27,14 +29,17 @@ public class Utils {
         if (wordIndex <= textWords.length) {
             return textWords[wordIndex];
         }
-        throw new ArrayIndexOutOfBoundsException("Entered word index: " + wordIndex + ", number of the words in text: " + textWords.length);
+        var errMes = String.format("Entered word index: %s, number of the words in text: %s", wordIndex, textWords.length);
+        log.error(errMes);
+        throw new ArrayIndexOutOfBoundsException(errMes);
     }
 
     public static String getMatchedText(String text, String pattern) {
         Matcher m = Pattern.compile(pattern).matcher(Objects.requireNonNull(text));
         if (m.find())
             return m.group(0);
-        throw new IllegalStateException("No pattern match found in provided text");
+        var errMes = String.format("No pattern match found in provided text: %s; Pattern: %s", text, pattern);
+        log.error(errMes);
+        throw new IllegalStateException(errMes);
     }
-
 }
