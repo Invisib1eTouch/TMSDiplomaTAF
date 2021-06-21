@@ -18,5 +18,5 @@ public class ProductJson {
     private final PricesJson prices;
     @Expose
     @SerializedName("html_url")
-    private final String productUrl;
+    private final String htmlUrl;
 }
