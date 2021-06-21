@@ -75,7 +75,7 @@ public abstract class BaseStep<Page extends BasePage> {
         try {
             return stepsClassType.getConstructor(Boolean.class).newInstance(false);
         } catch (Exception e) {
-            var errMes = String.format("Couldn't instantiate %s class instance. \nDetailed message: \n%s",
+            var errMes = String.format("Couldn't instantiate %s class. \nDetailed message: \n%s",
                     stepsClassType.getSimpleName(), e.getMessage());
             log.error(errMes);
             throw new Exception(errMes);

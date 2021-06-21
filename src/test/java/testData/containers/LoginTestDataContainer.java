@@ -13,13 +13,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class LoginTestDataContainer {
 
-    @CsvBindByName(column = "login")
+    @CsvBindByName(column = "auth")
     private String login;
 
     @CsvBindByName(column = "password")
     private String password;
 
-    @CsvBindByName(column = "login field error")
+    @CsvBindByName(column = "auth field error")
     private String loginFieldError;
 
     @CsvBindByName(column = "password field error")

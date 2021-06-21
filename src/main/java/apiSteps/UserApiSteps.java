@@ -19,7 +19,7 @@ public class UserApiSteps extends ApiSteps {
         super("user.api", authToken);
     }
 
-    @Description("Login with credentials: ({login} / {password}).")
+    @Step("[API] Authenticate")
     public Response postLogin(String login, String password) {
         return given(this.spec)
                 .filter(new RestAssuredRequestFilter(log, 200))
@@ -28,7 +28,7 @@ public class UserApiSteps extends ApiSteps {
                 .post("login");
     }
 
-    @Step("Get personal information.")
+    @Step("[API] Get personal information")
     public Response getMe() {
         return given(this.spec)
                 .filter(new RestAssuredRequestFilter(log, 200))
@@ -36,13 +36,13 @@ public class UserApiSteps extends ApiSteps {
                 .get("me");
     }
 
-    @Step("Get internal personal information by user id: '{userId}'.")
+    @Step("[API] Get internal personal information by user id")
     public Response getInternalUserInfoById(String userId) {
         return given(this.spec)
                 .get("users/{userId}", userId);
     }
 
-    @Step("Remove profile header image.")
+    @Step("[API] Remove profile header image")
     public Response removeProfileHeaderCoverImage() {
         var userId = this.getMe().getBody().jsonPath().getInt("id");
 

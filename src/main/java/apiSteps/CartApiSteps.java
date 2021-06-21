@@ -24,7 +24,7 @@ public class CartApiSteps extends ApiSteps {
         super("cart.api", authToken);
     }
 
-    @Step("Get cart positions.")
+    @Step("[API] Get cart positions")
     public Response getCartPositions() {
         return given(this.spec)
                 .filter(new RestAssuredRequestFilter(log, 200))
@@ -32,7 +32,7 @@ public class CartApiSteps extends ApiSteps {
                 .get("positions");
     }
 
-    @Step("Delete cart positions.")
+    @Step("[API] Delete cart positions")
     public Response deleteCartPositions(PositionsToDeleteJson positions) {
         return given(this.spec)
                 .filter(new RestAssuredRequestFilter(log, 204))
@@ -43,7 +43,7 @@ public class CartApiSteps extends ApiSteps {
     }
 
     @SneakyThrows
-    @Step("Delete existing cart positions.")
+    @Step("[API] Delete existing cart positions")
     public void deleteAllCartPositionsIfExist() {
         List<PositionToDeleteJson> positionsToDelete = null;
         String stringResponse = null;

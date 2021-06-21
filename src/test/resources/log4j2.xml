@@ -3,15 +3,15 @@
     <Appenders>
         <File name="LogFile" fileName="target/logs/logFile.log">
             <PatternLayout>
-                <Pattern>[%-5p] [%d] %c - %msg%n</Pattern>
+                <Pattern>[%-5p] [%d] %c.%M - %msg%n</Pattern>
             </PatternLayout>
         </File>
         <Console name="LogToConsole" target="SYSTEM_OUT">
-            <PatternLayout pattern="[%-5p] [%d] %c - %msg%n"/>
+            <PatternLayout pattern="[%-5p] [%d] %c.%M - %msg%n"/>
         </Console>
     </Appenders>
     <Loggers>
-        <Root level="error">
+        <Root level="info">
             <AppenderRef ref="LogFile"/>
             <AppenderRef ref="LogToConsole"/>
         </Root>

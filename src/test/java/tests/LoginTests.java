@@ -13,7 +13,7 @@ import static com.codeborne.selenide.Condition.*;
 
 public class LoginTests extends BaseTestAfterMethodDriverDisposing {
 
-    @Test(description = "Positive login test")
+    @Test(description = "Positive auth test")
     @Description("Login test with valid user credentials.")
     @Parameters({"validLogin_6", "validPassword_6", "validUserId_6"})
     public void positiveLoginTest(String login, String password, String userId) {
@@ -25,7 +25,7 @@ public class LoginTests extends BaseTestAfterMethodDriverDisposing {
                 .should(be(visible), have(exactOwnText(userId)));
     }
 
-    @Test(description = "Negative login test", dataProvider = "incorrectLoginData", dataProviderClass = StaticProviders.class, groups = {"csvFiles/invalid_login_test_data.csv"})
+    @Test(description = "Negative auth test", dataProvider = "incorrectLoginData", dataProviderClass = StaticProviders.class, groups = {"csvFiles/invalid_login_test_data.csv"})
     @Description("Login test with incorrect user credentials.")
     public void negativeLoginTest(LoginTestDataContainer loginTestData) {
         LoginPage loginPage = new MainPageSteps(true)

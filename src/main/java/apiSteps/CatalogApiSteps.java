@@ -16,7 +16,7 @@ public class CatalogApiSteps extends ApiSteps {
         super("catalog.api", null);
     }
 
-    @Step("Get available mobile phones.")
+    @Step("[API] Get available mobile phones")
     public ProductsJson getAvailableMobilePhones() {
         Response response = given(this.spec)
                 .filter(new RestAssuredRequestFilter(log, 200))
@@ -25,7 +25,7 @@ public class CatalogApiSteps extends ApiSteps {
         return gson.fromJson(response.getBody().asString(), ProductsJson.class);
     }
 
-    @Step("Get search result by product name: '{productName}'.")
+    @Step("[API] Get search result by product name")
     public Response getSearchResultByProductName(String productName) {
         return given(this.spec)
                 .filter(new RestAssuredRequestFilter(log, 200))

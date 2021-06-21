@@ -42,7 +42,7 @@ public abstract class BasePage {
             // Check that page opened indicator element fulfills provided conditions
             $(this.getCorrectPageOpenedIndicatorElLocator()).should(this.pageOpenIndConditionToFulfill.condition, Duration.ofSeconds(10));
         } catch (Error e) {
-            var errMes = String.format("%s was not opened\n Detailed Message:\n%s",
+            var errMes = String.format("%s was not opened \nDetailed Message:\n%s",
                     this.getClass().getSimpleName(), e.getMessage());
             log.error(errMes);
             throw new AssertionError(errMes);

@@ -24,13 +24,13 @@ public abstract class CommonHeaderSteps<Page extends CommonHeader> extends BaseS
      * @param <Steps>                - method caller steps class type
      * @return - instance of Steps class that extends CommonHeaderSteps class from which method was invoked
      */
-    @Step("Login with correct credentials: ({login} / {password}). Returning page steps: '{methodCallerStepsClass}'.")
+    @Step("Login with correct credentials: ({auth} / {password}). Returning page steps: '{methodCallerStepsClass}'.")
     public <Steps extends CommonHeaderSteps<Page>> Steps loginWithCorrectCredentials(Class<Steps> methodCallerStepsClass, String login, String password) {
         this.login(login, password);
         return this.getStepsObjectInstance(methodCallerStepsClass);
     }
 
-    @Step("Login with incorrect credentials: ({login} / {password}).")
+    @Step("Login with incorrect credentials: ({auth} / {password}).")
     public LoginPageSteps loginWithIncorrectCredentials(String login, String password) {
         this.login(login, password);
         return new LoginPageSteps();

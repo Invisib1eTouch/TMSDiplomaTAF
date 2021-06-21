@@ -43,7 +43,7 @@ public class ProfileTests extends BaseTestAfterMethodDriverDisposing {
     @Parameters({loginForTest, passwordForTest})
     public void testClassTeardown(String login, String password) {
         ApiSteps.get()
-                .login(login, password)
+                .setToken(login, password)
                 .userApiSteps()
                 .removeProfileHeaderCoverImage();
     }
