@@ -1,8 +1,12 @@
 package core;
 
+import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
+
 import java.io.IOException;
 import java.util.Properties;
 
+@Slf4j
 public class PropertyReader {
 
     private static final Properties properties;
@@ -12,6 +16,7 @@ public class PropertyReader {
         try {
             properties.load(PropertyReader.class.getClassLoader().getResourceAsStream("config.properties"));
         } catch (IOException e) {
+            log.error(e.getMessage());
             e.printStackTrace();
         }
     }

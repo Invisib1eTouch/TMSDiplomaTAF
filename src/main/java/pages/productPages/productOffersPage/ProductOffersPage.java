@@ -1,15 +1,18 @@
 package pages.productPages.productOffersPage;
 
+import lombok.extern.slf4j.Slf4j;
 import models.containers.OfferContainer;
 import org.openqa.selenium.By;
 import pages.productPages.ProductSummaryPage;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 
+@Slf4j
 public class ProductOffersPage extends ProductSummaryPage {
 
     private static final By offersListContainerBy = By.className("offers-list");
@@ -23,11 +26,17 @@ public class ProductOffersPage extends ProductSummaryPage {
         return offersListContainerBy;
     }
 
-    public OfferContainer getLowerPriceOffer() {
-        return this.getOffersList()
-                .stream()
-                .min((offer1, offer2) -> Float.compare(offer1.getFloatPrice(), offer2.getFloatPrice()))
-                .orElseThrow();
+    public OfferContainer getLowestPriceOffer() {
+        try{
+            return this.getOffersList()
+                    .stream()
+                    .min((offer1, offer2) -> Float.compare(offer1.getFloatPrice(), offer2.getFloatPrice()))
+                    .orElseThrow();
+        } catch (NoSuchElementException e){
+            var errMes = "Couldn't find offer with the lowest price. \nDetailed message: \n" + e.getMessage();
+            log.error(errMes);
+            throw new NoSuchElementException(errMes);
+        }
     }
 
     public List<OfferContainer> getOffersList() {

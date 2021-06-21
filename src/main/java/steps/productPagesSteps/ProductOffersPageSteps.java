@@ -7,7 +7,7 @@ public class ProductOffersPageSteps extends ProductSummaryPageSteps<ProductOffer
 
     @Step("Add offer with the lowest price to the cart.")
     public ProductOffersPageSteps addLowestPriceOfferToCart() {
-        this.page.getLowerPriceOffer().getAddToCartBtn().click();
+        this.page.getLowestPriceOffer().getAddToCartBtn().click();
         return this;
     }
 
