@@ -35,16 +35,9 @@ public class ProfileEditPageSteps extends BaseStep<ProfileEditPage> {
 
     @Step("Fill date of birth fields with Day: '{day}', Month: '{month}', Year: '{year}'.")
     public ProfileEditPageSteps fillDateOfBirthFields(String day, Month month, String year) {
-        if (day != null) {
-            this.fillDayOfBirthField(day);
-        }
-        if (month != null) {
-            this.selectMonthOfBirth(month);
-        }
-        if (year != null) {
-            this.fillYearOfBirthField(year);
-        }
-
+        if (day != null) this.fillDayOfBirthField(day);
+        if (month != null) this.selectMonthOfBirth(month);
+        if (year != null) this.fillYearOfBirthField(year);
         return this;
     }
 

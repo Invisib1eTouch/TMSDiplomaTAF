@@ -14,7 +14,7 @@ public class ProfilePersonalDataTabSteps extends ProfileHeaderSteps<ProfilePerso
 
     @Step("Open Profile Edit page.")
     public ProfileEditPageSteps openProfileEditPage() {
-        this.page.getEditPersonalDataBtn().hover().click();
+        this.page.getEditPersonalDataBtn().click();
         return new ProfileEditPageSteps();
     }
 }

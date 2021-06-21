@@ -4,6 +4,7 @@ import com.codeborne.selenide.SelenideElement;
 import enums.UrlPrefix;
 import org.openqa.selenium.By;
 import pages.profile.ProfileHeader;
+import wrappers.HiddenButton;
 
 import static com.codeborne.selenide.Selenide.$;
 
@@ -25,8 +26,8 @@ public class ProfilePersonalDataTab extends ProfileHeader {
         return emailLabelBy;
     }
 
-    public SelenideElement getEditPersonalDataBtn() {
-        return $(editPersonalDataBtnBy);
+    public HiddenButton getEditPersonalDataBtn() {
+        return new HiddenButton(editPersonalDataBtnBy);
     }
 
     public SelenideElement getFullName() {
