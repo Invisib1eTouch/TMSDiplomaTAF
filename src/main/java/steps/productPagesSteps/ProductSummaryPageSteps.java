@@ -11,12 +11,12 @@ public abstract class ProductSummaryPageSteps<Page extends ProductSummaryPage> e
         super(false);
     }
 
-    @Step("Open Product Offers page.")
+    @Step("Open Product Offers page")
     public ProductOffersPageSteps openProductOffersPageThroughPrice() {
         var cartItemModel = this.page.getProductSummary().getCartItemModel();
 
         // DB crutch
-        SQLRequestSender.addProductToCartTable(cartItemModel);
+        SQLRequestSender.addProductToShoppingCartTable(cartItemModel);
         this.page.getProductSummary().getPrice().click();
         // DB crutch
 

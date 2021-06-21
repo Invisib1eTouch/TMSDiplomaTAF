@@ -24,25 +24,25 @@ public abstract class CommonHeaderSteps<Page extends CommonHeader> extends BaseS
      * @param <Steps>                - method caller steps class type
      * @return - instance of Steps class that extends CommonHeaderSteps class from which method was invoked
      */
-    @Step("Login with correct credentials: ({auth} / {password}). Returning page steps: '{methodCallerStepsClass}'.")
+    @Step("Login with correct credentials. Returning page steps: '{methodCallerStepsClass}'")
     public <Steps extends CommonHeaderSteps<Page>> Steps loginWithCorrectCredentials(Class<Steps> methodCallerStepsClass, String login, String password) {
         this.login(login, password);
         return this.getStepsObjectInstance(methodCallerStepsClass);
     }
 
-    @Step("Login with incorrect credentials: ({auth} / {password}).")
+    @Step("Login with incorrect credentials")
     public LoginPageSteps loginWithIncorrectCredentials(String login, String password) {
         this.login(login, password);
         return new LoginPageSteps();
     }
 
-    @Step("Open Login page.")
+    @Step("Open Login page")
     public LoginPageSteps openLoginPage() {
         this.page.getLoginBtn().click();
         return new LoginPageSteps();
     }
 
-    @Step("Open profile menu.")
+    @Step("Open profile menu")
     public ProfileMenuSteps openProfileMenu() {
         this.page.getProfileIcon().click();
         // Animation of profile menu opening takes 200ms
@@ -63,14 +63,14 @@ public abstract class CommonHeaderSteps<Page extends CommonHeader> extends BaseS
         page.getLoginBtn().submit();
     }
 
-    @Step("Search for product. Search query: '{searchQuery}'.")
+    @Step("Search for product")
     public SearchResultsFrameSteps searchProduct(String searchQuery) {
         this.page.getSearchInput().sendKeys(searchQuery);
         switchTo().frame(this.page.getSearchResultsIFrame());
         return new SearchResultsFrameSteps().waitLoadingFinished();
     }
 
-    @Step("Open Cart page.")
+    @Step("Open Cart page")
     public CartPageSteps openCartPage() {
         this.page.getCartBtnBy().click();
         return new CartPageSteps(false);

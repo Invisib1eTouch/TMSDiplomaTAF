@@ -13,27 +13,27 @@ public class ProfileEditPageSteps extends BaseStep<ProfileEditPage> {
         super(false);
     }
 
-    @Step("Fill Day of birth field with '{value}' value.")
+    @Step("Fill Day of birth field. Value: {value}")
     public ProfileEditPageSteps fillDayOfBirthField(String value) {
         this.page.getDayOfBirthInput().clear();
         this.page.getDayOfBirthInput().sendKeys(value);
         return this;
     }
 
-    @Step("Select Month of birth with '{month}' value.")
+    @Step("Select Month of birth. Value: {month}")
     public ProfileEditPageSteps selectMonthOfBirth(Month month) {
         this.page.getMonthSelector().selectOptionByValue(month.getValue());
         return this;
     }
 
-    @Step("Fill Year of birth field with '{value}' value.")
+    @Step("Fill Year of birth field. Value: {value}")
     public ProfileEditPageSteps fillYearOfBirthField(String value) {
         this.page.getYearOfBirthInput().clear();
         this.page.getYearOfBirthInput().sendKeys(value);
         return this;
     }
 
-    @Step("Fill date of birth fields with Day: '{day}', Month: '{month}', Year: '{year}'.")
+    @Step("Fill date of birth fields")
     public ProfileEditPageSteps fillDateOfBirthFields(String day, Month month, String year) {
         if (day != null) this.fillDayOfBirthField(day);
         if (month != null) this.selectMonthOfBirth(month);
@@ -41,38 +41,38 @@ public class ProfileEditPageSteps extends BaseStep<ProfileEditPage> {
         return this;
     }
 
-    @Step("Fill Last Name field with '{value}' value.")
+    @Step("Fill Last Name field. Value: {value}")
     public ProfileEditPageSteps fillLastNameField(String value) {
         this.page.getLastNameInput().clear();
         this.page.getLastNameInput().sendKeys(value);
         return this;
     }
 
-    @Step("Save incorrect data.")
+    @Step("Save incorrect user data")
     public ProfileEditPageSteps saveIncorrectData() {
         this.page.getSaveBtn().click();
         return this;
     }
 
-    @Step("Save correct data.")
+    @Step("Save correct user data")
     public ProfilePersonalDataTabSteps saveCorrectData() {
         this.saveIncorrectData();
         return new ProfilePersonalDataTabSteps(false);
     }
 
-    @Step("Clear First Name field.")
+    @Step("Clear First Name field")
     public ProfileEditPageSteps clearFirstNameField() {
         this.page.getFirstNameInput().clear();
         return this;
     }
 
-    @Step("Clear Patronymic field.")
+    @Step("Clear Patronymic field")
     public ProfileEditPageSteps clearPatronymicField() {
         this.page.getSurnameInput().clear();
         return this;
     }
 
-    @Step("Clear First Name and Patronymic fields.")
+    @Step("Clear First Name and Patronymic fields")
     public ProfileEditPageSteps clearFirstNameAndPatronymicFields() {
         this.clearFirstNameField();
         this.clearPatronymicField();
