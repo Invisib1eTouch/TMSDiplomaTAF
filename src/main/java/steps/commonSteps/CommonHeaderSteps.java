@@ -39,8 +39,6 @@ public abstract class CommonHeaderSteps<Page extends CommonHeader> extends BaseS
     @Step("Open Login page.")
     public LoginPageSteps openLoginPage() {
         this.page.getLoginBtn().click();
-        // Wait until animation ends
-        sleep(300);
         return new LoginPageSteps();
     }
 

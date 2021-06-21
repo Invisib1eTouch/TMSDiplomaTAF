@@ -33,4 +33,3 @@ public abstract class ProfileHeader extends CommonHeader {
         return $(profileHeaderBackgroundBy);
     }
 }
-

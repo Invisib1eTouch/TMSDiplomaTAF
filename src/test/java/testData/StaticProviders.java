@@ -15,7 +15,6 @@ public class StaticProviders {
      * @param m - argument from which file name can be obtained"
      * @return - two-dimensional array of data objects
      */
-    @SuppressWarnings("unchecked")
     @SneakyThrows
     @DataProvider(name = "incorrectLoginData", parallel = true)
     public static Object[][] loginWithIncorrectData(Method m) {

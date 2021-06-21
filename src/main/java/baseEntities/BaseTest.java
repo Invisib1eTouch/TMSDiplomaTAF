@@ -16,6 +16,7 @@ public abstract class BaseTest {
         DriverClient.getInstance().setup();
     }
 
+
     protected int getElementTextLength(SelenideElement selenideElement) {
         return Objects.requireNonNull(selenideElement.getValue()).length();
     }
