@@ -26,9 +26,10 @@ import static utils.FileHelper.getFileToUpload;
 
 public class ProfileTests extends BaseTestAfterMethodDriverDisposing {
 
+    private static final String loginForTest = "validLogin_4";
+    private static final String passwordForTest = "validPassword_4";
+
     private ProfileMainTabSteps profileMainTabSteps;
-    private static final String loginForTest = "validLogin_5";
-    private static final String passwordForTest = "validPassword_5";
 
     @BeforeMethod
     @Parameters({loginForTest, passwordForTest})

@@ -13,7 +13,7 @@ public abstract class BaseTest {
      */
     @BeforeSuite
     public void driverSetup(){
-        DriverClient.getInstance().setupRemote().enableHeadlessMode();
+        DriverClient.getInstance().setup();
     }
 
 
