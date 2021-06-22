@@ -2,7 +2,6 @@ package baseEntities;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
-import com.codeborne.selenide.SelenideElement;
 import com.codeborne.selenide.WebDriverRunner;
 import core.PropertyReader;
 import enums.UrlPrefix;
@@ -12,7 +11,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.By;
 
 import java.time.Duration;
-import java.util.Objects;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$;

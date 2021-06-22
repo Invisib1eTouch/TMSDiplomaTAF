@@ -2,7 +2,6 @@ package apiSteps;
 
 import dataObjects.json.CredsJson;
 import dataObjects.json.user.UserDataJson;
-import io.qameta.allure.Description;
 import io.qameta.allure.Step;
 import io.restassured.http.ContentType;
 import io.restassured.http.Header;

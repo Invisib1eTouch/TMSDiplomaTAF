@@ -1,7 +1,6 @@
 package steps.profileSteps;
 
 import pages.profile.ProfileMainTab;
-import steps.commonSteps.CommonHeaderSteps;
 
 public class ProfileMainTabSteps extends ProfileHeaderSteps<ProfileMainTab> {
     /**

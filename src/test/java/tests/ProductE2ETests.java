@@ -1,6 +1,7 @@
 package tests;
 
 import apiSteps.ApiSteps;
+import dataObjects.json.products.ProductJson;
 import io.qameta.allure.Description;
 import models.CartItemModel;
 import org.testng.Assert;
@@ -36,9 +37,14 @@ public class ProductE2ETests extends BaseTestAfterClassDriverDisposing {
                 .getAvailableMobilePhones()
                 .getProducts();
 
-        var product = products.get(Utils.getRandomNumber(0, products.size()));
+        ProductJson product = products.get(Utils.getRandomNumber(0, products.size()));
         this.productFullName = product.getFullName();
         this.extendedProductName = product.getExtendedName();
+
+        // DB
+        CartItemModel cartItemToAddToDb = new CartItemModel(product);
+        SQLRequestSender.addProductToShoppingCartTable(cartItemToAddToDb);
+        // DB
 
         this.mainPageSteps = new MainPageSteps(true)
                 .loginWithCorrectCredentials(MainPageSteps.class, login, password);
@@ -74,14 +80,14 @@ public class ProductE2ETests extends BaseTestAfterClassDriverDisposing {
                 .addLowestPriceOfferToCart()
                 .openCartPage();
 
-        // DB crutch
+        // DB
         CartItemModel cartItem = this.cartPageSteps
                 .getCartItemByName(this.productFullName)
                 .getCartItemModel();
 
         CartItemModel cartItemFromDb = SQLRequestSender.getCartItemByProductName(this.productFullName).get(0);
         Assert.assertEquals(cartItem, cartItemFromDb);
-        // DB crutch
+        // DB
 
         Assert.assertTrue(cartPageSteps.cartItemExist(this.productFullName));
         Assert.assertEquals(cartPageSteps.getPageInstance().getCartItemsNumber(), 1);
@@ -93,6 +99,10 @@ public class ProductE2ETests extends BaseTestAfterClassDriverDisposing {
         boolean cartItemExist = this.cartPageSteps
                 .deleteItemFromCartByName(this.productFullName)
                 .cartItemExist(this.productFullName);
+
+        // DB
+        SQLRequestSender.deleteCartItemByProductName(this.productFullName);
+        // DB
 
         Assert.assertFalse(cartItemExist);
         Assert.assertEquals(this.cartPageSteps.getPageInstance().getDeletedCartItemsNumber(), 1);

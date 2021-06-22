@@ -4,7 +4,6 @@ import io.qameta.allure.Step;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.ParameterizedType;
 
 /**
@@ -58,7 +57,6 @@ public abstract class BaseStep<Page extends BasePage> {
      * @param <Steps>          - method caller steps class type
      * @return - instance of Steps class from which method was invoked
      */
-
     @Step("Open page.")
     public <Steps extends BaseStep<Page>> Steps openPage(Class<Steps> callerStepsClass) {
         this.page.open();
