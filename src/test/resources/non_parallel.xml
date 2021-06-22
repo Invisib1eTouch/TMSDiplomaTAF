@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Main Test Suite">
+    <parameter name="validLogin_1" value="igor1978.igorevitch@yandex.by"/>
+    <parameter name="validPassword_1" value="password1234"/>
+    <parameter name="validUserId_1" value="3318398"/>
+    <parameter name="validLogin_2" value="onliner.user1@yandex.by"/>
+    <parameter name="validPassword_2" value="Sdcp3J4g2EG8DAE"/>
+    <parameter name="validUserId_2" value="3318247"/>
+    <parameter name="validLogin_3" value="onliner.user2@yandex.by"/>
+    <parameter name="validPassword_3" value="WMuw_PJQ5w7A!s)"/>
+    <parameter name="validUserId_3" value="3318251"/>
+    <parameter name="validLogin_4" value="f0xwind@yandex.by"/>
+    <parameter name="validPassword_4" value="RYSCgSHQ4dLRgUZ"/>
+    <parameter name="validUserId_4" value="3318399"/>
+    <parameter name="validLogin_5" value="anton.4ntonov1@yandex.by"/>
+    <parameter name="validPassword_5" value="password1234"/>
+    <parameter name="validUserId_5" value="3318599"/>
+    <test name="LoginTests">
+        <classes>
+            <class name="tests.LoginTests"/>
+        </classes>
+    </test>
+    <test name="ProfileTests">
+        <classes>
+            <class name="tests.ProfileTests"/>
+        </classes>
+    </test>
+    <test name="ProductE2ETests">
+        <classes>
+            <class name="tests.ProductE2ETests"/>
+        </classes>
+    </test>
+    <test name="PopupTests">
+        <classes>
+            <class name="tests.PopupTests"/>
+        </classes>
+    </test>
+    <test name="ApiTests">
+        <classes>
+            <class name="tests.apiTests.ProfileApiTests"/>
+            <class name="tests.apiTests.SearchApiTests"/>
+        </classes>
+    </test>
+</suite>

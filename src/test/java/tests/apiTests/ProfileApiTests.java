@@ -30,7 +30,7 @@ public class ProfileApiTests {
 
     @Test(description = "Verify correct email in personal data test", dependsOnMethods = "getPersonalDataForUnauthorizedUserTest")
     @Description("Verify correct user's email in personal data.")
-    @Parameters({"validLogin_3", "validPassword_3"})
+    @Parameters({"validLogin_1", "validPassword_1"})
     public void correctEmailInPersonalDataTest(String email, String password) {
         var personalDataResponse = ApiSteps.get()
                 .setToken(email, password)

@@ -11,6 +11,7 @@ import utils.Utils;
 import static com.codeborne.selenide.Condition.*;
 
 public class PopupTests extends BaseTestAfterMethodDriverDisposing {
+
     private String productUrl;
 
     @BeforeMethod
@@ -30,7 +31,7 @@ public class PopupTests extends BaseTestAfterMethodDriverDisposing {
         final String popoverTitle = "Ваш населенный пункт";
 
         ProductDetailsPageSteps
-                .openPage(productUrl)
+                .openPage(this.productUrl)
                 .openProductOffersPageThroughPrice()
                 .getPageInstance()
                 .getLocationPopoverOnFirstPageVisit()

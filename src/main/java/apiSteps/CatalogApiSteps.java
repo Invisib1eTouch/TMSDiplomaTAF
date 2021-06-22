@@ -4,7 +4,6 @@ import dataObjects.json.products.ProductsJson;
 import io.qameta.allure.Step;
 import io.restassured.response.Response;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.http.HttpStatus;
 import utils.RestAssuredRequestFilter;
 
 import static io.restassured.RestAssured.given;
